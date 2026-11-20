@@ -461,11 +461,14 @@ class LabeledSwitch extends StatelessWidget {
 }
 
 class PasswordField extends StatefulWidget {
-  const PasswordField({super.key, required this.controller, required this.label, this.helper});
+  const PasswordField({super.key, required this.controller, required this.label, this.helper, this.validator});
 
   final TextEditingController controller;
   final String label;
   final String? helper;
+
+  /// Extra check run after the 4-digit format check passes.
+  final FormFieldValidator<String>? validator;
 
   @override
   State<PasswordField> createState() => _PasswordFieldState();
@@ -493,7 +496,10 @@ class _PasswordFieldState extends State<PasswordField> {
           onPressed: () => setState(() => _visible = !_visible),
         ),
       ),
-      validator: (v) => RegExp(r'^\d{4}$').hasMatch(v ?? '') ? null : 'رمز باید ۴ رقم باشد',
+      validator: (v) {
+        if (!RegExp(r'^\d{4}$').hasMatch(v ?? '')) return 'رمز باید ۴ رقم باشد';
+        return widget.validator?.call(v);
+      },
     );
   }
 }

@@ -74,7 +74,7 @@ flutter:
         - asset: assets/fonts/IRANSans.ttf
 
 flutter_launcher_icons:
-  image_path: assets/images/app_icon.png
+  image_path: assets/images/logo.png
   android: true
   adaptive_icon_background: "#FFFFFF"
   adaptive_icon_foreground: assets/images/app_icon_foreground.png
@@ -82,6 +82,6 @@ flutter_launcher_icons:
   remove_alpha_ios: true
   web:
     generate: true
-    image_path: assets/images/app_icon.png
+    image_path: assets/images/logo.png
     background_color: "#0D47A1"
     theme_color: "#0D47A1"

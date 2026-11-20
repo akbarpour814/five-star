@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -14,8 +15,10 @@ import 'features/auth/presentation/pages/lock_page.dart';
 import 'features/auth/presentation/pages/welcome_page.dart';
 import 'features/devices/domain/entities/device_message.dart';
 import 'features/devices/domain/usecases/incoming_sms_coordinator.dart';
+import 'features/devices/presentation/cubit/app_cooldown_cubit.dart';
 import 'features/devices/presentation/cubit/devices_cubit.dart';
 import 'features/devices/presentation/pages/home_page.dart';
+import 'features/devices/presentation/widgets/cooldown_bubble.dart';
 import 'features/devices/presentation/widgets/send_feedback.dart';
 
 class FiveStarApp extends StatefulWidget {
@@ -27,11 +30,17 @@ class FiveStarApp extends StatefulWidget {
 
 class _FiveStarAppState extends State<FiveStarApp> with WidgetsBindingObserver {
   static const _autoLockAfter = Duration(minutes: 3);
+  static const _statusBarStyle = SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.light,
+    statusBarBrightness: Brightness.dark,
+  );
 
   final _navigatorKey = GlobalKey<NavigatorState>();
   final _messengerKey = rootMessengerKey;
   late final AuthBloc _auth = AuthBloc(repository: sl())..add(const AuthStarted());
   late final DevicesCubit _devices = DevicesCubit(sl())..load();
+  late final AppCooldownCubit _cooldown = AppCooldownCubit(repository: sl(), sendCommand: sl());
   late final IncomingSmsCoordinator _incoming = sl();
   StreamSubscription<IncomingReply>? _replies;
   DateTime? _pausedAt;
@@ -51,6 +60,7 @@ class _FiveStarAppState extends State<FiveStarApp> with WidgetsBindingObserver {
     _incoming.dispose();
     _auth.close();
     _devices.close();
+    _cooldown.close();
     super.dispose();
   }
 
@@ -95,9 +105,10 @@ class _FiveStarAppState extends State<FiveStarApp> with WidgetsBindingObserver {
       providers: [
         BlocProvider.value(value: _auth),
         BlocProvider.value(value: _devices),
+        BlocProvider.value(value: _cooldown),
       ],
       child: MaterialApp(
-        title: 'FiveStar',
+        title: 'Five Star',
         debugShowCheckedModeBanner: false,
         navigatorKey: _navigatorKey,
         scaffoldMessengerKey: _messengerKey,
@@ -113,14 +124,21 @@ class _FiveStarAppState extends State<FiveStarApp> with WidgetsBindingObserver {
             }
           },
           buildWhen: (prev, next) => prev.status != next.status,
-          builder: (context, state) => Stack(
-            children: [
-              ?child,
-              if (state.status == AuthStatus.locked)
-                Positioned.fill(
-                  child: Navigator(onGenerateRoute: (_) => MaterialPageRoute(builder: (_) => const LockPage())),
-                ),
-            ],
+          builder: (context, state) => AnnotatedRegion<SystemUiOverlayStyle>(
+            value: _statusBarStyle,
+            child: Stack(
+              children: [
+                ?child,
+                Positioned.fill(child: CooldownBubble(enabled: state.status == AuthStatus.unlocked)),
+                if (state.status == AuthStatus.locked)
+                  // A second Navigator must not share the app's HeroController, or later root pushes break.
+                  Positioned.fill(
+                    child: HeroControllerScope.none(
+                      child: Navigator(onGenerateRoute: (_) => MaterialPageRoute(builder: (_) => const LockPage())),
+                    ),
+                  ),
+              ],
+            ),
           ),
         ),
         home: const _AuthGate(),

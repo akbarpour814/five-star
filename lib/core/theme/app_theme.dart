@@ -72,6 +72,7 @@ abstract final class AppTheme {
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
+          iconAlignment: IconAlignment.end,
           minimumSize: const Size.fromHeight(54),
           shape: RoundedRectangleBorder(borderRadius: radius),
           textStyle: const TextStyle(fontFamily: fontFamily, fontSize: 16, fontWeight: FontWeight.w700),
@@ -79,6 +80,7 @@ abstract final class AppTheme {
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
+          iconAlignment: IconAlignment.end,
           minimumSize: const Size.fromHeight(50),
           foregroundColor: AppColors.primary,
           side: const BorderSide(color: AppColors.primary, width: 1.2),
@@ -88,6 +90,7 @@ abstract final class AppTheme {
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
+          iconAlignment: IconAlignment.end,
           textStyle: const TextStyle(fontFamily: fontFamily, fontWeight: FontWeight.w600),
         ),
       ),

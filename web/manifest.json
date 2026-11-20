@@ -1,13 +1,13 @@
 {
-    "name": "FiveStar",
-    "short_name": "FiveStar",
+    "name": "Five Star",
+    "short_name": "Five Star",
     "start_url": ".",
     "lang": "fa",
     "dir": "rtl",
     "display": "standalone",
     "background_color": "#0D47A1",
     "theme_color": "#0D47A1",
-    "description": "کنترل دزدگیر سیم‌کارتی FiveStar GSA-212",
+    "description": "کنترل دزدگیر سیم‌کارتی Five Star GSA-212",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

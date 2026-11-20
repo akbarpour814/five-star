@@ -6,7 +6,7 @@ import '../entities/device.dart';
 import '../entities/device_message.dart';
 import '../repositories/device_repository.dart';
 
-enum SendStatus { sent, openedComposer, cooldown, permissionDenied, failed }
+enum SendStatus { sent, openedComposer, cooldown, permissionDenied, simUnavailable, failed }
 
 class SendOutcome {
   const SendOutcome(this.status, {this.wait = Duration.zero});
@@ -37,11 +37,12 @@ class SendDeviceCommand {
     final wait = await remainingCooldown(device.id);
     if (wait > Duration.zero) return SendOutcome(SendStatus.cooldown, wait: wait);
 
-    final result = await _gateway.send(number: device.simNumber, body: command.body);
+    final result = await _gateway.send(number: device.simNumber, body: command.body, simSlot: device.simSlot);
     final status = switch (result) {
       SmsSendResult.sent => SendStatus.sent,
       SmsSendResult.openedComposer => SendStatus.openedComposer,
       SmsSendResult.permissionDenied => SendStatus.permissionDenied,
+      SmsSendResult.simUnavailable => SendStatus.simUnavailable,
       SmsSendResult.failed => SendStatus.failed,
     };
     if (status != SendStatus.sent && status != SendStatus.openedComposer) return SendOutcome(status);

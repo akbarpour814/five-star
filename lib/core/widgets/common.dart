@@ -111,11 +111,11 @@ class GradientButton extends StatelessWidget {
                     : Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          if (icon != null) ...[Icon(icon, color: Colors.white, size: 20), const SizedBox(width: 8)],
                           Text(
                             label,
                             style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w700),
                           ),
+                          if (icon != null) ...[const SizedBox(width: 8), Icon(icon, color: Colors.white, size: 20)],
                         ],
                       ),
               ),
@@ -235,4 +235,24 @@ void showAppSnack(BuildContext context, String message, {bool error = false}) {
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(SnackBar(content: Text(message), backgroundColor: error ? AppColors.danger : AppColors.primaryDark));
+}
+
+/// Extended FAB label with the icon after the text (left of it in RTL).
+class FabLabel extends StatelessWidget {
+  const FabLabel({super.key, required this.text, required this.icon});
+
+  final String text;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(text, style: const TextStyle(fontWeight: FontWeight.w700)),
+        const SizedBox(width: 8),
+        Icon(icon),
+      ],
+    );
+  }
 }

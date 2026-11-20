@@ -48,7 +48,65 @@ class Gsa212ResponseParser {
     final c = TextNormalizer.compact(raw);
     if (c.isEmpty) return const ParsedResponse.unknown();
 
-    return _memories(text) ?? _status(text, c) ?? _rules(c) ?? _alerts(c) ?? const ParsedResponse.unknown();
+    return _memories(text) ??
+        _englishStatus(c.toUpperCase()) ??
+        _status(text, c) ??
+        _rules(c) ??
+        _alerts(c) ??
+        const ParsedResponse.unknown();
+  }
+
+  /// English status reply, e.g. `OUT 1: OFF , OUT 2: OFF , ... ,Device status:DISARM`.
+  ParsedResponse? _englishStatus(String c) {
+    final outputs = <bool?>[null, null, null, null];
+    for (final m in RegExp(r'OUT(?:PUT)?([1-4]):?(ON|OFF)').allMatches(c)) {
+      outputs[int.parse(m[1]!) - 1] = m[2] == 'ON';
+    }
+    final armMatch = RegExp(r'STATUS:?(DISARM|PARTSET|PART-SET|SILENT|ARM)').firstMatch(c);
+    final arm = switch (armMatch?[1]) {
+      null => null,
+      'DISARM' => ArmState.disarmed,
+      'PARTSET' || 'PART-SET' => ArmState.partset,
+      'SILENT' => ArmState.silent,
+      _ => ArmState.armed,
+    };
+    final powerMatch = RegExp(r'(?:POWER|AC|MAINS):?(ON|OFF|OK|FAIL|CONNECTED|DISCONNECTED|CUT)').firstMatch(c);
+    final power = switch (powerMatch?[1]) {
+      null => null,
+      'ON' || 'OK' || 'CONNECTED' => true,
+      _ => false,
+    };
+    final batteryMatch = RegExp(r'(?:BATTERY|BATT|BAT):?(OK|GOOD|FULL|LOW|WEAK)').firstMatch(c);
+    final battery = switch (batteryMatch?[1]) {
+      null => null,
+      'LOW' || 'WEAK' => false,
+      _ => true,
+    };
+    final antenna = int.tryParse(RegExp(r'(?:SIGNAL|ANTENNA|ANT|CSQ):?(\d{1,2})').firstMatch(c)?[1] ?? '');
+
+    if (arm == null && !outputs.any((o) => o != null) && power == null && battery == null && antenna == null) {
+      return null;
+    }
+    final parts = <String>[
+      if (arm != null) 'سیستم ${arm.label}',
+      for (var i = 0; i < 4; i++)
+        if (outputs[i] != null) 'خروجی ${TextNormalizer.toPersianDigits(i + 1)} ${outputs[i]! ? 'روشن' : 'خاموش'}',
+      if (power != null) power ? 'برق وصل' : 'برق قطع',
+      if (battery != null) battery ? 'باتری سالم' : 'باتری ضعیف',
+      if (antenna != null) 'آنتن ${SignalLevel.fromValue(antenna).label}',
+    ];
+    return ParsedResponse(
+      title: 'وضعیت دستگاه',
+      detail: parts.join(' • '),
+      severity: power == false || battery == false ? MessageSeverity.alert : MessageSeverity.success,
+      patch: (s) => s.copyWith(
+        arm: arm,
+        outputs: [for (var i = 0; i < 4; i++) outputs[i] ?? s.outputs[i]],
+        powerConnected: power,
+        batteryOk: battery,
+        antenna: antenna,
+      ),
+    );
   }
 
   bool _on(String word) => word == 'فعال';

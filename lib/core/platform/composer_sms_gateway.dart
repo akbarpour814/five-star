@@ -13,6 +13,12 @@ class ComposerSmsGateway implements SmsGateway {
   @override
   bool get receivesAutomatically => false;
 
+  @override
+  bool get supportsSimSelection => false;
+
+  @override
+  Future<List<SimCard>?> simCards() async => const [];
+
   static Uri buildUri(String number, String body, {TargetPlatform? platform}) {
     final encoded = Uri.encodeComponent(body);
     final separator =
@@ -24,7 +30,7 @@ class ComposerSmsGateway implements SmsGateway {
   }
 
   @override
-  Future<SmsSendResult> send({required String number, required String body}) async {
+  Future<SmsSendResult> send({required String number, required String body, int? simSlot}) async {
     try {
       final opened = await launchUrl(buildUri(number, body), mode: LaunchMode.externalApplication);
       return opened ? SmsSendResult.openedComposer : SmsSendResult.failed;
@@ -41,9 +47,6 @@ class ComposerSmsGateway implements SmsGateway {
 
   @override
   Future<void> watchNumbers(List<String> numbers) async {}
-
-  @override
-  Future<bool> ensurePermissions() async => true;
 
   @override
   Future<void> clear() async {}

@@ -250,18 +250,9 @@ class _DevicePasswordPageState extends State<DevicePasswordPage> {
               children: [
                 PasswordField(controller: _next, label: 'رمز جدید ۴ رقمی'),
                 const SizedBox(height: 14),
-                TextFormField(
+                PasswordField(
                   controller: _confirm,
-                  keyboardType: TextInputType.number,
-                  obscureText: true,
-                  maxLength: 4,
-                  textDirection: TextDirection.ltr,
-                  inputFormatters: const [LatinDigitsFormatter()],
-                  decoration: const InputDecoration(
-                    labelText: 'تکرار رمز جدید',
-                    counterText: '',
-                    prefixIcon: Icon(Icons.password),
-                  ),
+                  label: 'تکرار رمز جدید',
                   validator: (v) => v == _next.text ? null : 'تکرار رمز با رمز جدید یکسان نیست',
                 ),
                 const SizedBox(height: 18),

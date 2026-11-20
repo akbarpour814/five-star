@@ -72,7 +72,7 @@ class LocalAuthRepository implements AuthRepository {
   Future<bool> authenticateWithBiometric() async {
     try {
       return await _localAuth.authenticate(
-        localizedReason: 'برای ورود به FiveStar هویت خود را تایید کنید',
+        localizedReason: 'برای ورود به Five Star هویت خود را تایید کنید',
         biometricOnly: true,
         persistAcrossBackgrounding: true,
       );

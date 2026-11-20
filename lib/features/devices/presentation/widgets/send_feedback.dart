@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../../core/di/injection.dart';
+import '../../../../core/permissions/permission_service.dart';
+import '../../../../core/permissions/permission_sheet.dart';
+import '../../../../core/platform/sms_gateway.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/date_format.dart';
 import '../../../../core/widgets/common.dart';
@@ -23,9 +27,20 @@ abstract final class SendFeedback {
     SendStatus.sent => 'پیامک ارسال شد؛ منتظر پاسخ دستگاه باشید',
     SendStatus.openedComposer => 'پیام‌رسان باز شد؛ پیامک را ارسال و پاسخ دستگاه را در برنامه ثبت کنید',
     SendStatus.cooldown => 'تا ارسال بعدی ${AppDateFormat.countdown(outcome.wait)} صبر کنید',
-    SendStatus.permissionDenied => 'اجازه ارسال پیامک داده نشد',
+    SendStatus.permissionDenied => 'اجازه ارسال پیامک یا دسترسی به سیم‌کارت داده نشد',
+    SendStatus.simUnavailable =>
+      'سیم‌کارت انتخاب‌شده برای این دستگاه در گوشی فعال نیست؛ آن را در تنظیمات دستگاه تغییر دهید',
     SendStatus.failed => 'ارسال پیامک ناموفق بود',
   };
+}
+
+/// On Android, explains and requests SMS (and SIM, when a slot is chosen) permissions before sending.
+/// Returns false when the user declines, so the send must not happen.
+Future<bool> ensureSendPermissions(BuildContext context, {int? simSlot}) async {
+  if (!sl<SmsGateway>().sendsDirectly) return true;
+  if (!await ensureAppPermission(context, AppPermission.sms) || !context.mounted) return false;
+  if (simSlot != null && !await ensureAppPermission(context, AppPermission.phone)) return false;
+  return context.mounted;
 }
 
 /// Shows the command preview and, on confirmation, sends it through [cubit].
@@ -46,6 +61,7 @@ Future<SendOutcome?> sendDeviceCommand(
     builder: (_) => _CommandSheet(command: command, deviceName: state.device.name, sim: state.device.simNumber),
   );
   if (confirmed != true || !context.mounted) return null;
+  if (!await ensureSendPermissions(context, simSlot: state.device.simSlot)) return null;
 
   final outcome = await (sender?.call() ?? cubit.send(command));
   if (context.mounted) showAppSnack(context, SendFeedback.message(outcome), error: !outcome.delivered);

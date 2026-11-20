@@ -9,6 +9,7 @@ import '../../features/devices/domain/repositories/device_repository.dart';
 import '../../features/devices/domain/usecases/incoming_sms_coordinator.dart';
 import '../../features/devices/domain/usecases/process_device_reply.dart';
 import '../../features/devices/domain/usecases/send_device_command.dart';
+import '../permissions/permission_service.dart';
 import '../platform/android_sms_gateway.dart';
 import '../platform/composer_sms_gateway.dart';
 import '../platform/sms_gateway.dart';
@@ -24,6 +25,7 @@ Future<void> configureDependencies() async {
   sl
     ..registerLazySingleton(() => KeyValueStore(prefs))
     ..registerLazySingleton(SecureStore.new)
+    ..registerLazySingleton(() => const PermissionService())
     ..registerLazySingleton<SmsGateway>(() => _isAndroid ? AndroidSmsGateway() : const ComposerSmsGateway())
     ..registerLazySingleton<DeviceRepository>(() => LocalDeviceRepository(store: sl(), secure: sl()))
     ..registerLazySingleton<AuthRepository>(

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/di/injection.dart';
+import '../../../../core/permissions/permission_service.dart';
+import '../../../../core/permissions/permission_sheet.dart';
 import '../../../../core/platform/sms_gateway.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/common.dart';
@@ -12,6 +14,11 @@ import '../bloc/auth_bloc.dart';
 
 class AppSettingsPage extends StatelessWidget {
   const AppSettingsPage({super.key});
+
+  Future<void> _toggleBiometric(BuildContext context, bool enable) async {
+    if (enable && !await ensureAppPermission(context, AppPermission.biometric)) return;
+    if (context.mounted) context.read<AuthBloc>().add(AuthBiometricToggled(enable));
+  }
 
   Future<void> _reset(BuildContext context) async {
     final ok = await showConfirmDialog(
@@ -66,7 +73,7 @@ class AppSettingsPage extends StatelessWidget {
                           contentPadding: EdgeInsets.zero,
                           leading: const Icon(Icons.pin_outlined, color: AppColors.primary),
                           title: const Text('تغییر رمز ورود'),
-                          trailing: const Icon(Icons.chevron_left),
+                          trailing: const Icon(Icons.chevron_right),
                           onTap: () =>
                               Navigator.of(context).push(MaterialPageRoute(builder: (_) => const _ChangePinPage())),
                         ),
@@ -79,9 +86,7 @@ class AppSettingsPage extends StatelessWidget {
                             style: const TextStyle(fontSize: 12),
                           ),
                           value: state.biometricEnabled && state.biometricAvailable,
-                          onChanged: state.biometricAvailable
-                              ? (v) => context.read<AuthBloc>().add(AuthBiometricToggled(v))
-                              : null,
+                          onChanged: state.biometricAvailable ? (v) => _toggleBiometric(context, v) : null,
                         ),
                         ListTile(
                           contentPadding: EdgeInsets.zero,
@@ -120,7 +125,7 @@ class AppSettingsPage extends StatelessWidget {
                   const SizedBox(height: 24),
                   const Center(
                     child: Text(
-                      'FiveStar • نسخه ۱.۰.۰',
+                      'Five Star • نسخه ۱.۰.۰',
                       style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
                     ),
                   ),

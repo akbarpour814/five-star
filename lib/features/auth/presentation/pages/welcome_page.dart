@@ -23,7 +23,7 @@ class WelcomePage extends StatelessWidget {
                     const AppLogo(size: 150),
                     const SizedBox(height: 28),
                     const Text(
-                      'دزدگیر سیم‌کارتی FiveStar',
+                      'دزدگیر سیم‌کارتی Five Star',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.w800),
                     ),

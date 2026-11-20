@@ -145,6 +145,8 @@ class DeviceCubit extends Cubit<DeviceState> {
   Future<void> updateDevice({required String name, required String simNumber, String? ownerPhone}) =>
       _repository.saveDevice(state.device.copyWith(name: name, simNumber: simNumber, ownerPhone: ownerPhone));
 
+  Future<void> updateSimSlot(int slot) => _repository.saveDevice(state.device.copyWith(simSlot: slot));
+
   Future<void> updatePassword(String password) => _repository.setPassword(state.device.id, password);
 
   Future<void> clearMessages() => _repository.clearMessages(state.device.id);

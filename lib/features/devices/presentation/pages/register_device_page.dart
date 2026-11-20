@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/di/injection.dart';
+import '../../../../core/permissions/permission_service.dart';
+import '../../../../core/permissions/permission_sheet.dart';
+import '../../../../core/platform/sms_gateway.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/phone_utils.dart';
 import '../../../../core/utils/text_normalizer.dart';
@@ -13,6 +16,7 @@ import '../../../gsa212/domain/gsa212_commands.dart';
 import '../../domain/usecases/send_device_command.dart';
 import '../cubit/register_device_cubit.dart';
 import '../widgets/send_feedback.dart';
+import '../widgets/sim_slot_selector.dart';
 
 class RegisterDevicePage extends StatelessWidget {
   const RegisterDevicePage({super.key, required this.withAppSecurity});
@@ -193,6 +197,8 @@ class _DeviceFormState extends State<_DeviceForm> {
   late final _password = TextEditingController(text: widget.state.draft?.password ?? '0000');
   late final _owner = TextEditingController(text: widget.state.draft?.ownerPhone);
   late bool _saveOwner = widget.state.draft?.saveOwnerToMemory ?? true;
+  late int? _simSlot = widget.state.draft?.simSlot;
+  final bool _selectSim = sl<SmsGateway>().supportsSimSelection;
   bool _showPassword = false;
   String? _simError;
   bool _checking = false;
@@ -220,6 +226,9 @@ class _DeviceFormState extends State<_DeviceForm> {
     });
     if (!_formKey.currentState!.validate()) return;
     FocusScope.of(context).unfocus();
+    // Adding a device finishes right away, so its permissions are settled here; first-run asks on the last step.
+    if (!widget.state.withAppSecurity && !await ensureSendPermissions(context, simSlot: _simSlot)) return;
+    if (!mounted) return;
     cubit.submitDevice(
       DeviceDraft(
         name: _name.text.trim(),
@@ -227,6 +236,7 @@ class _DeviceFormState extends State<_DeviceForm> {
         password: _password.text,
         ownerPhone: _owner.text,
         saveOwnerToMemory: _saveOwner && _owner.text.trim().isNotEmpty,
+        simSlot: _simSlot,
       ),
     );
   }
@@ -331,6 +341,24 @@ class _DeviceFormState extends State<_DeviceForm> {
               ],
             ),
           ),
+          if (_selectSim) ...[
+            const SizedBox(height: 16),
+            SectionCard(
+              title: 'سیم‌کارت ارسال دستور',
+              icon: Icons.sim_card_outlined,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const Text(
+                    'دستورات این دستگاه همیشه از این سیم‌کارت گوشی شما ارسال می‌شوند.',
+                    style: TextStyle(fontSize: 12.5, color: AppColors.textSecondary, height: 1.7),
+                  ),
+                  const SizedBox(height: 12),
+                  SimSlotSelector(value: _simSlot, onChanged: (v) => setState(() => _simSlot = v)),
+                ],
+              ),
+            ),
+          ],
           const SizedBox(height: 16),
           const InfoBanner(
             text:
@@ -423,6 +451,15 @@ class _SecurityStep extends StatelessWidget {
 
   final RegisterState state;
 
+  Future<void> _finish(BuildContext context) async {
+    final cubit = context.read<RegisterDeviceCubit>();
+    if (!await ensureSendPermissions(context, simSlot: state.draft!.simSlot) || !context.mounted) return;
+    if (state.enableBiometric && state.biometricAvailable) {
+      if (!await ensureAppPermission(context, AppPermission.biometric)) return;
+    }
+    await cubit.finish();
+  }
+
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<RegisterDeviceCubit>();
@@ -458,6 +495,7 @@ class _SecurityStep extends StatelessWidget {
               _SummaryRow(label: 'نام دستگاه', value: draft.name),
               _SummaryRow(label: 'شماره سیم‌کارت', value: PhoneUtils.normalize(draft.simNumber), ltr: true),
               _SummaryRow(label: 'مدل', value: Gsa212Commands.model, ltr: true),
+              if (draft.simSlot != null) _SummaryRow(label: 'سیم‌کارت ارسال', value: 'سیم ${draft.simSlot! + 1}'),
               if (draft.saveOwnerToMemory)
                 _SummaryRow(label: 'ثبت در حافظه ۱', value: PhoneUtils.normalize(draft.ownerPhone), ltr: true),
             ],
@@ -475,7 +513,7 @@ class _SecurityStep extends StatelessWidget {
           label: 'تکمیل ثبت',
           icon: Icons.check_circle_outline,
           loading: state.submitting,
-          onPressed: cubit.finish,
+          onPressed: () => _finish(context),
         ),
       ],
     );

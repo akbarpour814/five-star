@@ -18,6 +18,7 @@ class DeviceDraft extends Equatable {
     required this.password,
     this.ownerPhone = '',
     this.saveOwnerToMemory = true,
+    this.simSlot,
   });
 
   final String name;
@@ -25,9 +26,10 @@ class DeviceDraft extends Equatable {
   final String password;
   final String ownerPhone;
   final bool saveOwnerToMemory;
+  final int? simSlot;
 
   @override
-  List<Object?> get props => [name, simNumber, password, ownerPhone, saveOwnerToMemory];
+  List<Object?> get props => [name, simNumber, password, ownerPhone, saveOwnerToMemory, simSlot];
 }
 
 class RegisterState extends Equatable {
@@ -165,6 +167,7 @@ class RegisterDeviceCubit extends Cubit<RegisterState> {
       simNumber: PhoneUtils.normalize(draft.simNumber),
       ownerPhone: draft.ownerPhone.trim().isEmpty ? null : PhoneUtils.normalize(draft.ownerPhone),
       createdAt: DateTime.now(),
+      simSlot: draft.simSlot,
     );
     await _devices.saveDevice(device, password: draft.password);
 

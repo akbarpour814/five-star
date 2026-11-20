@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSFaceIDUsageDescription</key>
-	<string>برای ورود سریع و امن به FiveStar از Face ID استفاده می‌شود.</string>
+	<string>برای ورود سریع و امن به Five Star از Face ID استفاده می‌شود.</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>sms</string>
@@ -14,7 +14,7 @@
 	<true/>
 	
 	<key>CFBundleDisplayName</key>
-	<string>FiveStar</string>
+	<string>Five Star</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -22,7 +22,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>FiveStar</string>
+	<string>Five Star</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

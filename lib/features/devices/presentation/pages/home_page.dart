@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/date_format.dart';
 import '../../../../core/utils/text_normalizer.dart';
+import '../../../../core/widgets/common.dart';
 import '../../../../core/widgets/gradient_background.dart';
 import '../../../auth/presentation/pages/app_settings_page.dart';
 import '../../domain/entities/device_message.dart';
@@ -25,8 +26,7 @@ class HomePage extends StatelessWidget {
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
         onPressed: () => _addDevice(context),
-        icon: const Icon(Icons.add),
-        label: const Text('افزودن دستگاه', style: TextStyle(fontWeight: FontWeight.w700)),
+        label: const FabLabel(text: 'افزودن دستگاه', icon: Icons.add),
       ),
       body: BlocBuilder<DevicesCubit, DevicesState>(
         builder: (context, state) {
@@ -164,7 +164,7 @@ class _DeviceCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const Icon(Icons.chevron_left_rounded, color: AppColors.textSecondary),
+                  const Icon(Icons.chevron_right_rounded, color: AppColors.textSecondary),
                 ],
               ),
               const SizedBox(height: 14),

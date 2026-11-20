@@ -18,6 +18,7 @@ import '../widgets/send_feedback.dart';
 import '../widgets/status_visuals.dart';
 import 'edit_device_page.dart';
 import 'paste_response_page.dart';
+import 'sim_selection_page.dart';
 
 void pushWithDevice(BuildContext context, Widget page) {
   final cubit = context.read<DeviceCubit>();
@@ -61,8 +62,7 @@ class _DeviceView extends StatelessWidget {
                   backgroundColor: AppColors.brandRed,
                   foregroundColor: Colors.white,
                   onPressed: () => pushWithDevice(context, const PasteResponsePage()),
-                  icon: const Icon(Icons.content_paste_go_rounded),
-                  label: const Text('ثبت پاسخ دستگاه', style: TextStyle(fontWeight: FontWeight.w700)),
+                  label: const FabLabel(text: 'ثبت پاسخ دستگاه', icon: Icons.content_paste_go_rounded),
                 ),
           body: NestedScrollView(
             headerSliverBuilder: (context, _) => [
@@ -409,8 +409,6 @@ class _ArmButton extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(state.icon, color: active ? Colors.white : state.color),
-                const SizedBox(width: 8),
                 Text(
                   title,
                   style: TextStyle(
@@ -419,6 +417,8 @@ class _ArmButton extends StatelessWidget {
                     fontSize: 14.5,
                   ),
                 ),
+                const SizedBox(width: 8),
+                Icon(state.icon, color: active ? Colors.white : state.color),
               ],
             ),
           ),
@@ -508,8 +508,6 @@ class _SmallButton extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(icon, size: 16, color: outlined ? AppColors.primary : Colors.white),
-                const SizedBox(width: 4),
                 Text(
                   label,
                   style: TextStyle(
@@ -518,6 +516,8 @@ class _SmallButton extends StatelessWidget {
                     color: outlined ? AppColors.primary : Colors.white,
                   ),
                 ),
+                const SizedBox(width: 4),
+                Icon(icon, size: 16, color: outlined ? AppColors.primary : Colors.white),
               ],
             ),
           ),
@@ -575,10 +575,18 @@ class _SettingsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final simSlot = context.select<DeviceCubit, int?>((c) => c.state.device.simSlot);
     final groups = <(String, List<(IconData, String, String, Widget)>)>[
       (
         'تنظیمات پایه',
         [
+          if (sl<SmsGateway>().supportsSimSelection)
+            (
+              Icons.sim_card_outlined,
+              'سیم‌کارت ارسال دستور',
+              simSlot == null ? 'سیم‌کارت پیش‌فرض گوشی' : 'ارسال از سیم ${TextNormalizer.toPersianDigits(simSlot + 1)}',
+              const SimSelectionPage(),
+            ),
           (Icons.contacts_outlined, 'حافظه‌های تلفن', 'ثبت ۳۰ شماره پیامک و تماس', const PhoneMemoriesPage()),
           (Icons.password_rounded, 'رمز دستگاه', 'تغییر رمز کنترلی ۴ رقمی', const DevicePasswordPage()),
           (Icons.sim_card_outlined, 'سیم‌کارت و شارژ', 'شارژ، USSD و استعلام خودکار', const SimSettingsPage()),
@@ -631,7 +639,7 @@ class _SettingsTab extends StatelessWidget {
                     leading: IconBadge(icon: group.$2[i].$1),
                     title: Text(group.$2[i].$2, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14.5)),
                     subtitle: Text(group.$2[i].$3, style: const TextStyle(fontSize: 12)),
-                    trailing: const Icon(Icons.chevron_left_rounded),
+                    trailing: const Icon(Icons.chevron_right_rounded),
                     onTap: () => pushWithDevice(context, group.$2[i].$4),
                   ),
                   if (i < group.$2.length - 1) const Divider(indent: 72),
