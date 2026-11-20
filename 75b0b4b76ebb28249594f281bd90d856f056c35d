@@ -1,0 +1,1502 @@
+.claude/launch.json
+  s_54227a9ea6e195::t_96492ee525861b 1-11
+.dart_tool/dartpad/web_plugin_registrant.dart
+  s_54227a9ea6e195::t_0752039e3e6735 1-22
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/.filecache
+  s_54227a9ea6e195::t_ef830ceb9be4b4 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/build_hooks.d
+  s_54227a9ea6e195::t_236384898d8478 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/build_hooks.stamp
+  s_54227a9ea6e195::t_5fa7e9d1fbd8b2 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/build_hooks_result.json
+  s_54227a9ea6e195::t_d81677775adcd2 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/debug_android_application.stamp
+  s_54227a9ea6e195::t_6014080f40c344 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/flutter_assets.d
+  s_54227a9ea6e195::t_dc32318b9342a7 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/gen_dart_plugin_registrant.stamp
+  s_54227a9ea6e195::t_a508be102f431d 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/gen_localizations.stamp
+  s_54227a9ea6e195::t_cc8aeb0193a7d2 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/install_code_assets.d
+  s_54227a9ea6e195::t_caf5be2ff6da97 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/install_code_assets.stamp
+  s_54227a9ea6e195::t_f92d1261de984d 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/kernel_snapshot_program.d
+  s_54227a9ea6e195::t_468d1dd537c0a1 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/kernel_snapshot_program.stamp
+  s_54227a9ea6e195::t_3090c66753c003 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/link_hooks.d
+  s_54227a9ea6e195::t_7a242161f2ef23 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/link_hooks.stamp
+  s_54227a9ea6e195::t_3e940b999e5563 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/link_hooks_result.json
+  s_54227a9ea6e195::t_0225113c3086ad 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/native_assets.json
+  s_54227a9ea6e195::t_96e260d2bba9bc 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/outputs.json
+  s_54227a9ea6e195::t_d4f9c44a9f8266 1
+.dart_tool/flutter_build/33da19f37893fba0e821c28a41aeba0b/recorded_uses.json
+  s_54227a9ea6e195::t_83636b89bb84dd 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/.filecache
+  s_54227a9ea6e195::t_4c834950556c1b 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/app.dill.deps
+  s_54227a9ea6e195::t_17bdc220d170dc 1-1642
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/build_hooks.d
+  s_54227a9ea6e195::t_9ac7601812aa69 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/build_hooks.stamp
+  s_54227a9ea6e195::t_d39eb3a90b7226 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/build_hooks_result.json
+  s_54227a9ea6e195::t_c9acb9f91c47dd 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/dart2js.d
+  s_54227a9ea6e195::t_74644a1991589a 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/dart2js.stamp
+  s_54227a9ea6e195::t_46cb6030e9064f 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/flutter_assets.d
+  s_54227a9ea6e195::t_4849fd6af4dbc6 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/gen_localizations.stamp
+  s_54227a9ea6e195::t_6f8240ee0b5a6a 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/link_hooks.d
+  s_54227a9ea6e195::t_aef88683f659ec 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/link_hooks.stamp
+  s_54227a9ea6e195::t_9abfca11b09a99 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/link_hooks_result.json
+  s_54227a9ea6e195::t_8a44aa86973f41 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/main.dart
+  s_54227a9ea6e195::t_7034b209aeddea 1-30
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/main.dart.js
+  s_54227a9ea6e195::t_fe25210d6e54f8 1-115614
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/main.dart.js.deps
+  s_54227a9ea6e195::t_dc650c32825e53 1-1641
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/outputs.json
+  s_54227a9ea6e195::t_41ecf3a9f378ee 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/recorded_uses_js.json
+  s_54227a9ea6e195::t_66a6aa572376fc 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/service_worker.d
+  s_54227a9ea6e195::t_faa8a19a1e433f 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/web_entrypoint.stamp
+  s_54227a9ea6e195::t_abcaf004863085 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/web_plugin_registrant.dart
+  s_54227a9ea6e195::t_e835a0b3158d2d 1-22
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/web_release_bundle.stamp
+  s_54227a9ea6e195::t_8bb7de9b13ca8d 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/web_resources.d
+  s_54227a9ea6e195::t_ff2234f5138620 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/web_service_worker.stamp
+  s_54227a9ea6e195::t_43242e71b6b7b7 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/web_static_assets.stamp
+  s_54227a9ea6e195::t_ca99955b5da603 1
+.dart_tool/flutter_build/36a14a9b053734669bb60bc61d73370b/web_templated_files.stamp
+  s_54227a9ea6e195::t_6fdca399f663cd 1
+.dart_tool/flutter_build/dart_plugin_registrant.dart
+  s_54227a9ea6e195::t_3e6d2f6c7d5a25 1-222
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/.filecache
+  s_54227a9ea6e195::t_1f80587271129e 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/app.dill.deps
+  s_54227a9ea6e195::t_6688cbb0333856 1-1642
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/build_hooks.d
+  s_54227a9ea6e195::t_8e9b60001271b5 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/build_hooks.stamp
+  s_54227a9ea6e195::t_faa307e3633e82 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/build_hooks_result.json
+  s_54227a9ea6e195::t_357ec6f6ec04d2 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/dart2js.d
+  s_54227a9ea6e195::t_da54dd23b17945 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/dart2js.stamp
+  s_54227a9ea6e195::t_c780dedef69c8d 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/dart2wasm.stamp
+  s_54227a9ea6e195::t_b491fffb5bf810 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/flutter_assets.d
+  s_54227a9ea6e195::t_362813010fb7bc 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/gen_localizations.stamp
+  s_54227a9ea6e195::t_3b5d06291705ac 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/link_hooks.d
+  s_54227a9ea6e195::t_73fa53d2c44e34 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/link_hooks.stamp
+  s_54227a9ea6e195::t_1a0ff878d6ec9a 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/link_hooks_result.json
+  s_54227a9ea6e195::t_72242b798d413e 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/main.dart
+  s_54227a9ea6e195::t_2f3e82e64b3444 1-30
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/main.dart.js
+  s_54227a9ea6e195::t_0d023b317d065a 1-115614
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/main.dart.js.deps
+  s_54227a9ea6e195::t_3643243bc6c5c4 1-1641
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/outputs.json
+  s_54227a9ea6e195::t_51b32778682128 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/recorded_uses_js.json
+  s_54227a9ea6e195::t_3df6179a0b74a1 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/recorded_uses_wasm.json
+  s_54227a9ea6e195::t_427f598f67ec80 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/service_worker.d
+  s_54227a9ea6e195::t_30454749c9fa20 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/web_entrypoint.stamp
+  s_54227a9ea6e195::t_83624aea3a7dc4 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/web_plugin_registrant.dart
+  s_54227a9ea6e195::t_3e8e72305d2e59 1-22
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/web_release_bundle.stamp
+  s_54227a9ea6e195::t_dffbc66591c871 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/web_resources.d
+  s_54227a9ea6e195::t_9f05fa7284a315 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/web_service_worker.stamp
+  s_54227a9ea6e195::t_26ddf08a923bb3 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/web_static_assets.stamp
+  s_54227a9ea6e195::t_e602f3652b8059 1
+.dart_tool/flutter_build/e79b29ad0a900d136da8a4e5bbe995b8/web_templated_files.stamp
+  s_54227a9ea6e195::t_bba9411d6c6d5c 1
+.dart_tool/hooks_runner/objective_c/38527f660b/.lock
+  s_54227a9ea6e195::t_263333c555f1a9 1
+.dart_tool/hooks_runner/objective_c/38527f660b/dependencies.dependencies_hash_file.json
+  s_54227a9ea6e195::t_99100b6ce7e6b9 1
+.dart_tool/hooks_runner/objective_c/38527f660b/hook.dependencies_hash_file.json
+  s_54227a9ea6e195::t_719618f1058cee 1
+.dart_tool/hooks_runner/objective_c/38527f660b/hook.dill.d
+  s_54227a9ea6e195::t_e7052faa7afa63 1
+.dart_tool/hooks_runner/objective_c/38527f660b/input.json
+  s_54227a9ea6e195::t_9bd031cd01eeac 1-29
+.dart_tool/hooks_runner/objective_c/38527f660b/output.json
+  s_54227a9ea6e195::t_a53d741c0904b0 1-5
+.dart_tool/hooks_runner/objective_c/38527f660b/stdout.txt
+  s_54227a9ea6e195::t_59cefb47f259a6 1
+.dart_tool/hooks_runner/objective_c/523eff254e/.lock
+  s_54227a9ea6e195::t_3e44275c53ae9b 1
+.dart_tool/hooks_runner/objective_c/523eff254e/dependencies.dependencies_hash_file.json
+  s_54227a9ea6e195::t_8cfe5301cc4a4f 1
+.dart_tool/hooks_runner/objective_c/523eff254e/hook.dependencies_hash_file.json
+  s_54227a9ea6e195::t_fca11260d51a33 1
+.dart_tool/hooks_runner/objective_c/523eff254e/hook.dill.d
+  s_54227a9ea6e195::t_9635e3cda81455 1
+.dart_tool/hooks_runner/objective_c/523eff254e/input.json
+  s_54227a9ea6e195::t_ac8306f5cec75e 1-29
+.dart_tool/hooks_runner/objective_c/523eff254e/output.json
+  s_54227a9ea6e195::t_516e7f441b102d 1-5
+.dart_tool/hooks_runner/objective_c/523eff254e/stdout.txt
+  s_54227a9ea6e195::t_e6b3cc1be5991b 1
+.dart_tool/hooks_runner/objective_c/6782ff62a0/.lock
+  s_54227a9ea6e195::t_032a68fceeab1b 1
+.dart_tool/hooks_runner/objective_c/6782ff62a0/dependencies.dependencies_hash_file.json
+  s_54227a9ea6e195::t_af319ce8d8d91f 1
+.dart_tool/hooks_runner/objective_c/6782ff62a0/hook.dependencies_hash_file.json
+  s_54227a9ea6e195::t_943c8bd29aca24 1
+.dart_tool/hooks_runner/objective_c/6782ff62a0/hook.dill.d
+  s_54227a9ea6e195::t_05d3cc37d21a41 1
+.dart_tool/hooks_runner/objective_c/6782ff62a0/input.json
+  s_54227a9ea6e195::t_380c380f7fae3d 1-12
+.dart_tool/hooks_runner/objective_c/6782ff62a0/output.json
+  s_54227a9ea6e195::t_710078034dfce7 1-5
+.dart_tool/hooks_runner/objective_c/6782ff62a0/stdout.txt
+  s_54227a9ea6e195::t_4210cae70167cf 1
+.dart_tool/hooks_runner/objective_c/77bd9ea2f1/.lock
+  s_54227a9ea6e195::t_7c614b4481b22f 1
+.dart_tool/hooks_runner/objective_c/77bd9ea2f1/dependencies.dependencies_hash_file.json
+  s_54227a9ea6e195::t_43f8c46620825c 1
+.dart_tool/hooks_runner/objective_c/77bd9ea2f1/hook.dependencies_hash_file.json
+  s_54227a9ea6e195::t_65f4eb680c00db 1
+.dart_tool/hooks_runner/objective_c/77bd9ea2f1/hook.dill.d
+  s_54227a9ea6e195::t_0a624cc8b6776f 1
+.dart_tool/hooks_runner/objective_c/77bd9ea2f1/input.json
+  s_54227a9ea6e195::t_4987e76a5e91a0 1-29
+.dart_tool/hooks_runner/objective_c/77bd9ea2f1/output.json
+  s_54227a9ea6e195::t_703ce2b80aa14b 1-5
+.dart_tool/hooks_runner/objective_c/77bd9ea2f1/stdout.txt
+  s_54227a9ea6e195::t_ce0d1e4077aa2d 1
+.dart_tool/hooks_runner/objective_c/7ad245dadc/.lock
+  s_54227a9ea6e195::t_0d8caf034723c2 1
+.dart_tool/hooks_runner/objective_c/7ad245dadc/dependencies.dependencies_hash_file.json
+  s_54227a9ea6e195::t_9dd0e8c43d8147 1
+.dart_tool/hooks_runner/objective_c/7ad245dadc/hook.dependencies_hash_file.json
+  s_54227a9ea6e195::t_1ef055877348da 1
+.dart_tool/hooks_runner/objective_c/7ad245dadc/hook.dill.d
+  s_54227a9ea6e195::t_39bdada502562c 1
+.dart_tool/hooks_runner/objective_c/7ad245dadc/input.json
+  s_54227a9ea6e195::t_e12120c7dbc88c 1-29
+.dart_tool/hooks_runner/objective_c/7ad245dadc/output.json
+  s_54227a9ea6e195::t_ea281dd05cc9c9 1-46
+.dart_tool/hooks_runner/objective_c/7ad245dadc/stdout.txt
+  s_54227a9ea6e195::t_a56b9d06ef2ad4 1-53
+.dart_tool/hooks_runner/shared/objective_c/.lock
+  s_54227a9ea6e195::t_5a26c18e3d8e9f 1
+.dart_tool/package_config.json
+  s_54227a9ea6e195::t_a07dad98e2dd41 1-808
+.dart_tool/package_graph.json
+  s_54227a9ea6e195::t_43ea46411e229a 1-1233
+.dart_tool/version
+  s_54227a9ea6e195::t_b713cfb912baec 1
+.flutter-plugins-dependencies
+  s_54227a9ea6e195::t_65f551041580b3 1
+analysis_options.yaml
+  s_54227a9ea6e195::t_77053111dfb29a 1-38
+android/app/build.gradle.kts
+  s_54227a9ea6e195::t_3b48137acc2652 1-53
+android/app/src/main/AndroidManifest.xml
+  s_54227a9ea6e195::t_0def0fd39edcef 1-65
+android/app/src/main/res/drawable-v21/launch_background.xml
+  s_54227a9ea6e195::t_391bb85e6201e6 1-9
+android/app/src/main/res/drawable/launch_background.xml
+  s_54227a9ea6e195::t_411c6bc51bb553 1-9
+android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
+  s_54227a9ea6e195::t_805f8f03bd893b 1-9
+android/app/src/main/res/values-night/styles.xml
+  s_54227a9ea6e195::t_9817cf4ca2db8e 1-18
+android/app/src/main/res/values/colors.xml
+  s_54227a9ea6e195::t_e8cae86f0b3b2a 1-5
+android/app/src/main/res/values/styles.xml
+  s_54227a9ea6e195::t_e95df61959f411 1-18
+android/gradle.properties
+  s_54227a9ea6e195::t_d2b653e551a41a 1-7
+build/app/deeplink.json
+  s_54227a9ea6e195::t_82aab95c2ff274 1
+build/app/intermediates/android_res_source_set_path_map/debug/mapDebugSourceSetPaths/file-map.txt
+  s_54227a9ea6e195::t_0965754304dd8b 1-7
+build/app/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
+  s_54227a9ea6e195::t_3fdc6cb8100a57 1
+build/app/intermediates/apk_ide_redirect_file/debug/createDebugApkListingFileRedirect/redirect.txt
+  s_54227a9ea6e195::t_5a0bf5635804e0 1-2
+build/app/intermediates/app_metadata/debug/writeDebugAppMetadata/app-metadata.properties
+  s_54227a9ea6e195::t_9066e665b5a25d 1-2
+build/app/intermediates/assets/debug/mergeDebugAssets/flutter_assets/AssetManifest.bin
+  s_54227a9ea6e195::t_abc979e4b86c1a 1
+build/app/intermediates/assets/debug/mergeDebugAssets/flutter_assets/FontManifest.json
+  s_54227a9ea6e195::t_ee5bee4dee5aa7 1
+build/app/intermediates/assets/debug/mergeDebugAssets/flutter_assets/NativeAssetsManifest.json
+  s_54227a9ea6e195::t_fb5772f3f05df4 1
+build/app/intermediates/compatible_screen_manifest/debug/createDebugCompatibleScreenManifests/output-metadata.json
+  s_54227a9ea6e195::t_26d3f73047f8e5 1-10
+build/app/intermediates/compile_symbol_list/debug/generateDebugRFile/R.txt
+  s_54227a9ea6e195::t_33a594ce054c76 1-8
+build/app/intermediates/dex_number_of_buckets_file/debug/dexBuilderDebug/out
+  s_54227a9ea6e195::t_bfa8ee136dcf46 1
+build/app/intermediates/flutter/debug/.last_build_id
+  s_54227a9ea6e195::t_4e86e2db3af6d5 1
+build/app/intermediates/flutter/debug/flutter_assets/AssetManifest.bin
+  s_54227a9ea6e195::t_976c86ecc4abe0 1
+build/app/intermediates/flutter/debug/flutter_assets/FontManifest.json
+  s_54227a9ea6e195::t_a2a22fd15bf34a 1
+build/app/intermediates/flutter/debug/flutter_assets/NativeAssetsManifest.json
+  s_54227a9ea6e195::t_fcd3df182481ff 1
+build/app/intermediates/flutter/debug/flutter_build.d
+  s_54227a9ea6e195::t_a96ba6ecc727b9 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/++9F7apvz4Eu5_4uLFTd5A==
+  s_54227a9ea6e195::t_570b49c0e4c3bf 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/+TyundnsyFHS9VMMZbepHQ==
+  s_54227a9ea6e195::t_48906a5fa5ce07 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/083NIJ9Z5goXRQS8AUwUyg==
+  s_54227a9ea6e195::t_b9c02a4bdbb30c 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/0ku_CSaq_mzjicj2nzAAYA==
+  s_54227a9ea6e195::t_9092365bc0debb 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/0yPltJzrv_yZvZiGKcHPCg==
+  s_54227a9ea6e195::t_b0c0024cb0aff0 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/1gBYJxoJY3NFZkkOCJXNnQ==
+  s_54227a9ea6e195::t_7910cc4fe13a96 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/25jVKqLgBG6sKuus2+yung==
+  s_54227a9ea6e195::t_22704479fb94bc 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/27dqkDL2XEbuZiKH5UGo_Q==
+  s_54227a9ea6e195::t_bedaf38549e6e1 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/3RSlZJJ+gtjzgWlBNggQ7A==
+  s_54227a9ea6e195::t_897286b5506684 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/3qEE_ZzZETNXRLNOw4mqxw==
+  s_54227a9ea6e195::t_4a448e83ef4c2a 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/4DSftyxl06XS6FUmi1xL5w==
+  s_54227a9ea6e195::t_ac093ebd4084b6 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/4xAaDQx1XWcQiHNLWgzR0w==
+  s_54227a9ea6e195::t_41930368e0c1b3 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/6hYP9vc5NfpMZK_frPFXxw==
+  s_54227a9ea6e195::t_22b275a7313d29 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/8fa5vIWt95ewbRjklh92Yg==
+  s_54227a9ea6e195::t_b51ea5d5b2e36b 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/9JgNQBSFtb0DSDP1X6nLAQ==
+  s_54227a9ea6e195::t_d9e87d29425163 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/9MX8sd1tiHx34iYA3hIbgQ==
+  s_54227a9ea6e195::t_2e16770ae54755 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/9VTowmNixbRlvxUchpe7_Q==
+  s_54227a9ea6e195::t_be4715a5e23a88 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/ADxR7A1eYMWtSGJTnFBZdw==
+  s_54227a9ea6e195::t_3cb9d322e9da05 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/Adgv+10p0aBwJMYFBm4Rsg==
+  s_54227a9ea6e195::t_8d9c8ed5769ff3 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/BVT6UHHee56BP68S6AmyqQ==
+  s_54227a9ea6e195::t_431f3a79ae406e 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/BvPs8nQFdIk_cColiOVkJQ==
+  s_54227a9ea6e195::t_8853178d579190 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/CZP2RZt70YZg10PP_PXXDg==
+  s_54227a9ea6e195::t_8d1baaa61aed35 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/CilBrH2+H0WWLFNY6BV_6w==
+  s_54227a9ea6e195::t_c7ac5def9c9110 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/D7bLlDNCjKaMP1ROXJH_wQ==
+  s_54227a9ea6e195::t_84ec4dc439dad0 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/DJjs2Z3RI2et7z5dGNxK2Q==
+  s_54227a9ea6e195::t_fb78a7dcc3193a 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/Eu5v+H0j50JFL1rJKzl3BA==
+  s_54227a9ea6e195::t_a2fd0246cf689b 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/Euw1+UqAuYzeLopbihnOew==
+  s_54227a9ea6e195::t_9fa27a5aea3eb5 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/FRCxLvBXp3tOCa5yp9e_Wg==
+  s_54227a9ea6e195::t_eb5fc1f22ad881 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/H8owc_NtlQuCNcU65LMAow==
+  s_54227a9ea6e195::t_48e5211bfa5814 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/HFGXvs_JBSRC6pngkIIYTg==
+  s_54227a9ea6e195::t_2d27208a75ffbf 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/HmCATyXBly_JZT_uZ_GTEg==
+  s_54227a9ea6e195::t_d03344d107bf27 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/IA973HIyVvq_o27p6Mcv2g==
+  s_54227a9ea6e195::t_fa4531d6fdea10 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/IC2TlrLgxRiSG5Eqzx79Zw==
+  s_54227a9ea6e195::t_a1f9b7c7409a8e 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/IuoWjF5SJJSyebB4EyQU_Q==
+  s_54227a9ea6e195::t_64d6ead0011453 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/JqFwjj0AEblQ3yo6jAYoDg==
+  s_54227a9ea6e195::t_8366d31250ed56 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/JtAw_qlwoe_qESdWXQ0R3w==
+  s_54227a9ea6e195::t_63f3936660686b 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/Kf8YYsglmw0UB2NN0auNRA==
+  s_54227a9ea6e195::t_8f7bafbbacc71a 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/M8qf6n0FAH1G1YWTxJOEHg==
+  s_54227a9ea6e195::t_3e833959d8c854 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/MY9CaieiMWCajOmIAsMo9w==
+  s_54227a9ea6e195::t_a01b66ce25a74d 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/MdA5YAqsz_1nURCzWqrK1Q==
+  s_54227a9ea6e195::t_ba7f9634ae19b0 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/Ms75x2eLN8cf3rMoJVtBpg==
+  s_54227a9ea6e195::t_4a92d63af82263 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/NN4WISL9pyoQFGpHVcptXw==
+  s_54227a9ea6e195::t_e619adff98b3ee 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/Oal6t_pKSijBYQCKnWIYJw==
+  s_54227a9ea6e195::t_9d22e24821f551 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/OgG9pP6Ycz3YXAMQuKEUkw==
+  s_54227a9ea6e195::t_659391fd4f5026 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/OyHmm29Emva1HIocQrZL0Q==
+  s_54227a9ea6e195::t_b3b6fa3be1321a 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/PqOvvOemZjcprDM58OcLWg==
+  s_54227a9ea6e195::t_72e9eb10592e27 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/QmKihrkmcv+RkYpUnntpww==
+  s_54227a9ea6e195::t_3e2b220f750b85 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/VHHkYHFFfpEgk3C++Oq9rg==
+  s_54227a9ea6e195::t_2b2c05874e4fc8 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/Vuc9Yuc6rI8_V3FEbeJGfA==
+  s_54227a9ea6e195::t_e685952806c808 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/XVGVp_+qZ5ow0fkc5znsrQ==
+  s_54227a9ea6e195::t_3cd66c6ff5fc59 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/XYp7LnMzWE8iWxJki8_0Jw==
+  s_54227a9ea6e195::t_f30955e7204094 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/YGQ2sLK+RaWx5T0eI8yXVA==
+  s_54227a9ea6e195::t_2f271ebc19ed18 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/Yfgk3FJhIV1srLUSrHV6cg==
+  s_54227a9ea6e195::t_cf5d81a06ee4f7 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/YuKArldzkVH760dXttdemQ==
+  s_54227a9ea6e195::t_3ef892eb7c13e7 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/_2RYwfFYuUS8bScOwkJxCQ==
+  s_54227a9ea6e195::t_50b298f7d3014d 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/_VKJShPnsmw06otfWT5MEA==
+  s_54227a9ea6e195::t_5bd5da06cfb451 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/_e37k_EgniqdKVL21LDaKQ==
+  s_54227a9ea6e195::t_3d8d62b02b4595 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/_lkS+h5j8b_DmnCO7wmnSA==
+  s_54227a9ea6e195::t_78a7841aea3e14 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/aK6mK0XVdHm3ZyL+_mIsmw==
+  s_54227a9ea6e195::t_8a2febc5767b62 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/eAZVptiIloErHfB1I+3jyA==
+  s_54227a9ea6e195::t_0028f35a722847 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/f4oL4qCMzqbxtZFAJViVyA==
+  s_54227a9ea6e195::t_53c45b891ad9d9 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/fQjtT5QYJMIYllLuK7m2tg==
+  s_54227a9ea6e195::t_9395d777e9f5ef 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/hNAh4ZvRjTojyknUOxgSIg==
+  s_54227a9ea6e195::t_f1eca014dd2d5c 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/hRuj_oh7wv6L_Ssur52JIQ==
+  s_54227a9ea6e195::t_e9934d402437a7 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/iL5VCWAqNm2u2P_9JFnlEQ==
+  s_54227a9ea6e195::t_82877004d356d2 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/jGhy6G4G9_aIaEKC8VuD5w==
+  s_54227a9ea6e195::t_ea94f5e7378e8a 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/jvJzNdXawtGZbdCCI6Welg==
+  s_54227a9ea6e195::t_1214bf981b692f 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/kVvzmuesVgBqMDyi_rjOFg==
+  s_54227a9ea6e195::t_e2afe6e10f4b40 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/m1s42nxkQ7QY5eU8Hbvtiw==
+  s_54227a9ea6e195::t_666d5bd1a87ddb 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/o+nwrtKdCbXqGXa9L4TOJw==
+  s_54227a9ea6e195::t_662a5b8b414afe 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/oIvsIfHdHcRFo0fQZYHHNg==
+  s_54227a9ea6e195::t_222cc87c2890fb 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/oZrTH5TI3oiKOJ6ETIZtzg==
+  s_54227a9ea6e195::t_8066a5107afafe 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/p0RMLLJl0yzLNH8KhPfMVQ==
+  s_54227a9ea6e195::t_7829ebb99552c4 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/rrbD8UIsizvU3Xf+S7aVSg==
+  s_54227a9ea6e195::t_61c362fb1b073e 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/tC7z4Vf_kiPKJlMXLZqYNg==
+  s_54227a9ea6e195::t_0cf5f7f8c2a60f 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/tkJ_tR13zOXsMyIulDUkhg==
+  s_54227a9ea6e195::t_7d9bc32c5031cf 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/u6idO1YeMfUM9U_Bstkmqg==
+  s_54227a9ea6e195::t_d4a96dd4e5b948 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/uJ6sKTBmQS2bSvWG0lKDHQ==
+  s_54227a9ea6e195::t_05555f3ff5dcc7 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/uP_Ry5LfECTQhWAKz4ZfLA==
+  s_54227a9ea6e195::t_1a17bb00381f35 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/udVXgN0qrKukkjlfuPIheQ==
+  s_54227a9ea6e195::t_d7aaafcb4363b5 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/vIqAzNAS2wc6U6DnVTkNlg==
+  s_54227a9ea6e195::t_5428d85f4c04c7 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/wvmrRvo8GiJ9CGv_CruUew==
+  s_54227a9ea6e195::t_0f8a6726c836c6 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/xLaCnMf+xb8fqKAxa_KkfQ==
+  s_54227a9ea6e195::t_85aa71ec5a834d 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/xs149a_2id_zsWxSHlEYzA==
+  s_54227a9ea6e195::t_9445f1d145a96e 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/y6SjiY_34sVhDDogryWCxA==
+  s_54227a9ea6e195::t_9f0fc44d03be2f 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/yYi5qACSvnmkJ5Lmz93RlA==
+  s_54227a9ea6e195::t_99a0d53bb324b8 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/yo1GncSn+CF_ZvWU1sqjjw==
+  s_54227a9ea6e195::t_9f5e90fb52d314 1
+build/app/intermediates/incremental/debug-mergeJavaRes/zip-cache/ytNK+EqznQA1bdoQ1mfGIA==
+  s_54227a9ea6e195::t_03cf62d1942909 1
+build/app/intermediates/incremental/debug/mergeDebugResources/compile-file-map.properties
+  s_54227a9ea6e195::t_44c60a27336cd1 1-14
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-af/values-af.xml
+  s_54227a9ea6e195::t_0f3f4977212793 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-am/values-am.xml
+  s_54227a9ea6e195::t_d26e72a5576e0d 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-ar/values-ar.xml
+  s_54227a9ea6e195::t_9a0acdb6a44dd4 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-as/values-as.xml
+  s_54227a9ea6e195::t_721a68604fc641 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-az/values-az.xml
+  s_54227a9ea6e195::t_6ac6ba20c1d610 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-b+sr+Latn/values-b+sr+Latn.xml
+  s_54227a9ea6e195::t_47043518222818 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-be/values-be.xml
+  s_54227a9ea6e195::t_c1a4696ecf8309 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-bg/values-bg.xml
+  s_54227a9ea6e195::t_aa8a3f8d1889fc 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-bn/values-bn.xml
+  s_54227a9ea6e195::t_f47becf874e403 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-bs/values-bs.xml
+  s_54227a9ea6e195::t_6705289f909dee 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-ca/values-ca.xml
+  s_54227a9ea6e195::t_ac2af93db44e0f 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-cs/values-cs.xml
+  s_54227a9ea6e195::t_0a1c46795dd7cf 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-da/values-da.xml
+  s_54227a9ea6e195::t_aff55203bb2b74 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-de/values-de.xml
+  s_54227a9ea6e195::t_9f7eaadf0e6590 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-el/values-el.xml
+  s_54227a9ea6e195::t_3e210e3d23be3c 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-en-rAU/values-en-rAU.xml
+  s_54227a9ea6e195::t_96ae239b123f20 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-en-rCA/values-en-rCA.xml
+  s_54227a9ea6e195::t_91c3368c124733 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-en-rGB/values-en-rGB.xml
+  s_54227a9ea6e195::t_2fc02067c34272 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-en-rIN/values-en-rIN.xml
+  s_54227a9ea6e195::t_e11cea82d5a4a4 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-en-rXC/values-en-rXC.xml
+  s_54227a9ea6e195::t_49103e59dafee1 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-es-rUS/values-es-rUS.xml
+  s_54227a9ea6e195::t_89909508ef4b75 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-es/values-es.xml
+  s_54227a9ea6e195::t_a487309ef1c0b6 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-et/values-et.xml
+  s_54227a9ea6e195::t_72eb4d4c4947f4 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-eu/values-eu.xml
+  s_54227a9ea6e195::t_4cba5ce95aac5c 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-fa/values-fa.xml
+  s_54227a9ea6e195::t_a5eccedcdca18b 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-fi/values-fi.xml
+  s_54227a9ea6e195::t_de0447337cbaf8 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-fr-rCA/values-fr-rCA.xml
+  s_54227a9ea6e195::t_654565b177bcfe 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-fr/values-fr.xml
+  s_54227a9ea6e195::t_f69363c22fe3d8 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-gl/values-gl.xml
+  s_54227a9ea6e195::t_552c7141dcb833 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-gu/values-gu.xml
+  s_54227a9ea6e195::t_f178c306a83d75 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml
+  s_54227a9ea6e195::t_adbbdce85b1c71 1-4
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-hdpi-v4/values-hdpi-v4.xml
+  s_54227a9ea6e195::t_3ac8369d74b28b 1-8
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-hi/values-hi.xml
+  s_54227a9ea6e195::t_660d7b3619a6d1 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-hr/values-hr.xml
+  s_54227a9ea6e195::t_898b4c4b443029 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-hu/values-hu.xml
+  s_54227a9ea6e195::t_d5c472d34f20a3 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-hy/values-hy.xml
+  s_54227a9ea6e195::t_2ca5f5226c9e41 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-in/values-in.xml
+  s_54227a9ea6e195::t_6065e9e8aefe67 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-is/values-is.xml
+  s_54227a9ea6e195::t_3511fe132e59dd 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-it/values-it.xml
+  s_54227a9ea6e195::t_ec84d0ffeafb94 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-iw/values-iw.xml
+  s_54227a9ea6e195::t_27e20100bbc943 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-ja/values-ja.xml
+  s_54227a9ea6e195::t_12a72dea51cd5c 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-ka/values-ka.xml
+  s_54227a9ea6e195::t_854a239e9bebd1 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-kk/values-kk.xml
+  s_54227a9ea6e195::t_db49515d62761f 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-km/values-km.xml
+  s_54227a9ea6e195::t_6175a2851899ba 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-kn/values-kn.xml
+  s_54227a9ea6e195::t_bdaf7f40551e1a 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-ko/values-ko.xml
+  s_54227a9ea6e195::t_2b79365007bbb0 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-ky/values-ky.xml
+  s_54227a9ea6e195::t_786109656dc79c 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-land/values-land.xml
+  s_54227a9ea6e195::t_576c85ea69ed5b 1-6
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-large-v4/values-large-v4.xml
+  s_54227a9ea6e195::t_2793d9e3bd1e64 1-12
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml
+  s_54227a9ea6e195::t_0ea3f424560f1b 1-4
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-lo/values-lo.xml
+  s_54227a9ea6e195::t_847cc8d48823f0 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-lt/values-lt.xml
+  s_54227a9ea6e195::t_d449e54414c53f 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-lv/values-lv.xml
+  s_54227a9ea6e195::t_81be9ff68c84ea 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-mk/values-mk.xml
+  s_54227a9ea6e195::t_ff9be4a92f4c24 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-ml/values-ml.xml
+  s_54227a9ea6e195::t_74df38b4508048 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-mn/values-mn.xml
+  s_54227a9ea6e195::t_f0209aeec572e9 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-mr/values-mr.xml
+  s_54227a9ea6e195::t_baab70cd7120cf 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-ms/values-ms.xml
+  s_54227a9ea6e195::t_79dab799e75143 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-my/values-my.xml
+  s_54227a9ea6e195::t_c69194b542c9f5 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-nb/values-nb.xml
+  s_54227a9ea6e195::t_07fa7acd4158ab 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-ne/values-ne.xml
+  s_54227a9ea6e195::t_07baeda022bf00 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml
+  s_54227a9ea6e195::t_2f60850f81b458 1-18
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-nl/values-nl.xml
+  s_54227a9ea6e195::t_2ec9dd8222e0af 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-or/values-or.xml
+  s_54227a9ea6e195::t_8c1f5947dd7ab6 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-pa/values-pa.xml
+  s_54227a9ea6e195::t_fefb7930c97159 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-pl/values-pl.xml
+  s_54227a9ea6e195::t_27ca78ed8afe1c 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-port/values-port.xml
+  s_54227a9ea6e195::t_2972616ceb30de 1-4
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-pt-rBR/values-pt-rBR.xml
+  s_54227a9ea6e195::t_8f7a83c999a311 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-pt-rPT/values-pt-rPT.xml
+  s_54227a9ea6e195::t_238ca2474cace2 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-pt/values-pt.xml
+  s_54227a9ea6e195::t_9465d5f8448914 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-ro/values-ro.xml
+  s_54227a9ea6e195::t_baaf051433b5f1 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-ru/values-ru.xml
+  s_54227a9ea6e195::t_4517c90f2c8621 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-si/values-si.xml
+  s_54227a9ea6e195::t_d55659b461d831 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-sk/values-sk.xml
+  s_54227a9ea6e195::t_0348b104a5cd79 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-sl/values-sl.xml
+  s_54227a9ea6e195::t_9114978f44990f 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-sq/values-sq.xml
+  s_54227a9ea6e195::t_05d14368243d4f 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-sr/values-sr.xml
+  s_54227a9ea6e195::t_2c1498dcc5038e 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-sv/values-sv.xml
+  s_54227a9ea6e195::t_fee57417282bff 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-sw/values-sw.xml
+  s_54227a9ea6e195::t_6c300831b555ac 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-sw360dp-v13/values-sw360dp-v13.xml
+  s_54227a9ea6e195::t_4716ab1f3d024f 1-4
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml
+  s_54227a9ea6e195::t_d74e0d317e01f8 1-11
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-ta/values-ta.xml
+  s_54227a9ea6e195::t_fb28d24ffc2585 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-te/values-te.xml
+  s_54227a9ea6e195::t_9aa03cbe24b201 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-th/values-th.xml
+  s_54227a9ea6e195::t_ad9d1cdb858bcf 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-tl/values-tl.xml
+  s_54227a9ea6e195::t_4d8a7d92d7b40e 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-tr/values-tr.xml
+  s_54227a9ea6e195::t_9fbb73347440b0 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-uk/values-uk.xml
+  s_54227a9ea6e195::t_88680d11825d71 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-ur/values-ur.xml
+  s_54227a9ea6e195::t_acf14e320380a6 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-uz/values-uz.xml
+  s_54227a9ea6e195::t_07bce12b277b64 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-v16/values-v16.xml
+  s_54227a9ea6e195::t_0ee60d743ae871 1-7
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-v17/values-v17.xml
+  s_54227a9ea6e195::t_139f20a428f3f9 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-v18/values-v18.xml
+  s_54227a9ea6e195::t_aa97efa926fb7c 1-4
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-v21/values-v21.xml
+  s_54227a9ea6e195::t_8bda323ad907da 1-268
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-v22/values-v22.xml
+  s_54227a9ea6e195::t_e527934c935697 1-15
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-v23/values-v23.xml
+  s_54227a9ea6e195::t_6484fe01015506 1-51
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-v24/values-v24.xml
+  s_54227a9ea6e195::t_9a6c6e9b3eff38 1-5
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-v25/values-v25.xml
+  s_54227a9ea6e195::t_e1f85853053131 1-9
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-v26/values-v26.xml
+  s_54227a9ea6e195::t_f518a0b398e915 1-18
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-v28/values-v28.xml
+  s_54227a9ea6e195::t_112a13cc752b66 1-13
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-vi/values-vi.xml
+  s_54227a9ea6e195::t_5d08cb25e99fdc 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-watch-v20/values-watch-v20.xml
+  s_54227a9ea6e195::t_63206ba4595192 1-12
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-watch-v21/values-watch-v21.xml
+  s_54227a9ea6e195::t_c84da9806ca635 1-15
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-xlarge-v4/values-xlarge-v4.xml
+  s_54227a9ea6e195::t_46f0393a2abd88 1-9
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-zh-rCN/values-zh-rCN.xml
+  s_54227a9ea6e195::t_833244d42bc9f6 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-zh-rHK/values-zh-rHK.xml
+  s_54227a9ea6e195::t_ca8588452372ca 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-zh-rTW/values-zh-rTW.xml
+  s_54227a9ea6e195::t_e935350accdd8e 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values-zu/values-zu.xml
+  s_54227a9ea6e195::t_ce76f3a89184df 1-62
+build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir/values/values.xml
+  s_54227a9ea6e195::t_8b9d8af3da3802 1-3891
+build/app/intermediates/incremental/debug/mergeDebugResources/merger.xml
+  s_54227a9ea6e195::t_6a9bf5e521658d 1-4866
+build/app/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+  s_54227a9ea6e195::t_eb98e472296d89 1-14
+build/app/intermediates/incremental/debug/packageDebugResources/merged.dir/values-night-v8/values-night-v8.xml
+  s_54227a9ea6e195::t_bccd6800465a3d 1-10
+build/app/intermediates/incremental/debug/packageDebugResources/merged.dir/values/values.xml
+  s_54227a9ea6e195::t_4b116469724967 1-12
+build/app/intermediates/incremental/debug/packageDebugResources/merger.xml
+  s_54227a9ea6e195::t_a69ddb7c5f495e 1-12
+build/app/intermediates/incremental/mergeDebugAssets/merger.xml
+  s_54227a9ea6e195::t_f70e659fde1a7a 1-2
+build/app/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+  s_54227a9ea6e195::t_8a246d515cf12c 1-2
+build/app/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt
+  s_54227a9ea6e195::t_131d8243ea51c3 1-43
+build/app/intermediates/incremental/packageDebug/tmp/debug/zip-cache/androidResources
+  s_54227a9ea6e195::t_a472260ba5df90 1
+build/app/intermediates/incremental/packageDebug/tmp/debug/zip-cache/javaResources0
+  s_54227a9ea6e195::t_02ec4eb8c9dc7d 1
+build/app/intermediates/linked_resources_binary_format/debug/processDebugResources/output-metadata.json
+  s_54227a9ea6e195::t_f19cc7aa1e5912 1-20
+build/app/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
+  s_54227a9ea6e195::t_b53d6ae0906059 1-10
+build/app/intermediates/manifest_merge_blame_file/debug/processDebugMainManifest/manifest-merger-blame-debug-report.txt
+  s_54227a9ea6e195::t_55b766c76d483a 1-234
+build/app/intermediates/merged_manifest/debug/outputDebugAppLinkSettings/AndroidManifest.xml
+  s_54227a9ea6e195::t_b84185ffc91f5b 1-154
+build/app/intermediates/merged_manifest/debug/processDebugMainManifest/AndroidManifest.xml
+  s_54227a9ea6e195::t_0f7782339a5dbe 1-154
+build/app/intermediates/merged_manifests/debug/processDebugManifest/AndroidManifest.xml
+  s_54227a9ea6e195::t_c529a0a203938c 1-154
+build/app/intermediates/merged_manifests/debug/processDebugManifest/output-metadata.json
+  s_54227a9ea6e195::t_7eb1294b3cc992 1-20
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/mergeDebugResources.json
+  s_54227a9ea6e195::t_fdb3beccbd2689 1-8415
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-af.json
+  s_54227a9ea6e195::t_940771d31d94af 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-am.json
+  s_54227a9ea6e195::t_f1e8dd253e190c 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ar.json
+  s_54227a9ea6e195::t_fdf38ee9b20e2b 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-as.json
+  s_54227a9ea6e195::t_d268a7c4668fb1 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-az.json
+  s_54227a9ea6e195::t_c813eeeb282417 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-b+sr+Latn.json
+  s_54227a9ea6e195::t_5a9aab16c726da 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-be.json
+  s_54227a9ea6e195::t_83f6138bf512a3 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-bg.json
+  s_54227a9ea6e195::t_9c5a71e5beca42 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-bn.json
+  s_54227a9ea6e195::t_5b991eeade243e 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-bs.json
+  s_54227a9ea6e195::t_2f5fbfd4762094 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ca.json
+  s_54227a9ea6e195::t_6ea853b3108267 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-cs.json
+  s_54227a9ea6e195::t_efa8f67cbd0ced 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-da.json
+  s_54227a9ea6e195::t_523cf954e5857b 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-de.json
+  s_54227a9ea6e195::t_2333d22ec84cc2 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-el.json
+  s_54227a9ea6e195::t_9a5359dac24a62 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-en-rAU.json
+  s_54227a9ea6e195::t_16488a729e11bb 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-en-rCA.json
+  s_54227a9ea6e195::t_b8de1137da9095 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-en-rGB.json
+  s_54227a9ea6e195::t_4eea11ed83cea6 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-en-rIN.json
+  s_54227a9ea6e195::t_fa3d7029d61bca 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-en-rXC.json
+  s_54227a9ea6e195::t_cc51837e0883f7 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-es-rUS.json
+  s_54227a9ea6e195::t_27dbc868b64d84 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-es.json
+  s_54227a9ea6e195::t_951432a8c87b36 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-et.json
+  s_54227a9ea6e195::t_0fbcc9227920f5 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-eu.json
+  s_54227a9ea6e195::t_1eefe9d982340c 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-fa.json
+  s_54227a9ea6e195::t_9a820137f1881f 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-fi.json
+  s_54227a9ea6e195::t_20e8e28eb96e26 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-fr-rCA.json
+  s_54227a9ea6e195::t_1af921b2ce0be1 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-fr.json
+  s_54227a9ea6e195::t_e59f0c50c4f208 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-gl.json
+  s_54227a9ea6e195::t_a2019d0ad13505 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-gu.json
+  s_54227a9ea6e195::t_cc290512b58c0d 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-h720dp-v13.json
+  s_54227a9ea6e195::t_9631dc7cbd9275 1-19
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-hdpi-v4.json
+  s_54227a9ea6e195::t_cfe2b9a5555528 1-20
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-hi.json
+  s_54227a9ea6e195::t_237cef30fcf9d1 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-hr.json
+  s_54227a9ea6e195::t_e96c88ebbac5b3 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-hu.json
+  s_54227a9ea6e195::t_1cf562bb488534 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-hy.json
+  s_54227a9ea6e195::t_99dea2e757be6b 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-in.json
+  s_54227a9ea6e195::t_0898ff50abbf07 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-is.json
+  s_54227a9ea6e195::t_131359241b2b8c 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-it.json
+  s_54227a9ea6e195::t_953e09961e3564 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-iw.json
+  s_54227a9ea6e195::t_6e59af1644d3e4 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ja.json
+  s_54227a9ea6e195::t_d9da6e74a11fb2 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ka.json
+  s_54227a9ea6e195::t_5290ce26357edb 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-kk.json
+  s_54227a9ea6e195::t_81c5ca623f448c 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-km.json
+  s_54227a9ea6e195::t_975c98c67d2ea2 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-kn.json
+  s_54227a9ea6e195::t_ae280d10bc6097 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ko.json
+  s_54227a9ea6e195::t_cfc3b020503e53 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ky.json
+  s_54227a9ea6e195::t_559d05aa1c02ce 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-land.json
+  s_54227a9ea6e195::t_581f4ef5a178ec 1-19
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-large-v4.json
+  s_54227a9ea6e195::t_8ce50abb5995f3 1-19
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ldltr-v21.json
+  s_54227a9ea6e195::t_63d857cb69cfd2 1-19
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-lo.json
+  s_54227a9ea6e195::t_21252ee38d1ef3 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-lt.json
+  s_54227a9ea6e195::t_e3238bab8479e1 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-lv.json
+  s_54227a9ea6e195::t_2a84804fa01101 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-mk.json
+  s_54227a9ea6e195::t_3879558373d944 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ml.json
+  s_54227a9ea6e195::t_94c9e46f36310e 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-mn.json
+  s_54227a9ea6e195::t_cd0e860020ad45 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-mr.json
+  s_54227a9ea6e195::t_006d4a49b9b648 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ms.json
+  s_54227a9ea6e195::t_e9c8f8b47c37b2 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-my.json
+  s_54227a9ea6e195::t_62c6526d215459 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-nb.json
+  s_54227a9ea6e195::t_6da8511575265d 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ne.json
+  s_54227a9ea6e195::t_7c06aa8cee4775 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-night-v8.json
+  s_54227a9ea6e195::t_5f29ee994ddfa7 1-45
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-nl.json
+  s_54227a9ea6e195::t_6f17340f347a90 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-or.json
+  s_54227a9ea6e195::t_ae451806a06f92 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-pa.json
+  s_54227a9ea6e195::t_0c9a9407af9e52 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-pl.json
+  s_54227a9ea6e195::t_8b47a1a686342a 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-port.json
+  s_54227a9ea6e195::t_19aa59e0e34c15 1-19
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-pt-rBR.json
+  s_54227a9ea6e195::t_a8caf7b702df20 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-pt-rPT.json
+  s_54227a9ea6e195::t_2a1cfb02f411d5 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-pt.json
+  s_54227a9ea6e195::t_4bcdb8d194f0e0 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ro.json
+  s_54227a9ea6e195::t_0d3c420ce74c63 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ru.json
+  s_54227a9ea6e195::t_25de21ed9cbbbf 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-si.json
+  s_54227a9ea6e195::t_23b4b4b787960b 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-sk.json
+  s_54227a9ea6e195::t_e77e73ffe9541e 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-sl.json
+  s_54227a9ea6e195::t_4cabff50470941 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-sq.json
+  s_54227a9ea6e195::t_85c5d780b96f80 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-sr.json
+  s_54227a9ea6e195::t_208b2624535219 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-sv.json
+  s_54227a9ea6e195::t_976dc16c45d79e 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-sw.json
+  s_54227a9ea6e195::t_d713602a3b8aae 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-sw360dp-v13.json
+  s_54227a9ea6e195::t_969540b632b7b7 1-19
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-sw600dp-v13.json
+  s_54227a9ea6e195::t_5012905ad1c98f 1-19
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ta.json
+  s_54227a9ea6e195::t_a90781fcc3fd9a 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-te.json
+  s_54227a9ea6e195::t_6269d39fb5147c 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-th.json
+  s_54227a9ea6e195::t_65515570660725 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-tl.json
+  s_54227a9ea6e195::t_cc40e213bfe497 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-tr.json
+  s_54227a9ea6e195::t_5f3c924fec9748 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-uk.json
+  s_54227a9ea6e195::t_5beb9f2f6942ba 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-ur.json
+  s_54227a9ea6e195::t_c89e703315188f 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-uz.json
+  s_54227a9ea6e195::t_8c7c877ccd2c13 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v16.json
+  s_54227a9ea6e195::t_c3888e2695e8ed 1-20
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v17.json
+  s_54227a9ea6e195::t_4707723e1c8d6b 1-20
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v18.json
+  s_54227a9ea6e195::t_8f67a70cca5c29 1-19
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v21.json
+  s_54227a9ea6e195::t_b8f864ec34821e 1-47
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v22.json
+  s_54227a9ea6e195::t_e1fed514a1876f 1-20
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v23.json
+  s_54227a9ea6e195::t_3b4e1487cd9b8e 1-20
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v24.json
+  s_54227a9ea6e195::t_6c0dd4227c1fce 1-19
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v25.json
+  s_54227a9ea6e195::t_f766c43a84c046 1-20
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v26.json
+  s_54227a9ea6e195::t_7c91105837217d 1-20
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-v28.json
+  s_54227a9ea6e195::t_24293613ec25e7 1-20
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-vi.json
+  s_54227a9ea6e195::t_9be6b8e16dd185 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-watch-v20.json
+  s_54227a9ea6e195::t_e6a2de7c2544c3 1-20
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-watch-v21.json
+  s_54227a9ea6e195::t_6a208e8854f10e 1-20
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-xlarge-v4.json
+  s_54227a9ea6e195::t_37ca3ee06252cb 1-19
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-zh-rCN.json
+  s_54227a9ea6e195::t_61ff4fe49dacec 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-zh-rHK.json
+  s_54227a9ea6e195::t_d4a89313f856ff 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-zh-rTW.json
+  s_54227a9ea6e195::t_de1ed265da3cda 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values-zu.json
+  s_54227a9ea6e195::t_4e4faa4f616399 1-94
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/multi-v2/values.json
+  s_54227a9ea6e195::t_bfba3368726c4b 1-371
+build/app/intermediates/merged_res_blame_folder/debug/mergeDebugResources/out/single/mergeDebugResources.json
+  s_54227a9ea6e195::t_927656ad06ef0b 1-54
+build/app/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
+  s_54227a9ea6e195::t_2e8ece87e146d7 1
+build/app/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
+  s_54227a9ea6e195::t_e3c85410ba98e7 1
+build/app/intermediates/packaged_manifests/debug/processDebugManifestForPackage/AndroidManifest.xml
+  s_54227a9ea6e195::t_8938046474e7a6 1-154
+build/app/intermediates/packaged_manifests/debug/processDebugManifestForPackage/output-metadata.json
+  s_54227a9ea6e195::t_df95a77cb4bb18 1-20
+build/app/intermediates/packaged_res/debug/packageDebugResources/drawable-v21/launch_background.xml
+  s_54227a9ea6e195::t_acf5289d7128dd 1-9
+build/app/intermediates/packaged_res/debug/packageDebugResources/mipmap-anydpi-v26/ic_launcher.xml
+  s_54227a9ea6e195::t_81903a1f0eea62 1-9
+build/app/intermediates/packaged_res/debug/packageDebugResources/values-night-v8/values-night-v8.xml
+  s_54227a9ea6e195::t_21af9e744863e7 1-10
+build/app/intermediates/packaged_res/debug/packageDebugResources/values/values.xml
+  s_54227a9ea6e195::t_7829e0fb50aca7 1-12
+build/app/intermediates/runtime_symbol_list/debug/processDebugResources/R.txt
+  s_54227a9ea6e195::t_dbe2355f0dc717 1-2228
+build/app/intermediates/signing_config_versions/debug/writeDebugSigningConfigVersions/signing-config-versions.json
+  s_54227a9ea6e195::t_0a901356d167ea 1
+build/app/intermediates/stable_resource_ids_file/debug/processDebugResources/stableIds.txt
+  s_54227a9ea6e195::t_cbb203ee31f593 1-1606
+build/app/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
+  s_54227a9ea6e195::t_17f91d8d537881 1-9
+build/app/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/counters.tab
+  s_54227a9ea6e195::t_f251ad75f082f9 1-2
+build/app/outputs/apk/debug/output-metadata.json
+  s_54227a9ea6e195::t_e422eaf5e7f63f 1-21
+build/app/outputs/flutter-apk/app-debug.apk.sha1
+  s_54227a9ea6e195::t_6bb142dfb1ddb3 1
+build/app/outputs/logs/manifest-merger-debug-report.txt
+  s_54227a9ea6e195::t_eaef7ff6d19d08 1-413
+build/flutter_plugin_android_lifecycle/.transforms/33a872d00327b5f071d5ef7ed2c8c4ec/results.bin
+  s_54227a9ea6e195::t_690e8d7f7764e9 1
+build/flutter_plugin_android_lifecycle/.transforms/6b14632ba95aa4fa6887e95c9f349de7/results.bin
+  s_54227a9ea6e195::t_3a24e7b6b38d83 1
+build/flutter_plugin_android_lifecycle/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml
+  s_54227a9ea6e195::t_ea933c3a61da5e 1-7
+build/flutter_plugin_android_lifecycle/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json
+  s_54227a9ea6e195::t_5a413c201f0a0a 1-18
+build/flutter_plugin_android_lifecycle/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties
+  s_54227a9ea6e195::t_0e1a266d25c184 1-6
+build/flutter_plugin_android_lifecycle/intermediates/android_res_source_set_path_map/debug/mapDebugSourceSetPaths/file-map.txt
+  s_54227a9ea6e195::t_953b8651bb08be 1-8
+build/flutter_plugin_android_lifecycle/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
+  s_54227a9ea6e195::t_5d9eeee6127a53 1
+build/flutter_plugin_android_lifecycle/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+  s_54227a9ea6e195::t_76d0750a7471c5 1
+build/flutter_plugin_android_lifecycle/intermediates/incremental/debug/packageDebugResources/merger.xml
+  s_54227a9ea6e195::t_54b4f5ec7f3b2e 1-2
+build/flutter_plugin_android_lifecycle/intermediates/incremental/mergeDebugAssets/merger.xml
+  s_54227a9ea6e195::t_cfc0f59fb15b7e 1-2
+build/flutter_plugin_android_lifecycle/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+  s_54227a9ea6e195::t_d9fe187d5c18af 1-2
+build/flutter_plugin_android_lifecycle/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
+  s_54227a9ea6e195::t_9ed489e8e02fd5 1-2
+build/flutter_plugin_android_lifecycle/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt
+  s_54227a9ea6e195::t_6c3cfaa234e75b 1-9
+build/flutter_plugin_android_lifecycle/intermediates/merged_consumer_proguard_file/debug/mergeDebugConsumerProguardFiles/proguard.txt
+  s_54227a9ea6e195::t_78aad452a3e112 1-9
+build/flutter_plugin_android_lifecycle/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml
+  s_54227a9ea6e195::t_8465d40f486c71 1-7
+build/flutter_plugin_android_lifecycle/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
+  s_54227a9ea6e195::t_59c6c5c69c00d1 1
+build/flutter_plugin_android_lifecycle/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
+  s_54227a9ea6e195::t_8e37a4597d9ec9 1
+build/flutter_plugin_android_lifecycle/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
+  s_54227a9ea6e195::t_359a76a53cfd45 1
+build/flutter_plugin_android_lifecycle/outputs/logs/manifest-merger-debug-report.txt
+  s_54227a9ea6e195::t_99ddfc4bb72902 1-17
+build/flutter_secure_storage/.transforms/339e6fa5a259f93656b91e775f243e0e/results.bin
+  s_54227a9ea6e195::t_4054f2acb78220 1
+build/flutter_secure_storage/.transforms/9b01b685d25e6464667e379cf8fc5b3e/results.bin
+  s_54227a9ea6e195::t_1e7260a8e43259 1
+build/flutter_secure_storage/generated/source/buildConfig/debug/com/it_nomads/fluttersecurestorage/BuildConfig.java
+  s_54227a9ea6e195::t_b610f63cd6d40c 1-10
+build/flutter_secure_storage/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml
+  s_54227a9ea6e195::t_0a562911035d81 1-7
+build/flutter_secure_storage/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json
+  s_54227a9ea6e195::t_7f76ca10114a15 1-18
+build/flutter_secure_storage/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties
+  s_54227a9ea6e195::t_6621d42096d3ef 1-6
+build/flutter_secure_storage/intermediates/android_res_source_set_path_map/debug/mapDebugSourceSetPaths/file-map.txt
+  s_54227a9ea6e195::t_d1cb354c9aac24 1-8
+build/flutter_secure_storage/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
+  s_54227a9ea6e195::t_47124b35f371a7 1
+build/flutter_secure_storage/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+  s_54227a9ea6e195::t_042221f06ba693 1
+build/flutter_secure_storage/intermediates/incremental/debug/packageDebugResources/merger.xml
+  s_54227a9ea6e195::t_193280ed608504 1-2
+build/flutter_secure_storage/intermediates/incremental/mergeDebugAssets/merger.xml
+  s_54227a9ea6e195::t_136573eaf35592 1-2
+build/flutter_secure_storage/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+  s_54227a9ea6e195::t_c54465c9eb2736 1-2
+build/flutter_secure_storage/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
+  s_54227a9ea6e195::t_b429a83e163f36 1-2
+build/flutter_secure_storage/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt
+  s_54227a9ea6e195::t_388f4b400d4b5e 1-9
+build/flutter_secure_storage/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml
+  s_54227a9ea6e195::t_7e722d7268152b 1-7
+build/flutter_secure_storage/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
+  s_54227a9ea6e195::t_f43f572910ff46 1
+build/flutter_secure_storage/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
+  s_54227a9ea6e195::t_0d34505788c3f4 1
+build/flutter_secure_storage/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
+  s_54227a9ea6e195::t_0bedca62027a4b 1
+build/flutter_secure_storage/outputs/logs/manifest-merger-debug-report.txt
+  s_54227a9ea6e195::t_dd41c20a6c5c6c 1-14
+build/jni/.transforms/a9b7280813362124e0a476eb61dcb065/results.bin
+  s_54227a9ea6e195::t_36f4bdf1d0137a 1
+build/jni/.transforms/e1659ea525d0fc23b976259b88e33c04/results.bin
+  s_54227a9ea6e195::t_134a72707e0d3a 1
+build/jni/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml
+  s_54227a9ea6e195::t_9ab1986dabcab7 1-7
+build/jni/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json
+  s_54227a9ea6e195::t_0a50ef643e7dbb 1-18
+build/jni/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties
+  s_54227a9ea6e195::t_b1d05b0040012b 1-6
+build/jni/intermediates/android_res_source_set_path_map/debug/mapDebugSourceSetPaths/file-map.txt
+  s_54227a9ea6e195::t_16bef21e819374 1-8
+build/jni/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
+  s_54227a9ea6e195::t_3966aa61741ee0 1
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/arm64-v8a/build_command_jni
+  s_54227a9ea6e195::t_f03330d994dad5 1-4
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/arm64-v8a/build_model.json
+  s_54227a9ea6e195::t_578c51a5d1db2f 1-195
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/arm64-v8a/build_stdout_jni.txt
+  s_54227a9ea6e195::t_a8e554f3186d28 1-5
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/arm64-v8a/configure_command
+  s_54227a9ea6e195::t_597aeadd51684b 1-17
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/arm64-v8a/configure_stdout.txt
+  s_54227a9ea6e195::t_3759776e567584 1-9
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/arm64-v8a/generate_cxx_metadata_351_timing.txt
+  s_54227a9ea6e195::t_3aea29730b9bd9 1-11
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/arm64-v8a/metadata_generation_record.json
+  s_54227a9ea6e195::t_6dd72a6e55f8bb 1-158
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/armeabi-v7a/build_command_jni
+  s_54227a9ea6e195::t_1a43360c01b2ea 1-4
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/armeabi-v7a/build_model.json
+  s_54227a9ea6e195::t_c3326f8a9ada50 1-195
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/armeabi-v7a/build_stdout_jni.txt
+  s_54227a9ea6e195::t_3594dfcff410e7 1-5
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/armeabi-v7a/configure_command
+  s_54227a9ea6e195::t_70551e20b62795 1-17
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/armeabi-v7a/configure_stdout.txt
+  s_54227a9ea6e195::t_5a56f7a669bb0d 1-9
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/armeabi-v7a/generate_cxx_metadata_354_timing.txt
+  s_54227a9ea6e195::t_c82d713ccf9631 1-7
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/armeabi-v7a/metadata_generation_record.json
+  s_54227a9ea6e195::t_1c742d9df9df0e 1-158
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/x86/build_command_jni
+  s_54227a9ea6e195::t_35e81cdbafb1a4 1-4
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/x86/build_model.json
+  s_54227a9ea6e195::t_ad0b5fea3dc5f5 1-195
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/x86/build_stdout_jni.txt
+  s_54227a9ea6e195::t_3474446baffd1a 1-5
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/x86/configure_command
+  s_54227a9ea6e195::t_203c19ad517c2b 1-17
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/x86/configure_stdout.txt
+  s_54227a9ea6e195::t_b386b2ee407ea7 1-9
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/x86/generate_cxx_metadata_354_timing.txt
+  s_54227a9ea6e195::t_5ae6c1a2edbef3 1-7
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/x86/metadata_generation_record.json
+  s_54227a9ea6e195::t_bcd70f07860532 1-158
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/x86_64/build_command_jni
+  s_54227a9ea6e195::t_3378ba62771086 1-4
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/x86_64/build_model.json
+  s_54227a9ea6e195::t_024ec27871653b 1-195
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/x86_64/build_stdout_jni.txt
+  s_54227a9ea6e195::t_0e57e69c45d5a7 1-5
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/x86_64/configure_command
+  s_54227a9ea6e195::t_5dd8198dd6c514 1-17
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/x86_64/configure_stdout.txt
+  s_54227a9ea6e195::t_3da8ed55aebb90 1-9
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/x86_64/generate_cxx_metadata_354_timing.txt
+  s_54227a9ea6e195::t_d03c1ab1f25146 1-7
+build/jni/intermediates/cxx/Debug/3u2u11c4/logs/x86_64/metadata_generation_record.json
+  s_54227a9ea6e195::t_b4d54432e6eb4d 1-158
+build/jni/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+  s_54227a9ea6e195::t_d1c47c5efcc539 1
+build/jni/intermediates/incremental/debug/packageDebugResources/merger.xml
+  s_54227a9ea6e195::t_955a6f826de987 1-2
+build/jni/intermediates/incremental/mergeDebugAssets/merger.xml
+  s_54227a9ea6e195::t_c7da2e5ac1ffc5 1-2
+build/jni/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+  s_54227a9ea6e195::t_cecffe41bb1654 1-2
+build/jni/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
+  s_54227a9ea6e195::t_8259d49a62d7d1 1-2
+build/jni/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt
+  s_54227a9ea6e195::t_2e18b884ebc80a 1-9
+build/jni/intermediates/merged_consumer_proguard_file/debug/mergeDebugConsumerProguardFiles/proguard.txt
+  s_54227a9ea6e195::t_d8896b70042898 1-11
+build/jni/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml
+  s_54227a9ea6e195::t_e6fe91b4635d57 1-7
+build/jni/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
+  s_54227a9ea6e195::t_1cad630efd0b68 1
+build/jni/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
+  s_54227a9ea6e195::t_3427cd0d6b96f7 1
+build/jni/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
+  s_54227a9ea6e195::t_ca37ea35a9769c 1
+build/jni/outputs/logs/manifest-merger-debug-report.txt
+  s_54227a9ea6e195::t_efd061de225f3f 1-17
+build/jni_flutter/.transforms/963ae0c2d9c2609b637e190a6a25555f/results.bin
+  s_54227a9ea6e195::t_a82a111135f018 1
+build/jni_flutter/.transforms/b3aff2b5fb06a37e97f14e70beeaca4f/results.bin
+  s_54227a9ea6e195::t_acede4b2475eb5 1
+build/jni_flutter/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml
+  s_54227a9ea6e195::t_a98bf7eaf58d09 1-7
+build/jni_flutter/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json
+  s_54227a9ea6e195::t_31d67e04d74d1a 1-18
+build/jni_flutter/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties
+  s_54227a9ea6e195::t_4a80bbb4389054 1-6
+build/jni_flutter/intermediates/android_res_source_set_path_map/debug/mapDebugSourceSetPaths/file-map.txt
+  s_54227a9ea6e195::t_b74c3076c70d17 1-8
+build/jni_flutter/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
+  s_54227a9ea6e195::t_5fc4aab719d224 1
+build/jni_flutter/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+  s_54227a9ea6e195::t_b47d115d475e15 1
+build/jni_flutter/intermediates/incremental/debug/packageDebugResources/merger.xml
+  s_54227a9ea6e195::t_5ff34e4798017e 1-2
+build/jni_flutter/intermediates/incremental/mergeDebugAssets/merger.xml
+  s_54227a9ea6e195::t_5aa02da2c0b5de 1-2
+build/jni_flutter/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+  s_54227a9ea6e195::t_cda38bd0ff425b 1-2
+build/jni_flutter/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
+  s_54227a9ea6e195::t_0e271b553ef2bf 1-2
+build/jni_flutter/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt
+  s_54227a9ea6e195::t_84d09cfc175d2c 1-9
+build/jni_flutter/intermediates/merged_consumer_proguard_file/debug/mergeDebugConsumerProguardFiles/proguard.txt
+  s_54227a9ea6e195::t_f59307fc1a1e28 1
+build/jni_flutter/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml
+  s_54227a9ea6e195::t_62a5fddbb956d2 1-7
+build/jni_flutter/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
+  s_54227a9ea6e195::t_a7586031b5c892 1
+build/jni_flutter/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
+  s_54227a9ea6e195::t_e16bd2b9e149c8 1
+build/jni_flutter/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
+  s_54227a9ea6e195::t_3008e9d1810f76 1
+build/jni_flutter/outputs/logs/manifest-merger-debug-report.txt
+  s_54227a9ea6e195::t_3ee65130173205 1-17
+build/local_auth_android/.transforms/0df53c6f22fdffecb6bbdf080dbc1a12/results.bin
+  s_54227a9ea6e195::t_04cadef4ec8c6c 1
+build/local_auth_android/.transforms/8e1d91f3a69e24f90178a852c2a7377c/results.bin
+  s_54227a9ea6e195::t_2924f9fc387aae 1
+build/local_auth_android/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml
+  s_54227a9ea6e195::t_b00ee906be64f2 1-9
+build/local_auth_android/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json
+  s_54227a9ea6e195::t_bd68ddd0583f64 1-18
+build/local_auth_android/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties
+  s_54227a9ea6e195::t_1ff386d945f66e 1-6
+build/local_auth_android/intermediates/android_res_source_set_path_map/debug/mapDebugSourceSetPaths/file-map.txt
+  s_54227a9ea6e195::t_76c4ba1432caf1 1-8
+build/local_auth_android/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
+  s_54227a9ea6e195::t_96288d713d8998 1
+build/local_auth_android/intermediates/compile_symbol_list/debug/generateDebugRFile/R.txt
+  s_54227a9ea6e195::t_3fa9915567f99d 1-5
+build/local_auth_android/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+  s_54227a9ea6e195::t_afbae215210653 1
+build/local_auth_android/intermediates/incremental/debug/packageDebugResources/merged.dir/values/values.xml
+  s_54227a9ea6e195::t_d225a30ed7399e 1-13
+build/local_auth_android/intermediates/incremental/debug/packageDebugResources/merger.xml
+  s_54227a9ea6e195::t_9e3595e988b212 1-7
+build/local_auth_android/intermediates/incremental/mergeDebugAssets/merger.xml
+  s_54227a9ea6e195::t_74f30827da1816 1-2
+build/local_auth_android/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+  s_54227a9ea6e195::t_07f96c5fc6d360 1-2
+build/local_auth_android/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
+  s_54227a9ea6e195::t_ea2c8a04b1a9f3 1-7
+build/local_auth_android/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt
+  s_54227a9ea6e195::t_6a8c4da5de5b02 1-13
+build/local_auth_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml
+  s_54227a9ea6e195::t_11ff9cf052bd54 1-9
+build/local_auth_android/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
+  s_54227a9ea6e195::t_0f4441c1dc3321 1
+build/local_auth_android/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
+  s_54227a9ea6e195::t_8ab0351d9b1f3b 1
+build/local_auth_android/intermediates/packaged_res/debug/packageDebugResources/values/values.xml
+  s_54227a9ea6e195::t_968f10c36e7124 1-13
+build/local_auth_android/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
+  s_54227a9ea6e195::t_51cfb06953ddb4 1-6
+build/local_auth_android/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/counters.tab
+  s_54227a9ea6e195::t_0742896a5bb18c 1-2
+build/local_auth_android/outputs/logs/manifest-merger-debug-report.txt
+  s_54227a9ea6e195::t_f4de6020d80eb2 1-21
+build/native_assets/macos/native_assets.json
+  s_54227a9ea6e195::t_90afb444ca0c99 1
+build/permission_handler_android/.transforms/6b84745e9cb7e6a52fc2883eda039f13/results.bin
+  s_54227a9ea6e195::t_2b2b9a6553bf05 1
+build/permission_handler_android/.transforms/d23028e8c425adbcec51e16b1903374d/results.bin
+  s_54227a9ea6e195::t_319ac5360b2eb2 1
+build/permission_handler_android/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml
+  s_54227a9ea6e195::t_394d82b69d69e1 1-7
+build/permission_handler_android/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json
+  s_54227a9ea6e195::t_3fb9f8abcd77ee 1-18
+build/permission_handler_android/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties
+  s_54227a9ea6e195::t_290669940641ca 1-6
+build/permission_handler_android/intermediates/android_res_source_set_path_map/debug/mapDebugSourceSetPaths/file-map.txt
+  s_54227a9ea6e195::t_931cf7878d321a 1-8
+build/permission_handler_android/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
+  s_54227a9ea6e195::t_3593723c5e98dd 1
+build/permission_handler_android/intermediates/annotations_typedef_file/debug/extractDebugAnnotations/typedefs.txt
+  s_54227a9ea6e195::t_f6af9943d9e8ac 1-3
+build/permission_handler_android/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+  s_54227a9ea6e195::t_a0edb8ca4c4302 1
+build/permission_handler_android/intermediates/incremental/debug/packageDebugResources/merger.xml
+  s_54227a9ea6e195::t_c86006f81c4767 1-2
+build/permission_handler_android/intermediates/incremental/mergeDebugAssets/merger.xml
+  s_54227a9ea6e195::t_d37bcaa33d7a88 1-2
+build/permission_handler_android/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+  s_54227a9ea6e195::t_9751ecb4df6fac 1-2
+build/permission_handler_android/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
+  s_54227a9ea6e195::t_c788f1d2133a17 1-2
+build/permission_handler_android/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt
+  s_54227a9ea6e195::t_2c3d5f934007a6 1-9
+build/permission_handler_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml
+  s_54227a9ea6e195::t_0c65202bcb240d 1-7
+build/permission_handler_android/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
+  s_54227a9ea6e195::t_376f9a7b521ae2 1
+build/permission_handler_android/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
+  s_54227a9ea6e195::t_74b7f958e0c251 1
+build/permission_handler_android/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
+  s_54227a9ea6e195::t_f975f712acafb4 1
+build/permission_handler_android/outputs/logs/manifest-merger-debug-report.txt
+  s_54227a9ea6e195::t_0c58d18250157c 1-17
+build/shared_preferences_android/.transforms/9233e53c4e165b960ed451db278ad291/results.bin
+  s_54227a9ea6e195::t_6bb28a48a542de 1
+build/shared_preferences_android/.transforms/958e855ad1dd89aacdacc726d79542ba/results.bin
+  s_54227a9ea6e195::t_db912674781d34 1
+build/shared_preferences_android/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml
+  s_54227a9ea6e195::t_7accfd3d73bc21 1-7
+build/shared_preferences_android/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json
+  s_54227a9ea6e195::t_66d83c4f40ec21 1-18
+build/shared_preferences_android/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties
+  s_54227a9ea6e195::t_494af99ee1ec30 1-6
+build/shared_preferences_android/intermediates/android_res_source_set_path_map/debug/mapDebugSourceSetPaths/file-map.txt
+  s_54227a9ea6e195::t_b320d8b6f03e02 1-8
+build/shared_preferences_android/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
+  s_54227a9ea6e195::t_4e1ac17ad790d2 1
+build/shared_preferences_android/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+  s_54227a9ea6e195::t_22844e64149434 1
+build/shared_preferences_android/intermediates/incremental/debug/packageDebugResources/merger.xml
+  s_54227a9ea6e195::t_2df05182a2e8fd 1-2
+build/shared_preferences_android/intermediates/incremental/mergeDebugAssets/merger.xml
+  s_54227a9ea6e195::t_6dfdeba7f2d2dd 1-2
+build/shared_preferences_android/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+  s_54227a9ea6e195::t_a9a8f31b2e0bd9 1-2
+build/shared_preferences_android/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
+  s_54227a9ea6e195::t_3dbc9d6da585ee 1-2
+build/shared_preferences_android/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt
+  s_54227a9ea6e195::t_9243dc377e93ea 1-9
+build/shared_preferences_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml
+  s_54227a9ea6e195::t_af8b7515e613c7 1-7
+build/shared_preferences_android/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
+  s_54227a9ea6e195::t_b7cd80506bdd2f 1
+build/shared_preferences_android/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
+  s_54227a9ea6e195::t_c61274ee26d602 1
+build/shared_preferences_android/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
+  s_54227a9ea6e195::t_4d48bfd5bbd46b 1
+build/shared_preferences_android/kotlin/compileDebugKotlin/cacheable/caches-jvm/jvm/kotlin/internal-name-to-source.tab.values.s
+  s_54227a9ea6e195::t_aee06e406fc6d2 1
+build/shared_preferences_android/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/counters.tab
+  s_54227a9ea6e195::t_7868c77a85d86d 1-2
+build/shared_preferences_android/outputs/logs/manifest-merger-debug-report.txt
+  s_54227a9ea6e195::t_1f090824827a5f 1-17
+build/unit_test_assets/AssetManifest.bin
+  s_54227a9ea6e195::t_f01d1c60297a42 1
+build/unit_test_assets/FontManifest.json
+  s_54227a9ea6e195::t_5bc47d538212e3 1
+build/unit_test_assets/NativeAssetsManifest.json
+  s_54227a9ea6e195::t_a897fbf51db73c 1
+build/url_launcher_android/.transforms/17e6cad397c22ae62025c77667369e8c/results.bin
+  s_54227a9ea6e195::t_dcdb731b701895 1
+build/url_launcher_android/.transforms/7ed1231bc518724693e24d8649a452bc/results.bin
+  s_54227a9ea6e195::t_8774f96d207e0c 1
+build/url_launcher_android/generated/source/buildConfig/debug/io/flutter/plugins/urllauncher/BuildConfig.java
+  s_54227a9ea6e195::t_6b60f4d828fff2 1-10
+build/url_launcher_android/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/AndroidManifest.xml
+  s_54227a9ea6e195::t_7f18ca553084d5 1-14
+build/url_launcher_android/intermediates/aapt_friendly_merged_manifests/debug/processDebugManifest/aapt/output-metadata.json
+  s_54227a9ea6e195::t_80ccd10a38871e 1-18
+build/url_launcher_android/intermediates/aar_metadata/debug/writeDebugAarMetadata/aar-metadata.properties
+  s_54227a9ea6e195::t_13c1ba99b9d1b9 1-6
+build/url_launcher_android/intermediates/android_res_source_set_path_map/debug/mapDebugSourceSetPaths/file-map.txt
+  s_54227a9ea6e195::t_a59b377d851898 1-8
+build/url_launcher_android/intermediates/annotation_processor_list/debug/javaPreCompileDebug/annotationProcessors.json
+  s_54227a9ea6e195::t_6e1508624759b3 1
+build/url_launcher_android/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties
+  s_54227a9ea6e195::t_0be4f05574f1a0 1
+build/url_launcher_android/intermediates/incremental/debug/packageDebugResources/merger.xml
+  s_54227a9ea6e195::t_09eae8867d14bd 1-2
+build/url_launcher_android/intermediates/incremental/mergeDebugAssets/merger.xml
+  s_54227a9ea6e195::t_4ad996f228ed2c 1-2
+build/url_launcher_android/intermediates/incremental/mergeDebugJniLibFolders/merger.xml
+  s_54227a9ea6e195::t_490354ece2e68d 1-2
+build/url_launcher_android/intermediates/local_only_symbol_list/debug/parseDebugLocalResources/R-def.txt
+  s_54227a9ea6e195::t_ecb2b665e15a38 1-2
+build/url_launcher_android/intermediates/manifest_merge_blame_file/debug/processDebugManifest/manifest-merger-blame-debug-report.txt
+  s_54227a9ea6e195::t_992e1d39ef3feb 1-21
+build/url_launcher_android/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml
+  s_54227a9ea6e195::t_473c11eba654c2 1-14
+build/url_launcher_android/intermediates/navigation_json/debug/extractDeepLinksDebug/navigation.json
+  s_54227a9ea6e195::t_cfd168c842dd05 1
+build/url_launcher_android/intermediates/nested_resources_validation_report/debug/generateDebugResources/nestedResourcesValidationReport.txt
+  s_54227a9ea6e195::t_36c64589077f28 1
+build/url_launcher_android/intermediates/symbol_list_with_package_name/debug/generateDebugRFile/package-aware-r.txt
+  s_54227a9ea6e195::t_7897b54f0d5212 1
+build/url_launcher_android/kotlin/compileDebugKotlin/cacheable/caches-jvm/lookups/counters.tab
+  s_54227a9ea6e195::t_39b71eeab01529 1-2
+build/url_launcher_android/outputs/logs/manifest-merger-debug-report.txt
+  s_54227a9ea6e195::t_cb599f2b6f5e10 1-27
+build/web/.last_build_id
+  s_54227a9ea6e195::t_c3f4c200d32984 1
+build/web/assets/AssetManifest.bin
+  s_54227a9ea6e195::t_a29a8d76becefe 1
+build/web/assets/AssetManifest.bin.json
+  s_54227a9ea6e195::t_26915675ff022c 1
+build/web/assets/FontManifest.json
+  s_54227a9ea6e195::t_884c8a33996fc6 1
+build/web/assets/NOTICES
+  s_54227a9ea6e195::t_b7847a6035de30 1-31657
+build/web/assets/shaders/ink_sparkle.frag
+  s_54227a9ea6e195::t_ed473a14de941f 1-127
+build/web/assets/shaders/stretch_effect.frag
+  s_54227a9ea6e195::t_ddacded37e3b64 1-64
+build/web/canvaskit/canvaskit.js
+  s_54227a9ea6e195::t_66881a74767407 1-193
+build/web/canvaskit/canvaskit.js.symbols
+  s_54227a9ea6e195::t_7257ffe37cc365 1-12219
+build/web/canvaskit/chromium/canvaskit.js
+  s_54227a9ea6e195::t_b43f1cc81c2feb 1-191
+build/web/canvaskit/chromium/canvaskit.js.symbols
+  s_54227a9ea6e195::t_c9c4204062c0d6 1-10495
+build/web/canvaskit/skwasm.js
+  s_54227a9ea6e195::t_e74da98a9e0560 1-147
+build/web/canvaskit/skwasm.js.symbols
+  s_54227a9ea6e195::t_50c1415d8d5412 1-12954
+build/web/canvaskit/skwasm_heavy.js
+  s_54227a9ea6e195::t_407aec779f8698 1-147
+build/web/canvaskit/skwasm_heavy.js.symbols
+  s_54227a9ea6e195::t_a14334142b266c 1-14596
+build/web/canvaskit/webparagraph/canvaskit.js
+  s_54227a9ea6e195::t_96e91b87622450 1-171
+build/web/canvaskit/webparagraph/canvaskit.js.symbols
+  s_54227a9ea6e195::t_a1fe22dea45f86 1-8392
+build/web/canvaskit/wimp.js
+  s_54227a9ea6e195::t_1675342ebd4783 1-139
+build/web/canvaskit/wimp.js.symbols
+  s_54227a9ea6e195::t_5d0828c838abbd 1-11577
+build/web/flutter.js
+  s_54227a9ea6e195::t_a579ec88d753a1 1-36
+build/web/flutter_bootstrap.js
+  s_54227a9ea6e195::t_12a31e9abb793f 1-47
+build/web/flutter_service_worker.js
+  s_54227a9ea6e195::t_0b9e974a139a66 1-31
+build/web/index.html
+  s_54227a9ea6e195::t_83d7910d49cd6c 1-46
+build/web/main.dart.js
+  s_54227a9ea6e195::t_2e631345db27a4 1-115614
+build/web/manifest.json
+  s_54227a9ea6e195::t_a0ac1d6b927d98 1-37
+build/web/version.json
+  s_54227a9ea6e195::t_3a72473556d322 1
+ios/Runner.xcodeproj/project.pbxproj
+  s_54227a9ea6e195::t_3854bbd1e3c4f5 1-650
+ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json
+  s_54227a9ea6e195::t_d0d81320e88f32 1
+ios/Runner/Info.plist
+  s_54227a9ea6e195::t_2abf584c4e632c 1-77
+lib/app.dart
+  s_54227a9ea6e195::t_ab670623da5570 1-160
+lib/core/di/injection.dart
+  s_54227a9ea6e195::t_fbb09abb578ed3 1-35
+lib/core/platform/android_sms_gateway.dart
+  s_54227a9ea6e195::t_2bd7c22500dcc7 1-68
+lib/core/platform/composer_sms_gateway.dart
+  s_54227a9ea6e195::t_d9fd53c3b15eed 1-50
+lib/core/theme/app_theme.dart
+  s_54227a9ea6e195::t_ca47769efa37cd 1-130
+lib/core/utils/text_normalizer.dart
+  s_54227a9ea6e195::t_25ecd7e66b1961 1-45
+lib/core/widgets/common.dart
+  s_54227a9ea6e195::t_f952d521707bc2 1-238
+lib/core/widgets/pin_pad.dart
+  s_54227a9ea6e195::t_aa9d1f91f28b9e 1-199
+lib/features/auth/data/local_auth_repository.dart
+  s_54227a9ea6e195::t_e7297228fcb8f2 1-91
+lib/features/auth/presentation/bloc/auth_bloc.dart
+  s_54227a9ea6e195::t_ab2b16cc457e4f 1-194
+lib/features/auth/presentation/pages/app_settings_page.dart
+  s_54227a9ea6e195::t_3f11868132869b 1-232
+lib/features/auth/presentation/pages/lock_page.dart
+  s_54227a9ea6e195::t_0e95d149df2771 1-117
+lib/features/auth/presentation/pages/welcome_page.dart
+  s_54227a9ea6e195::t_627ebcbfc7f7de 1-95
+lib/features/devices/data/local_device_repository.dart
+  s_54227a9ea6e195::t_3d936d1c9dbddd 1-165
+lib/features/devices/domain/entities/device.dart
+  s_54227a9ea6e195::t_b2d4c4bda3fb26 1-49
+lib/features/devices/domain/entities/device_message.dart
+  s_54227a9ea6e195::t_d27397e1218949 1-52
+lib/features/devices/domain/entities/device_status.dart
+  s_54227a9ea6e195::t_e4349dac351599 1-102
+lib/features/devices/domain/usecases/incoming_sms_coordinator.dart
+  s_54227a9ea6e195::t_b16391049b5bf2 1-61
+lib/features/devices/domain/usecases/process_device_reply.dart
+  s_54227a9ea6e195::t_620b62b637cc3a 1-38
+lib/features/devices/domain/usecases/send_device_command.dart
+  s_54227a9ea6e195::t_4a69a296eee9d9 1-65
+lib/features/devices/presentation/cubit/device_cubit.dart
+  s_54227a9ea6e195::t_9bace1c6a03e6e 1-160
+lib/features/devices/presentation/cubit/devices_cubit.dart
+  s_54227a9ea6e195::t_b774015ad47ca0 1-61
+lib/features/devices/presentation/cubit/register_device_cubit.dart
+  s_54227a9ea6e195::t_57a20b88a00ce6 1-194
+lib/features/devices/presentation/pages/device_page.dart
+  s_54227a9ea6e195::t_fbf24d3afa2e86 1-800
+lib/features/devices/presentation/pages/edit_device_page.dart
+  s_54227a9ea6e195::t_3d7d0f6eb3b193 1-146
+lib/features/devices/presentation/pages/home_page.dart
+  s_54227a9ea6e195::t_54b59658c548f1 1-287
+lib/features/devices/presentation/pages/paste_response_page.dart
+  s_54227a9ea6e195::t_3529ad850e05ff 1-266
+lib/features/devices/presentation/pages/register_device_page.dart
+  s_54227a9ea6e195::t_675d51c996b71c 1-509
+lib/features/devices/presentation/widgets/cooldown_banner.dart
+  s_54227a9ea6e195::t_94c4a8792bf8ef 1-69
+lib/features/devices/presentation/widgets/send_feedback.dart
+  s_54227a9ea6e195::t_d5362f5e6c3f6d 1-158
+lib/features/devices/presentation/widgets/status_visuals.dart
+  s_54227a9ea6e195::t_454c2631e7f3b8 1-88
+lib/features/gsa212/domain/device_command.dart
+  s_54227a9ea6e195::t_2008815a04feae 1-68
+lib/features/gsa212/domain/gsa212_commands.dart
+  s_54227a9ea6e195::t_4a196e978a8a6e 1-269
+lib/features/gsa212/domain/gsa212_response_parser.dart
+  s_54227a9ea6e195::t_4b04580e7d2df6 1-325
+lib/features/gsa212/presentation/pages/settings_pages.dart
+  s_54227a9ea6e195::t_fda10b20d5cb59 1-1268
+lib/features/gsa212/presentation/widgets/settings_widgets.dart
+  s_54227a9ea6e195::t_17c4903dea8bca 1-499
+pubspec.lock
+  s_54227a9ea6e195::t_289ab5c4654661 1-1047
+pubspec.yaml
+  s_54227a9ea6e195::t_b9728d858fe681 1-87
+test/auth/auth_bloc_test.dart
+  s_54227a9ea6e195::t_e7685074743fe5 1-73
+test/devices/send_device_command_test.dart
+  s_54227a9ea6e195::t_570809ccb97ebe 1-114
+test/gsa212/gsa212_commands_test.dart
+  s_54227a9ea6e195::t_3d55a5053375ac 1-112
+web/index.html
+  s_54227a9ea6e195::t_4c807b3ff45ef5 1-46
+web/manifest.json
+  s_54227a9ea6e195::t_947949b6e28bc9 1-37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "63b8ea259e7d2b9b02ddc6c1adcc599a01e683eb",
+  "prompts": {},
+  "humans": {
+    "h_636f416d549e83": {
+      "author": "k.akbarpour <k.akbarpour>"
+    }
+  },
+  "sessions": {
+    "s_54227a9ea6e195": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a90ecb07-0bb1-428d-b08b-0abf56164092",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "k.akbarpour <k.akbarpour>"
+    }
+  }
+}
