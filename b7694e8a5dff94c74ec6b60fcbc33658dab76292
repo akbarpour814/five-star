@@ -1,0 +1,16 @@
+.dart_tool/hooks_runner/shared/objective_c/.lock
+  h_636f416d549e83 1
+.gitignore
+  h_636f416d549e83 1-48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f3d4f511260ec2a556e82d9c373a8bbff020af1c",
+  "prompts": {},
+  "humans": {
+    "h_636f416d549e83": {
+      "author": "k.akbarpour <k.akbarpour>"
+    }
+  }
+}
