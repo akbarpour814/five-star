@@ -46,6 +46,9 @@ class ComposerSmsGateway implements SmsGateway {
   Future<List<IncomingSms>> drainPending() async => const [];
 
   @override
+  Future<List<IncomingSms>> readInbox({required List<String> numbers, required DateTime since}) async => const [];
+
+  @override
   Future<void> watchNumbers(List<String> numbers) async {}
 
   @override

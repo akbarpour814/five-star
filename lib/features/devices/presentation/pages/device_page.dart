@@ -14,9 +14,11 @@ import '../../domain/entities/device_message.dart';
 import '../../domain/entities/device_status.dart';
 import '../cubit/device_cubit.dart';
 import '../widgets/cooldown_banner.dart';
+import '../widgets/rename_output_dialog.dart';
 import '../widgets/send_feedback.dart';
 import '../widgets/status_visuals.dart';
 import 'edit_device_page.dart';
+import 'part_control_tab.dart';
 import 'paste_response_page.dart';
 import 'sim_selection_page.dart';
 
@@ -53,7 +55,7 @@ class _DeviceView extends StatelessWidget {
       listenWhen: (prev, next) => !prev.deleted && next.deleted,
       listener: (context, _) => Navigator.of(context).popUntil((r) => r.isFirst),
       child: DefaultTabController(
-        length: 3,
+        length: 4,
         child: Scaffold(
           floatingActionButton: autoReceive
               ? null
@@ -64,12 +66,13 @@ class _DeviceView extends StatelessWidget {
                   onPressed: () => pushWithDevice(context, const PasteResponsePage()),
                   label: const FabLabel(text: 'ثبت پاسخ دستگاه', icon: Icons.content_paste_go_rounded),
                 ),
-          body: NestedScrollView(
-            headerSliverBuilder: (context, _) => [
-              const SliverToBoxAdapter(child: _DeviceHeader()),
-              const SliverToBoxAdapter(child: CooldownBanner()),
+          // Header and tabs stay fixed; scrolling them away pushed the tabs under the status bar.
+          body: const Column(
+            children: [
+              _DeviceHeader(),
+              CooldownBanner(),
+              Expanded(child: TabBarView(children: [_ControlTab(), PartControlTab(), _SettingsTab(), _MessagesTab()])),
             ],
-            body: const TabBarView(children: [_ControlTab(), _SettingsTab(), _MessagesTab()]),
           ),
         ),
       ),
@@ -187,6 +190,7 @@ class _DeviceHeader extends StatelessWidget {
                 const TabBar(
                   tabs: [
                     Tab(text: 'کنترل', icon: Icon(Icons.gamepad_outlined, size: 20)),
+                    Tab(text: 'کنترل پارت', icon: Icon(Icons.account_tree_outlined, size: 20)),
                     Tab(text: 'تنظیمات', icon: Icon(Icons.tune_rounded, size: 20)),
                     Tab(text: 'پیام‌ها', icon: Icon(Icons.forum_outlined, size: 20)),
                   ],
@@ -323,13 +327,16 @@ class _ControlTab extends StatelessWidget {
               child: Column(
                 children: [
                   for (var i = 1; i <= 4; i++) ...[
-                    _OutputRow(
+                    _OutputTile(
                       output: i,
+                      name: state.device.outputName(i),
+                      custom: state.device.hasCustomOutputName(i),
                       on: state.status.outputs[i - 1],
+                      onRename: () => _renameOutput(context, state.device, i),
                       onToggle: () => send(c.outputToggle(i)),
                       onPulse: () => send(c.outputMomentary(i)),
                     ),
-                    if (i < 4) const Divider(height: 20),
+                    if (i < 4) const SizedBox(height: 10),
                   ],
                 ],
               ),
@@ -433,57 +440,157 @@ void sendDeviceCommandBlocked(BuildContext context) {
   showAppSnack(context, 'تا ارسال بعدی ${AppDateFormat.countdown(left)} صبر کنید', error: true);
 }
 
-class _OutputRow extends StatelessWidget {
-  const _OutputRow({required this.output, required this.on, required this.onToggle, required this.onPulse});
+Future<void> _renameOutput(BuildContext context, Device device, int output) async {
+  final cubit = context.read<DeviceCubit>();
+  final result = await showRenameOutputDialog(
+    context,
+    output: output,
+    currentName: device.outputName(output),
+    customName: device.outputNames[output],
+  );
+  if (result != null) await cubit.renameOutput(output, result);
+}
+
+/// One output: name (any length, wraps to two lines) with rename, live state, then the two actions on their own row.
+class _OutputTile extends StatelessWidget {
+  const _OutputTile({
+    required this.output,
+    required this.name,
+    required this.custom,
+    required this.on,
+    required this.onRename,
+    required this.onToggle,
+    required this.onPulse,
+  });
 
   final int output;
+  final String name;
+  final bool custom;
   final bool? on;
+  final VoidCallback onRename;
   final VoidCallback onToggle;
   final VoidCallback onPulse;
 
   @override
   Widget build(BuildContext context) {
-    final color = on == true ? AppColors.success : AppColors.textSecondary;
-    return Row(
-      children: [
-        Container(
-          width: 42,
-          height: 42,
-          decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(13)),
-          child: Center(
-            child: Text(
-              TextNormalizer.toPersianDigits(output),
-              style: TextStyle(color: color, fontWeight: FontWeight.w800, fontSize: 18),
-            ),
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Column(
+    final (color, label) = switch (on) {
+      true => (AppColors.success, 'روشن'),
+      false => (AppColors.textSecondary, 'خاموش'),
+      null => (AppColors.warning, 'نامشخص'),
+    };
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 250),
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+      decoration: BoxDecoration(
+        color: on == true ? AppColors.success.withValues(alpha: 0.06) : AppColors.background,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: on == true ? AppColors.success.withValues(alpha: 0.35) : AppColors.divider),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                output == 1 ? 'خروجی ۱ (درب‌بازکن)' : 'خروجی ${TextNormalizer.toPersianDigits(output)}',
-                style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: on == true ? AppColors.success : AppColors.primary.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  output == 1 ? Icons.door_sliding_outlined : Icons.power_outlined,
+                  color: on == true ? Colors.white : AppColors.primary,
+                  size: 22,
+                ),
               ),
-              Text(switch (on) {
-                null => 'وضعیت نامشخص',
-                true => 'روشن',
-                false => 'خاموش',
-              }, style: TextStyle(color: color, fontSize: 12)),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14.5, height: 1.5),
+                    ),
+                    const SizedBox(height: 4),
+                    Wrap(
+                      spacing: 6,
+                      runSpacing: 4,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: color.withValues(alpha: 0.12),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                width: 7,
+                                height: 7,
+                                decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+                              ),
+                              const SizedBox(width: 5),
+                              Text(
+                                label,
+                                style: TextStyle(color: color, fontSize: 11.5, fontWeight: FontWeight.w700),
+                              ),
+                            ],
+                          ),
+                        ),
+                        if (custom)
+                          Text(
+                            'خروجی ${TextNormalizer.toPersianDigits(output)}',
+                            style: const TextStyle(color: AppColors.textSecondary, fontSize: 11.5),
+                          ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              IconButton(
+                tooltip: 'تغییر نام',
+                visualDensity: VisualDensity.compact,
+                style: IconButton.styleFrom(backgroundColor: AppColors.primary.withValues(alpha: 0.08)),
+                onPressed: onRename,
+                icon: const Icon(Icons.edit_outlined, size: 18, color: AppColors.primary),
+              ),
             ],
           ),
-        ),
-        _SmallButton(label: 'دائم', icon: Icons.power_settings_new_rounded, onTap: onToggle),
-        const SizedBox(width: 8),
-        _SmallButton(label: 'لحظه‌ای', icon: Icons.flash_on_rounded, onTap: onPulse, outlined: true),
-      ],
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: _OutputAction(
+                  label: switch (on) {
+                    true => 'خاموش کردن',
+                    false => 'روشن کردن',
+                    null => 'روشن / خاموش',
+                  },
+                  icon: Icons.power_settings_new_rounded,
+                  onTap: onToggle,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _OutputAction(label: 'لحظه‌ای', icon: Icons.flash_on_rounded, onTap: onPulse, outlined: true),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
 
-class _SmallButton extends StatelessWidget {
-  const _SmallButton({required this.label, required this.icon, required this.onTap, this.outlined = false});
+class _OutputAction extends StatelessWidget {
+  const _OutputAction({required this.label, required this.icon, required this.onTap, this.outlined = false});
 
   final String label;
   final IconData icon;
@@ -494,35 +601,41 @@ class _SmallButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocSelector<DeviceCubit, DeviceState, bool>(
       selector: (s) => s.canSend,
-      builder: (context, canSend) => Material(
-        color: outlined ? Colors.transparent : AppColors.primary.withValues(alpha: canSend ? 1 : 0.4),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-          side: outlined ? BorderSide(color: AppColors.primary.withValues(alpha: canSend ? 1 : 0.4)) : BorderSide.none,
-        ),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(12),
-          onTap: canSend ? onTap : () => sendDeviceCommandBlocked(context),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  label,
-                  style: TextStyle(
-                    fontSize: 12.5,
-                    fontWeight: FontWeight.w700,
-                    color: outlined ? AppColors.primary : Colors.white,
-                  ),
+      builder: (context, canSend) {
+        final fg = outlined ? AppColors.primary : Colors.white;
+        return Opacity(
+          opacity: canSend ? 1 : 0.45,
+          child: Material(
+            color: outlined ? Colors.white : AppColors.primary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              side: outlined ? const BorderSide(color: AppColors.primary) : BorderSide.none,
+            ),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(12),
+              onTap: canSend ? onTap : () => sendDeviceCommandBlocked(context),
+              child: SizedBox(
+                height: 42,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        label,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: fg),
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Icon(icon, size: 17, color: fg),
+                  ],
                 ),
-                const SizedBox(width: 4),
-                Icon(icon, size: 16, color: outlined ? AppColors.primary : Colors.white),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

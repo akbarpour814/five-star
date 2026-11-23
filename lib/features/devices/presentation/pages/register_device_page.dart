@@ -363,7 +363,7 @@ class _DeviceFormState extends State<_DeviceForm> {
           const InfoBanner(
             text:
                 'قبل از استفاده، کد PIN سیم‌کارت دستگاه را غیرفعال و زبان آن را انگلیسی کنید. '
-                'بین پیامک‌های ارسالی به دستگاه حداقل دو دقیقه فاصله لازم است.',
+                'بین پیامک‌های ارسالی به دستگاه فاصله زمانی لازم است که در تنظیمات برنامه قابل تغییر است.',
           ),
           const SizedBox(height: 24),
           GradientButton(

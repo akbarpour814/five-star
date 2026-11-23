@@ -13,6 +13,7 @@ import '../permissions/permission_service.dart';
 import '../platform/android_sms_gateway.dart';
 import '../platform/composer_sms_gateway.dart';
 import '../platform/sms_gateway.dart';
+import '../storage/app_preferences.dart';
 import '../storage/key_value_store.dart';
 
 final sl = GetIt.instance;
@@ -31,7 +32,10 @@ Future<void> configureDependencies() async {
     ..registerLazySingleton<AuthRepository>(
       () => LocalAuthRepository(secure: sl(), store: sl(), devices: sl(), gateway: sl()),
     )
-    ..registerLazySingleton(() => SendDeviceCommand(repository: sl(), gateway: sl()))
+    ..registerLazySingleton(() => AppPreferences(sl()))
+    ..registerLazySingleton(
+      () => SendDeviceCommand(repository: sl(), gateway: sl(), interval: () => sl<AppPreferences>().smsInterval),
+    )
     ..registerLazySingleton(() => ProcessDeviceReply(repository: sl()))
     ..registerLazySingleton(() => IncomingSmsCoordinator(gateway: sl(), repository: sl(), processReply: sl()));
 }

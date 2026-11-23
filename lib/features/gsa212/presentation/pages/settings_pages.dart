@@ -859,9 +859,8 @@ class PartitionsPage extends StatelessWidget {
           build: (c, n, z) => c.passwordPartition(part: n, zones: z),
         ),
         const _PartPasswordCard(),
-        const _PartControlCard(),
         _ZoneAccessCard(
-          title: '۵. پارتیشن ریموت‌ها',
+          title: '۴. پارتیشن ریموت‌ها',
           icon: Icons.settings_remote_outlined,
           numberLabel: 'شماره ریموت',
           numbers: [for (var i = 1; i <= Gsa212Commands.remoteCount; i++) i],
@@ -869,7 +868,7 @@ class PartitionsPage extends StatelessWidget {
           build: (c, n, z) => c.remotePartition(remote: n, zones: z),
         ),
         _ZoneAccessCard(
-          title: '۶. پارتیشن حافظه‌های تلفن',
+          title: '۵. پارتیشن حافظه‌های تلفن',
           icon: Icons.contacts_outlined,
           numberLabel: 'شماره حافظه',
           numbers: [for (var i = 1; i <= Gsa212Commands.memoryCount; i++) i],
@@ -961,8 +960,33 @@ class _PartPasswordCard extends StatefulWidget {
 class _PartPasswordCardState extends State<_PartPasswordCard> {
   final _formKey = GlobalKey<FormState>();
   int _part = 1;
-  final _old = TextEditingController(text: '0000');
+  late final _old = TextEditingController(text: _savedPassword(1));
   final _next = TextEditingController();
+
+  String _savedPassword(int part) => context.read<DeviceCubit>().state.partPasswords[part] ?? '0000';
+
+  void _selectPart(int part) => setState(() {
+    _part = part;
+    _old.text = _savedPassword(part);
+    _next.clear();
+  });
+
+  Future<void> _send() async {
+    if (!_formKey.currentState!.validate()) return;
+    final cubit = context.read<DeviceCubit>();
+    final part = _part;
+    final newPassword = _next.text;
+    final outcome = await sendDeviceCommand(
+      context,
+      cubit,
+      cubit.state.commands.partPasswordChange(part: part, oldPassword: _old.text, newPassword: newPassword),
+      sender: () => cubit.changePartPassword(part: part, oldPassword: _old.text, newPassword: newPassword),
+    );
+    if (outcome != null && outcome.delivered && mounted && part == _part) {
+      _old.text = newPassword;
+      _next.clear();
+    }
+  }
 
   @override
   void dispose() {
@@ -982,110 +1006,17 @@ class _PartPasswordCardState extends State<_PartPasswordCard> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Text(
-              'رمز پیش‌فرض همه قسمت‌ها ۰۰۰۰ است.',
-              style: TextStyle(fontSize: 12.5, color: AppColors.textSecondary),
+              'رمز پیش‌فرض همه قسمت‌ها ۰۰۰۰ است. رمز جدید در برنامه ذخیره می‌شود و در تب «کنترل پارت» خودکار وارد می‌شود.',
+              style: TextStyle(fontSize: 12.5, color: AppColors.textSecondary, height: 1.7),
             ),
             const SizedBox(height: 12),
-            NumberChoice(
-              label: 'قسمت',
-              options: const [1, 2, 3, 4],
-              value: _part,
-              onChanged: (v) => setState(() => _part = v),
-            ),
+            NumberChoice(label: 'قسمت', options: const [1, 2, 3, 4], value: _part, onChanged: _selectPart),
             const SizedBox(height: 14),
             PasswordField(controller: _old, label: 'رمز فعلی قسمت'),
             const SizedBox(height: 12),
             PasswordField(controller: _next, label: 'رمز جدید قسمت'),
             const SizedBox(height: 16),
-            SendButton(
-              onPressed: () {
-                if (!_formKey.currentState!.validate()) return;
-                sendFromSettings(
-                  context,
-                  context.read<DeviceCubit>().state.commands.partPasswordChange(
-                    part: _part,
-                    oldPassword: _old.text,
-                    newPassword: _next.text,
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _PartControlCard extends StatefulWidget {
-  const _PartControlCard();
-
-  @override
-  State<_PartControlCard> createState() => _PartControlCardState();
-}
-
-class _PartControlCardState extends State<_PartControlCard> {
-  final _formKey = GlobalKey<FormState>();
-  int _part = 1;
-  final _password = TextEditingController();
-
-  @override
-  void dispose() {
-    _password.dispose();
-    super.dispose();
-  }
-
-  void _send(bool arm) {
-    if (!_formKey.currentState!.validate()) return;
-    sendFromSettings(
-      context,
-      context.read<DeviceCubit>().state.commands.partControl(part: _part, arm: arm, partPassword: _password.text),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SectionCard(
-      title: '۴. فعال/غیرفعال کردن هر قسمت',
-      icon: Icons.shield_outlined,
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            NumberChoice(
-              label: 'قسمت',
-              options: const [1, 2, 3, 4],
-              value: _part,
-              onChanged: (v) => setState(() => _part = v),
-            ),
-            const SizedBox(height: 14),
-            PasswordField(controller: _password, label: 'رمز کنترلی قسمت'),
-            const SizedBox(height: 16),
-            BlocSelector<DeviceCubit, DeviceState, bool>(
-              selector: (s) => s.canSend,
-              builder: (context, canSend) => Row(
-                children: [
-                  Expanded(
-                    child: FilledButton.icon(
-                      style: FilledButton.styleFrom(backgroundColor: AppColors.danger),
-                      onPressed: canSend ? () => _send(true) : null,
-                      icon: const Icon(Icons.lock_rounded),
-                      label: const Text('فعال'),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: FilledButton.icon(
-                      style: FilledButton.styleFrom(backgroundColor: AppColors.success),
-                      onPressed: canSend ? () => _send(false) : null,
-                      icon: const Icon(Icons.lock_open_rounded),
-                      label: const Text('غیرفعال'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            SendButton(onPressed: _send),
           ],
         ),
       ),
@@ -1115,7 +1046,7 @@ class _OutputProgramCardState extends State<_OutputProgramCard> {
   @override
   Widget build(BuildContext context) {
     return SectionCard(
-      title: '۷. برنامه‌ریزی خروجی‌ها',
+      title: '۶. برنامه‌ریزی خروجی‌ها',
       icon: Icons.electrical_services_rounded,
       child: Form(
         key: _formKey,
@@ -1210,7 +1141,7 @@ class _NotificationCardState extends State<_NotificationCard> {
   @override
   Widget build(BuildContext context) {
     return SectionCard(
-      title: '۸. پارتیشن‌بندی اطلاع‌رسانی',
+      title: '۷. پارتیشن‌بندی اطلاع‌رسانی',
       icon: Icons.notifications_active_outlined,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

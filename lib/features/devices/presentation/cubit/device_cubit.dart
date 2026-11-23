@@ -20,6 +20,7 @@ class DeviceState extends Equatable {
     this.config = const {},
     this.messages = const [],
     this.password = '0000',
+    this.partPasswords = const {},
     this.cooldown = Duration.zero,
     this.sending = false,
     this.deleted = false,
@@ -32,6 +33,9 @@ class DeviceState extends Equatable {
   /// Oldest first.
   final List<DeviceMessage> messages;
   final String password;
+
+  /// Part (1–4) control passwords saved when they were changed from the app.
+  final Map<int, String> partPasswords;
   final Duration cooldown;
   final bool sending;
   final bool deleted;
@@ -53,6 +57,7 @@ class DeviceState extends Equatable {
     Map<String, Object?>? config,
     List<DeviceMessage>? messages,
     String? password,
+    Map<int, String>? partPasswords,
     Duration? cooldown,
     bool? sending,
     bool? deleted,
@@ -62,13 +67,14 @@ class DeviceState extends Equatable {
     config: config ?? this.config,
     messages: messages ?? this.messages,
     password: password ?? this.password,
+    partPasswords: partPasswords ?? this.partPasswords,
     cooldown: cooldown ?? this.cooldown,
     sending: sending ?? this.sending,
     deleted: deleted ?? this.deleted,
   );
 
   @override
-  List<Object?> get props => [device, status, config, messages, password, cooldown, sending, deleted];
+  List<Object?> get props => [device, status, config, messages, password, partPasswords, cooldown, sending, deleted];
 }
 
 class DeviceCubit extends Cubit<DeviceState> {
@@ -100,6 +106,7 @@ class DeviceCubit extends Cubit<DeviceState> {
       config: await _repository.getConfig(id),
       messages: await _repository.getMessages(id),
       password: await _repository.getPassword(id),
+      partPasswords: await _repository.getPartPasswords(id),
     );
     if (isClosed) return;
     emit(next);
@@ -146,6 +153,31 @@ class DeviceCubit extends Cubit<DeviceState> {
       _repository.saveDevice(state.device.copyWith(name: name, simNumber: simNumber, ownerPhone: ownerPhone));
 
   Future<void> updateSimSlot(int slot) => _repository.saveDevice(state.device.copyWith(simSlot: slot));
+
+  /// An empty [name] restores the default output name.
+  Future<void> renameOutput(int output, String name) {
+    final names = {...state.device.outputNames};
+    final trimmed = name.trim();
+    if (trimmed.isEmpty) {
+      names.remove(output);
+    } else {
+      names[output] = trimmed;
+    }
+    return _repository.saveDevice(state.device.copyWith(outputNames: names));
+  }
+
+  /// Sends a part password change and remembers the new password for the part control tab.
+  Future<SendOutcome> changePartPassword({
+    required int part,
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    final outcome = await send(
+      state.commands.partPasswordChange(part: part, oldPassword: oldPassword, newPassword: newPassword),
+    );
+    if (outcome.delivered) await _repository.setPartPassword(state.device.id, part, newPassword);
+    return outcome;
+  }
 
   Future<void> updatePassword(String password) => _repository.setPassword(state.device.id, password);
 

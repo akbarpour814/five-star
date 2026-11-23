@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import '../../../core/storage/key_value_store.dart';
 import '../../../core/utils/phone_utils.dart';
@@ -12,6 +13,7 @@ class LocalDeviceRepository implements DeviceRepository {
 
   static const defaultPassword = '0000';
   static const _devicesKey = 'devices';
+  static const _inboxSyncedKey = 'inbox_synced_at';
   static const _maxMessages = 300;
 
   final KeyValueStore _store;
@@ -23,6 +25,7 @@ class LocalDeviceRepository implements DeviceRepository {
   static String _messagesKey(String id) => 'messages_$id';
   static String _lastSentKey(String id) => 'last_sent_$id';
   static String _passwordKey(String id) => 'device_password_$id';
+  static String _partPasswordsKey(String id) => 'part_passwords_$id';
 
   @override
   Stream<String> get changes => _changes.stream;
@@ -77,6 +80,7 @@ class LocalDeviceRepository implements DeviceRepository {
       _store.remove(_messagesKey(id)),
       _store.remove(_lastSentKey(id)),
       _secure.delete(_passwordKey(id)),
+      _secure.delete(_partPasswordsKey(id)),
     ]);
     _notify(id);
   }
@@ -87,6 +91,29 @@ class LocalDeviceRepository implements DeviceRepository {
   @override
   Future<void> setPassword(String deviceId, String password) async {
     await _secure.write(_passwordKey(deviceId), password);
+    _notify(deviceId);
+  }
+
+  @override
+  Future<Map<int, String>> getPartPasswords(String deviceId) async {
+    final raw = await _secure.read(_partPasswordsKey(deviceId));
+    if (raw == null) return {};
+    try {
+      final map = jsonDecode(raw) as Map<String, dynamic>;
+      return {for (final e in map.entries) int.parse(e.key): '${e.value}'};
+    } on FormatException {
+      return {};
+    }
+  }
+
+  @override
+  Future<void> setPartPassword(String deviceId, int part, String password) async {
+    final passwords = await getPartPasswords(deviceId)
+      ..[part] = password;
+    await _secure.write(
+      _partPasswordsKey(deviceId),
+      jsonEncode({for (final e in passwords.entries) '${e.key}': e.value}),
+    );
     _notify(deviceId);
   }
 
@@ -126,8 +153,10 @@ class LocalDeviceRepository implements DeviceRepository {
 
   @override
   Future<void> addMessage(String deviceId, DeviceMessage message) async {
+    // Synced inbox messages can be older than ones already stored, so keep the log in time order.
     final messages = await getMessages(deviceId)
-      ..add(message);
+      ..add(message)
+      ..sort((a, b) => a.at.compareTo(b.at));
     final trimmed = messages.length > _maxMessages ? messages.sublist(messages.length - _maxMessages) : messages;
     await _store.setJson(_messagesKey(deviceId), [for (final m in trimmed) m.toJson()]);
     _notify(deviceId);
@@ -138,6 +167,15 @@ class LocalDeviceRepository implements DeviceRepository {
     await _store.remove(_messagesKey(deviceId));
     _notify(deviceId);
   }
+
+  @override
+  Future<DateTime?> getInboxSyncedAt() async {
+    final ms = _store.getInt(_inboxSyncedKey);
+    return ms == null ? null : DateTime.fromMillisecondsSinceEpoch(ms);
+  }
+
+  @override
+  Future<void> setInboxSyncedAt(DateTime at) => _store.setInt(_inboxSyncedKey, at.millisecondsSinceEpoch);
 
   @override
   Future<DateTime?> getLastSentAt(String deviceId) async {
@@ -156,6 +194,7 @@ class LocalDeviceRepository implements DeviceRepository {
     final devices = await getDevices();
     for (final d in devices) {
       await _secure.delete(_passwordKey(d.id));
+      await _secure.delete(_partPasswordsKey(d.id));
     }
     await _store.clear();
     for (final d in devices) {

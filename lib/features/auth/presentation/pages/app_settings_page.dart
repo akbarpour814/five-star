@@ -5,7 +5,9 @@ import '../../../../core/di/injection.dart';
 import '../../../../core/permissions/permission_service.dart';
 import '../../../../core/permissions/permission_sheet.dart';
 import '../../../../core/platform/sms_gateway.dart';
+import '../../../../core/storage/app_preferences.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/utils/date_format.dart';
 import '../../../../core/widgets/common.dart';
 import '../../../../core/widgets/gradient_background.dart';
 import '../../../../core/widgets/pin_pad.dart';
@@ -98,6 +100,8 @@ class AppSettingsPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
+                  const _SmsIntervalCard(),
+                  const SizedBox(height: 16),
                   SectionCard(
                     title: 'ارسال و دریافت پیامک',
                     icon: Icons.sms_outlined,
@@ -132,6 +136,60 @@ class AppSettingsPage extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SmsIntervalCard extends StatefulWidget {
+  const _SmsIntervalCard();
+
+  @override
+  State<_SmsIntervalCard> createState() => _SmsIntervalCardState();
+}
+
+class _SmsIntervalCardState extends State<_SmsIntervalCard> {
+  final AppPreferences _prefs = sl();
+  late int _seconds = _prefs.smsInterval.inSeconds;
+
+  Future<void> _select(int seconds) async {
+    setState(() => _seconds = seconds);
+    await _prefs.setSmsInterval(Duration(seconds: seconds));
+    if (mounted) showAppSnack(context, 'فاصله بین پیامک‌ها: ${AppDateFormat.duration(Duration(seconds: seconds))}');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SectionCard(
+      title: 'فاصله بین پیامک‌ها',
+      icon: Icons.timer_outlined,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Text(
+            'حداقل فاصله زمانی بین دو پیامک ارسالی به یک دستگاه. در این مدت دکمه‌های ارسال غیرفعال هستند.',
+            style: TextStyle(fontSize: 12.5, color: AppColors.textSecondary, height: 1.7),
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              for (final seconds in AppPreferences.smsIntervalOptions)
+                ChoiceChip(
+                  label: Text(AppDateFormat.duration(Duration(seconds: seconds))),
+                  selected: seconds == _seconds,
+                  showCheckmark: false,
+                  selectedColor: AppColors.primary,
+                  labelStyle: TextStyle(
+                    color: seconds == _seconds ? Colors.white : AppColors.textPrimary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  onSelected: (_) => _select(seconds),
+                ),
+            ],
           ),
         ],
       ),

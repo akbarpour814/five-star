@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Build
+import android.provider.Telephony
 import android.telephony.SmsManager
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
@@ -53,6 +54,15 @@ class MainActivity : FlutterFragmentActivity() {
                     result.success(null)
                 }
                 "drainPending" -> result.success(SmsStore.drain(this))
+                "readInbox" -> {
+                    val numbers = call.argument<List<String>>("numbers") ?: emptyList()
+                    val since = call.argument<Number>("since")?.toLong() ?: 0L
+                    try {
+                        result.success(readInbox(numbers, since))
+                    } catch (e: SecurityException) {
+                        result.success(emptyList<Map<String, Any>>())
+                    }
+                }
                 "clear" -> {
                     SmsStore.clear(this)
                     result.success(null)
@@ -137,6 +147,35 @@ class MainActivity : FlutterFragmentActivity() {
             @Suppress("DEPRECATION")
             SmsManager.getSmsManagerForSubscriptionId(info.subscriptionId)
         }
+    }
+
+    // Returns only messages from the given device numbers, oldest first.
+    private fun readInbox(numbers: List<String>, since: Long): List<Map<String, Any>> {
+        if (!hasPermission(Manifest.permission.READ_SMS)) return emptyList()
+        val keys = numbers.map(SmsStore::matchKey).toSet()
+        if (keys.isEmpty()) return emptyList()
+        val messages = mutableListOf<Map<String, Any>>()
+        contentResolver.query(
+            Telephony.Sms.Inbox.CONTENT_URI,
+            arrayOf(Telephony.Sms.ADDRESS, Telephony.Sms.BODY, Telephony.Sms.DATE),
+            "${Telephony.Sms.DATE} > ?",
+            arrayOf(since.toString()),
+            "${Telephony.Sms.DATE} ASC",
+        )?.use { cursor ->
+            val address = cursor.getColumnIndexOrThrow(Telephony.Sms.ADDRESS)
+            val body = cursor.getColumnIndexOrThrow(Telephony.Sms.BODY)
+            val date = cursor.getColumnIndexOrThrow(Telephony.Sms.DATE)
+            while (cursor.moveToNext()) {
+                val sender = cursor.getString(address) ?: continue
+                if (SmsStore.matchKey(sender) !in keys) continue
+                messages += mapOf(
+                    "sender" to sender,
+                    "body" to (cursor.getString(body) ?: ""),
+                    "timestamp" to cursor.getLong(date),
+                )
+            }
+        }
+        return messages
     }
 
     private fun sendSms(number: String, body: String, slot: Int?) {

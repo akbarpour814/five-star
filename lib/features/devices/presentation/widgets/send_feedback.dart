@@ -5,6 +5,7 @@ import '../../../../core/di/injection.dart';
 import '../../../../core/permissions/permission_service.dart';
 import '../../../../core/permissions/permission_sheet.dart';
 import '../../../../core/platform/sms_gateway.dart';
+import '../../../../core/storage/app_preferences.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/date_format.dart';
 import '../../../../core/widgets/common.dart';
@@ -155,7 +156,10 @@ class _CommandSheetState extends State<_CommandSheet> {
                 const Spacer(),
                 const Icon(Icons.timer_outlined, size: 18, color: AppColors.textSecondary),
                 const SizedBox(width: 4),
-                const Text('ارسال بعدی پس از ۲ دقیقه', style: TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                Text(
+                  'ارسال بعدی پس از ${AppDateFormat.duration(sl<AppPreferences>().smsInterval)}',
+                  style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                ),
               ],
             ),
             const SizedBox(height: 20),

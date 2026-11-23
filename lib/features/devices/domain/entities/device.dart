@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../../core/utils/text_normalizer.dart';
+
 class Device extends Equatable {
   const Device({
     required this.id,
@@ -9,6 +11,7 @@ class Device extends Equatable {
     this.ownerPhone,
     this.model = 'GSA-212',
     this.simSlot,
+    this.outputNames = const {},
   });
 
   factory Device.fromJson(Map<String, dynamic> json) => Device(
@@ -18,6 +21,9 @@ class Device extends Equatable {
     ownerPhone: json['ownerPhone'] as String?,
     model: json['model'] as String? ?? 'GSA-212',
     simSlot: json['simSlot'] as int?,
+    outputNames: {
+      for (final e in (json['outputNames'] as Map? ?? const {}).entries) int.parse('${e.key}'): '${e.value}',
+    },
     createdAt: DateTime.fromMillisecondsSinceEpoch(json['createdAt'] as int),
   );
 
@@ -31,15 +37,25 @@ class Device extends Equatable {
   /// Zero-based phone SIM slot used to send commands (Android); null means the default SMS SIM.
   final int? simSlot;
 
-  Device copyWith({String? name, String? simNumber, String? ownerPhone, int? simSlot}) => Device(
-    id: id,
-    name: name ?? this.name,
-    simNumber: simNumber ?? this.simNumber,
-    ownerPhone: ownerPhone ?? this.ownerPhone,
-    model: model,
-    createdAt: createdAt,
-    simSlot: simSlot ?? this.simSlot,
-  );
+  /// User-given names for outputs 1–4; missing entries use the default name.
+  final Map<int, String> outputNames;
+
+  String outputName(int output) =>
+      outputNames[output] ?? (output == 1 ? 'خروجی ۱ (درب‌بازکن)' : 'خروجی ${TextNormalizer.toPersianDigits(output)}');
+
+  bool hasCustomOutputName(int output) => outputNames.containsKey(output);
+
+  Device copyWith({String? name, String? simNumber, String? ownerPhone, int? simSlot, Map<int, String>? outputNames}) =>
+      Device(
+        id: id,
+        name: name ?? this.name,
+        simNumber: simNumber ?? this.simNumber,
+        ownerPhone: ownerPhone ?? this.ownerPhone,
+        model: model,
+        createdAt: createdAt,
+        simSlot: simSlot ?? this.simSlot,
+        outputNames: outputNames ?? this.outputNames,
+      );
 
   Map<String, dynamic> toJson() => {
     'id': id,
@@ -48,9 +64,10 @@ class Device extends Equatable {
     'ownerPhone': ownerPhone,
     'model': model,
     'simSlot': simSlot,
+    'outputNames': {for (final e in outputNames.entries) '${e.key}': e.value},
     'createdAt': createdAt.millisecondsSinceEpoch,
   };
 
   @override
-  List<Object?> get props => [id, name, simNumber, ownerPhone, model, createdAt, simSlot];
+  List<Object?> get props => [id, name, simNumber, ownerPhone, model, createdAt, simSlot, outputNames];
 }

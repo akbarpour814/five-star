@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/di/injection.dart';
+import '../../../../core/storage/app_preferences.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/date_format.dart';
-import '../../../gsa212/domain/gsa212_commands.dart';
 import '../cubit/device_cubit.dart';
 
 /// Countdown shown while the two-minute gap between SMS to the device is running.
@@ -16,7 +17,7 @@ class CooldownBanner extends StatelessWidget {
       selector: (s) => s.cooldown,
       builder: (context, left) {
         final visible = left > Duration.zero;
-        final progress = 1 - left.inMilliseconds / Gsa212Commands.minInterval.inMilliseconds;
+        final progress = 1 - left.inMilliseconds / sl<AppPreferences>().smsInterval.inMilliseconds;
         return AnimatedSize(
           duration: const Duration(milliseconds: 250),
           child: !visible
@@ -39,7 +40,7 @@ class CooldownBanner extends StatelessWidget {
                           const SizedBox(width: 8),
                           const Expanded(
                             child: Text(
-                              'فاصله دو دقیقه‌ای بین پیامک‌ها',
+                              'فاصله زمانی بین پیامک‌ها',
                               style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: Color(0xFF8A5A00)),
                             ),
                           ),

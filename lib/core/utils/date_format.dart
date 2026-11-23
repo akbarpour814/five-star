@@ -21,4 +21,12 @@ abstract final class AppDateFormat {
     final s = (value.inSeconds % 60).toString().padLeft(2, '0');
     return TextNormalizer.toPersianDigits('$m:$s');
   }
+
+  /// Human-readable length, e.g. «۲۰ ثانیه» or «۱ دقیقه و ۳۰ ثانیه».
+  static String duration(Duration value) {
+    final m = value.inMinutes;
+    final s = value.inSeconds % 60;
+    final parts = [if (m > 0) '$m دقیقه', if (s > 0 || m == 0) '$s ثانیه'];
+    return TextNormalizer.toPersianDigits(parts.join(' و '));
+  }
 }

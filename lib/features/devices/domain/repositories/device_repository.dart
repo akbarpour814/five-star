@@ -20,6 +20,11 @@ abstract interface class DeviceRepository {
 
   Future<void> setPassword(String deviceId, String password);
 
+  /// Control passwords of partition parts 1–4 that were set from this app.
+  Future<Map<int, String>> getPartPasswords(String deviceId);
+
+  Future<void> setPartPassword(String deviceId, int part, String password);
+
   Future<DeviceStatus> getStatus(String deviceId);
 
   Future<void> saveStatus(String deviceId, DeviceStatus status);
@@ -33,6 +38,11 @@ abstract interface class DeviceRepository {
   Future<void> addMessage(String deviceId, DeviceMessage message);
 
   Future<void> clearMessages(String deviceId);
+
+  /// Receive time of the newest phone-inbox message already imported.
+  Future<DateTime?> getInboxSyncedAt();
+
+  Future<void> setInboxSyncedAt(DateTime at);
 
   Future<DateTime?> getLastSentAt(String deviceId);
 

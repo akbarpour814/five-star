@@ -1,4 +1,5 @@
 import '../../../../core/utils/id_generator.dart';
+import '../../../gsa212/domain/gsa212_commands.dart';
 import '../../../gsa212/domain/gsa212_response_parser.dart';
 import '../entities/device_message.dart';
 import '../repositories/device_repository.dart';
@@ -13,14 +14,23 @@ class ProcessDeviceReply {
   ParsedResponse preview(String text) => _parser.parse(text);
 
   Future<ParsedResponse> call(String deviceId, String text, {DateTime? at}) async {
-    final parsed = _parser.parse(text);
+    var parsed = _parser.parse(text);
     final time = at ?? DateTime.now();
-
-    if (parsed.patch != null) {
-      final status = await _repository.getStatus(deviceId);
-      await _repository.saveStatus(deviceId, parsed.patch!(status).copyWith(updatedAt: time));
+    final output = parsed.output;
+    if (output != null) {
+      final config = await _repository.getConfig(deviceId);
+      if (config[ConfigKeys.outputMode(output)] == 'momentary') parsed = parsed.asMomentary();
     }
-    await _repository.mergeConfig(deviceId, parsed.config);
+
+    // A reply older than the last applied one (e.g. found later in the inbox) is logged but must not roll state back.
+    final status = await _repository.getStatus(deviceId);
+    final stale = status.updatedAt != null && time.isBefore(status.updatedAt!);
+    if (!stale) {
+      if (parsed.patch != null) {
+        await _repository.saveStatus(deviceId, parsed.patch!(status).copyWith(updatedAt: time));
+      }
+      await _repository.mergeConfig(deviceId, parsed.config);
+    }
     await _repository.addMessage(
       deviceId,
       DeviceMessage(

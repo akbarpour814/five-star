@@ -65,8 +65,20 @@ class AndroidSmsGateway implements SmsGateway {
   Stream<void> get incomingSignals => _events.receiveBroadcastStream().map((_) {});
 
   @override
-  Future<List<IncomingSms>> drainPending() async {
-    final raw = await _method.invokeListMethod<Object?>('drainPending') ?? const [];
+  Future<List<IncomingSms>> drainPending() async =>
+      _toSms(await _method.invokeListMethod<Object?>('drainPending') ?? const []);
+
+  @override
+  Future<List<IncomingSms>> readInbox({required List<String> numbers, required DateTime since}) async {
+    if (numbers.isEmpty || !await Permission.sms.isGranted) return const [];
+    final raw = await _method.invokeListMethod<Object?>('readInbox', {
+      'numbers': numbers,
+      'since': since.millisecondsSinceEpoch,
+    });
+    return _toSms(raw ?? const []);
+  }
+
+  static List<IncomingSms> _toSms(List<Object?> raw) {
     return [
       for (final item in raw)
         if (item is Map)

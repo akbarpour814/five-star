@@ -47,6 +47,9 @@ abstract interface class SmsGateway {
 
   Future<List<IncomingSms>> drainPending();
 
+  /// Messages already in the phone's inbox from [numbers], received after [since], oldest first.
+  Future<List<IncomingSms>> readInbox({required List<String> numbers, required DateTime since});
+
   Future<void> watchNumbers(List<String> numbers);
 
   Future<void> clear();

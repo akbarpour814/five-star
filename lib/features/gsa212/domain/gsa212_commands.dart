@@ -16,6 +16,7 @@ abstract final class ConfigKeys {
   static const landlineControl = 'landlineControl';
   static const partitionMode = 'partitionMode';
   static String zone(int zone) => 'zone$zone';
+  static String outputMode(int output) => 'outputMode$output';
   static String notify(int zone) => 'notify$zone';
 }
 
@@ -33,7 +34,6 @@ class Gsa212Commands {
   static const remoteCount = 30;
   static const zoneCount = 4;
   static const outputCount = 4;
-  static const minInterval = Duration(minutes: 2);
 
   static final _fourDigits = RegExp(r'^\d{4}$');
 
@@ -64,12 +64,12 @@ class Gsa212Commands {
 
   DeviceCommand outputToggle(int output) {
     _range(output, 1, outputCount, 'output');
-    return _simple('کنترل دائم خروجی $output', '$output');
+    return _simple('کنترل دائم خروجی $output', '$output', config: {ConfigKeys.outputMode(output): 'toggle'});
   }
 
   DeviceCommand outputMomentary(int output) {
     _range(output, 1, outputCount, 'output');
-    return _simple('کنترل لحظه‌ای خروجی $output', '${output}L');
+    return _simple('کنترل لحظه‌ای خروجی $output', '${output}L', config: {ConfigKeys.outputMode(output): 'momentary'});
   }
 
   DeviceCommand openDoor() => _simple('فعال کردن درب‌بازکن', 'D');

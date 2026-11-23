@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/di/injection.dart';
+import '../../../../core/storage/app_preferences.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/date_format.dart';
-import '../../../gsa212/domain/gsa212_commands.dart';
 import '../cubit/app_cooldown_cubit.dart';
 
 /// Floating, draggable ring that fills up during the two-minute SMS gap and fades out when it ends.
@@ -98,7 +99,7 @@ class _Bubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final total = Gsa212Commands.minInterval.inMilliseconds;
+    final total = sl<AppPreferences>().smsInterval.inMilliseconds;
     final progress = (1 - state.remaining.inMilliseconds / total).clamp(0.0, 1.0);
     // Sits above the navigator, so it needs its own Material for text styling.
     return Material(

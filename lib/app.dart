@@ -75,7 +75,7 @@ class _FiveStarAppState extends State<FiveStarApp> with WidgetsBindingObserver {
         if (pausedAt != null && DateTime.now().difference(pausedAt) > _autoLockAfter) {
           _auth.add(const AuthLockRequested());
         }
-        _incoming.drain();
+        _incoming.refresh();
       default:
         break;
     }

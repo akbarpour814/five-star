@@ -15,6 +15,7 @@ class ParsedResponse extends Equatable {
     this.patch,
     this.config = const {},
     this.recognized = true,
+    this.output,
   });
 
   const ParsedResponse.unknown()
@@ -23,7 +24,8 @@ class ParsedResponse extends Equatable {
       severity = MessageSeverity.info,
       patch = null,
       config = const {},
-      recognized = false;
+      recognized = false,
+      output = null;
 
   final String title;
   final String? detail;
@@ -32,8 +34,23 @@ class ParsedResponse extends Equatable {
   final Map<String, Object?> config;
   final bool recognized;
 
+  /// Set when the reply confirms a single output (1–4).
+  final int? output;
+
+  /// The device answers a momentary (pulse) command like a permanent one; the output is
+  /// already off again, so log it as a pulse and keep it shown as off.
+  ParsedResponse asMomentary() => ParsedResponse(
+    title: 'خروجی ${TextNormalizer.toPersianDigits(output!)} به‌صورت لحظه‌ای فعال شد',
+    detail: detail,
+    severity: severity,
+    patch: (s) => s.withOutput(output!, false),
+    config: config,
+    recognized: recognized,
+    output: output,
+  );
+
   @override
-  List<Object?> get props => [title, detail, severity, config, recognized];
+  List<Object?> get props => [title, detail, severity, config, recognized, output];
 }
 
 /// Interprets SMS replies of the GSA-212 following the code/answer table.
@@ -84,8 +101,13 @@ class Gsa212ResponseParser {
     };
     final antenna = int.tryParse(RegExp(r'(?:SIGNAL|ANTENNA|ANT|CSQ):?(\d{1,2})').firstMatch(c)?[1] ?? '');
 
-    if (arm == null && !outputs.any((o) => o != null) && power == null && battery == null && antenna == null) {
-      return null;
+    final reported = [
+      for (var i = 0; i < 4; i++)
+        if (outputs[i] != null) i + 1,
+    ];
+    if (arm == null && power == null && battery == null && antenna == null) {
+      if (reported.isEmpty) return null;
+      if (reported.length == 1) return _outputReply(reported.single, outputs[reported.single - 1]!);
     }
     final parts = <String>[
       if (arm != null) 'سیستم ${arm.label}',
@@ -110,6 +132,12 @@ class Gsa212ResponseParser {
   }
 
   bool _on(String word) => word == 'فعال';
+
+  ParsedResponse _outputReply(int output, bool on) => ParsedResponse(
+    title: 'خروجی ${TextNormalizer.toPersianDigits(output)} ${on ? 'روشن' : 'خاموش'} شد',
+    patch: (s) => s.withOutput(output, on),
+    output: output,
+  );
 
   String _state(bool on) => on ? 'فعال' : 'غیرفعال';
 
@@ -208,17 +236,11 @@ class Gsa212ResponseParser {
       );
     }
 
-    if ((m = RegExp(
-          'خروجی([1-4])$_onOff'
-          'شد',
-        ).firstMatch(c)) !=
-        null) {
+    // Manual says «خروجی ۱ فعال شد»; real devices answer «خروجی ۱ روشن».
+    if ((m = RegExp('خروجی([1-4]):?(روشن|خاموش|غیرفعال|فعال)').firstMatch(c)) != null) {
       final output = int.parse(m![1]!);
-      final on = _on(m[2]!);
-      return ParsedResponse(
-        title: 'خروجی ${TextNormalizer.toPersianDigits(output)} ${_state(on)} شد',
-        patch: (s) => s.withOutput(output, on),
-      );
+      final on = m[2] == 'روشن' || m[2] == 'فعال';
+      return _outputReply(output, on);
     }
 
     if ((m = RegExp('(دستگاه|دزدگیر|سیستم)(بیصدافعال|نیمهفعال|غیرفعال|فعال)شد').firstMatch(c)) != null) {
