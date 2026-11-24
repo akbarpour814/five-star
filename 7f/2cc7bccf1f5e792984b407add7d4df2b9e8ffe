@@ -1,0 +1,105 @@
+lib/features/devices/domain/usecases/incoming_sms_coordinator.dart
+  s_1dbc037b55e911::t_d0dfbf40886f54 5
+  s_1dbc037b55e911::t_3db3aa3a4cdbac 17-20,31-37,55,59-66,68-78,110,116
+  s_1dbc037b55e911::t_25153ad8649025 95-98,101-105,107
+lib/features/devices/presentation/pages/register_device_page.dart
+  s_1dbc037b55e911::t_d15444147da41f 15,196,236,260-261,502,553-565,568-576,582-591,597-608
+  s_1dbc037b55e911::t_ea20d7abf551df 566-567
+  s_1dbc037b55e911::t_a4f197989ee656 577-581,592-596
+  s_1dbc037b55e911::t_d0dfbf40886f54 16,307
+  s_1dbc037b55e911::t_3a880c48d82295 609-611
+lib/features/devices/presentation/widgets/send_feedback.dart
+  s_1dbc037b55e911::t_d0dfbf40886f54 12
+lib/features/panel/domain/device_model.dart
+  s_1dbc037b55e911::t_0525f1c1ceabef 1-43,59-264,266-281,283-286,288-325
+  s_1dbc037b55e911::t_687b4217099f7e 265
+  s_1dbc037b55e911::t_aba174dbccedd1 282
+  s_1dbc037b55e911::t_a4f197989ee656 44-58,287
+lib/features/devices/domain/entities/device.dart
+  s_1dbc037b55e911::t_aba174dbccedd1 4,13,23,36,46-48,50-53,57-64
+  s_1dbc037b55e911::t_a4f197989ee656 35,65-73
+lib/app.dart
+  s_d6d132c46ab14e::t_00256a907fe2e8 129-139,141-142
+  s_d6d132c46ab14e::t_b3649809b6f2a2 152-181
+lib/features/panel/presentation/pages/settings_pages.dart
+  s_1dbc037b55e911::t_d0dfbf40886f54 1-10,12-21,30-34,40-51,58-76,78-140,142-143,145-162,164-289,300,308-372,377,379,405,437-446,454-455,457-459,491,497-549,562,571-572,575,577,646-820,836-867,871-920,931-964,966-1274,1323-1325,1423-1426
+  s_1dbc037b55e911::t_a4f197989ee656 408-415,418-425,428-436,462-471,474-490,492-496,580-589,592-597,600-605,608-614,617-623,626-633,636-645,823-835,1275-1322,1326-1422
+  s_1dbc037b55e911::t_5affd00b389a2c 11,22-29,35-39,52-57,77,141,144,163,290-299,301-307,373-376,378,380-404,406-407,416-417,426-427,447-453,456,460-461,472-473,550-561,563-570,573-574,576,578-579,590-591,598-599,606-607,615-616,624-625,634-635,821-822,868-870,921-930,965
+web/index.html
+  s_d6d132c46ab14e::t_5967520dfcec9e 34-72,75-134
+lib/features/devices/domain/usecases/process_device_reply.dart
+  s_1dbc037b55e911::t_a4f197989ee656 16-20
+  s_1dbc037b55e911::t_d0dfbf40886f54 3-4,10,13
+  s_1dbc037b55e911::t_aba174dbccedd1 2,15,23-25,28
+  s_1dbc037b55e911::t_3957aaaab67ec7 30-35,37
+lib/features/devices/presentation/cubit/device_cubit.dart
+  s_1dbc037b55e911::t_d0dfbf40886f54 6,8-9
+  s_1dbc037b55e911::t_a5ecb8632ac315 7,48-52,153
+  s_1dbc037b55e911::t_a4f197989ee656 157-164
+lib/features/panel/domain/panel_response_parser.dart
+  s_1dbc037b55e911::t_e5f884df72698e 6,55,57-58,64,70-71,74,79-144,146-148,153,280,312,331,442-447
+  s_1dbc037b55e911::t_a4f197989ee656 145,149-152
+  s_1dbc037b55e911::t_d0dfbf40886f54 1-5,7-54,56,59-63,65-69,72-73,75-78,154-279,281-311,313-330,332-441,448-478
+lib/features/devices/presentation/pages/device_page.dart
+  s_1dbc037b55e911::t_a4f197989ee656 191-196,346-363,365,756-761,795-797
+  s_1dbc037b55e911::t_25153ad8649025 16,44-48
+  s_1dbc037b55e911::t_d0dfbf40886f54 12
+  s_1dbc037b55e911::t_93660e1f9cf3ff 11,60,65-67,79,81-92,189-190,209,211-215,293,328-341,345,367,380-385,387-410,725-727,738-755,767-779,785-791
+  s_1dbc037b55e911::t_a1ebaf03508602 798
+lib/features/devices/domain/usecases/send_device_command.dart
+  s_1dbc037b55e911::t_d0dfbf40886f54 3
+  s_1dbc037b55e911::t_3957aaaab67ec7 58
+lib/features/devices/presentation/pages/paste_response_page.dart
+  s_1dbc037b55e911::t_d0dfbf40886f54 8
+lib/features/devices/presentation/pages/sim_selection_page.dart
+  s_1dbc037b55e911::t_d0dfbf40886f54 7
+lib/features/devices/presentation/pages/edit_device_page.dart
+  s_1dbc037b55e911::t_d0dfbf40886f54 9
+  s_1dbc037b55e911::t_cd113bc0ec1f09 8,12,28,53,84-93
+lib/features/devices/presentation/cubit/register_device_cubit.dart
+  s_1dbc037b55e911::t_d0dfbf40886f54 8
+  s_1dbc037b55e911::t_a5ecb8632ac315 7,17,26,35,170,189
+lib/features/panel/domain/panel_commands.dart
+  s_1dbc037b55e911::t_d0dfbf40886f54 1,3-21,25-28,31,33,35,42,46-70,80-81,83-87,89-92,102-104,119-121,123-128,130-135,137-142,144-145,155-156,158,174-180,189,198,207,216,225-226,228-233,235-238,247-249,251-262,264-280,289-290,292-299,308-309,318-319,321-325,327-331,333-337,339-345,347-355,357-366,368-377
+  s_1dbc037b55e911::t_a4f197989ee656 75,97,109,114,150-154,184-187,193-196,202-205,211-214,220-223,241-245,283-287,303-306,313-316
+  s_1dbc037b55e911::t_78dfe308f2515e 2,22-24,29-30,32,34,36-41,43-45,71-74,76-79,82,88,93-96,98-101,105-108,110-113,115-118,122,129,136,143,146-149,157,159-173,181-183,188,190-192,197,199-201,206,208-210,215,217-219,224,227,234,239-240,246,250,263,281-282,288,291,300-302,307,310-312,317,320,326,332,338,346,356,367
+lib/features/devices/data/local_device_repository.dart
+  s_1dbc037b55e911::t_3957aaaab67ec7 24-25,64-65,83-84,144,146-162,192-193,198-199
+lib/features/devices/domain/repositories/device_repository.dart
+  s_1dbc037b55e911::t_3957aaaab67ec7 34-36,44-46,48
+lib/features/devices/presentation/pages/part_control_tab.dart
+  s_1dbc037b55e911::t_d0dfbf40886f54 7-9
+lib/features/devices/domain/entities/device_status.dart
+  s_1dbc037b55e911::t_4387ff8231e55c 30-31,33-35,45,48-49,63,66-89,100,103-105,116,125,128-146,150-171,186,190
+  s_1dbc037b55e911::t_25153ad8649025 50-62,99,147-149
+  s_1dbc037b55e911::t_473796bff2da80 90
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "7f2cc7bccf1f5e792984b407add7d4df2b9e8ffe",
+  "prompts": {},
+  "humans": {
+    "h_636f416d549e83": {
+      "author": "k.akbarpour <k.akbarpour>"
+    }
+  },
+  "sessions": {
+    "s_1dbc037b55e911": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8c1a9649-edda-4d68-b2b2-b8ea04ee97fc",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "k.akbarpour <k.akbarpour>"
+    },
+    "s_d6d132c46ab14e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0b63fcb9-d369-46a5-b965-e2f834f936c3",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "k.akbarpour <k.akbarpour>"
+    }
+  }
+}
