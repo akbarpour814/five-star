@@ -31,8 +31,107 @@
 
   <title>Five Star</title>
   <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0D47A1">
+
+  <style>
+    #pwa-install {
+      position: fixed;
+      left: 50%;
+      bottom: 16px;
+      transform: translate(-50%, 140%);
+      width: calc(100% - 32px);
+      max-width: 480px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: #ffffff;
+      color: #1a1a1a;
+      border-radius: 16px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+      font-family: Tahoma, system-ui, sans-serif;
+      direction: rtl;
+      z-index: 2147483647;
+      transition: transform 0.35s ease;
+    }
+    #pwa-install.show { transform: translate(-50%, 0); }
+    #pwa-install img { width: 44px; height: 44px; border-radius: 10px; flex: none; }
+    #pwa-install .txt { flex: 1; font-size: 13px; line-height: 1.7; }
+    #pwa-install .txt b { display: block; font-size: 14px; }
+    #pwa-install button {
+      border: 0;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      flex: none;
+    }
+    #pwa-install .ok { background: #0D47A1; color: #fff; padding: 8px 14px; }
+    #pwa-install .close { background: transparent; color: #777; font-size: 20px; padding: 0 4px; }
+  </style>
 </head>
 <body>
+  <div id="pwa-install" role="dialog" aria-live="polite" hidden>
+    <img src="icons/Icon-192.png" alt="">
+    <div class="txt">
+      <b>نصب Five Star</b>
+      <span id="pwa-install-msg">اپلیکیشن را روی دستگاه خود نصب کنید تا سریع‌تر به آن دسترسی داشته باشید.</span>
+    </div>
+    <button class="ok" id="pwa-install-ok" type="button">نصب</button>
+    <button class="close" id="pwa-install-close" type="button" aria-label="بستن">&times;</button>
+  </div>
+  <script>
+    (function () {
+      var DISMISS_KEY = 'pwa-install-dismissed-at';
+      var DISMISS_DAYS = 7;
+      var standalone = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+      if (standalone) return;
+
+      var last = Number(localStorage.getItem(DISMISS_KEY) || 0);
+      if (Date.now() - last < DISMISS_DAYS * 864e5) return;
+
+      var banner = document.getElementById('pwa-install');
+      var okBtn = document.getElementById('pwa-install-ok');
+      var msg = document.getElementById('pwa-install-msg');
+      var deferred = null;
+
+      function show() {
+        banner.hidden = false;
+        requestAnimationFrame(function () { banner.classList.add('show'); });
+      }
+      function hide(remember) {
+        banner.classList.remove('show');
+        setTimeout(function () { banner.hidden = true; }, 400);
+        if (remember) localStorage.setItem(DISMISS_KEY, String(Date.now()));
+      }
+
+      document.getElementById('pwa-install-close').addEventListener('click', function () { hide(true); });
+
+      // Chrome / Edge / Android: native install prompt.
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        deferred = e;
+        setTimeout(show, 1500);
+      });
+      okBtn.addEventListener('click', function () {
+        if (!deferred) { hide(true); return; }
+        deferred.prompt();
+        deferred.userChoice.finally(function () { deferred = null; hide(true); });
+      });
+      window.addEventListener('appinstalled', function () { hide(true); });
+
+      // iOS Safari has no install prompt: show manual instructions instead.
+      var ua = navigator.userAgent;
+      var isIos = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      if (isIos) {
+        msg.textContent = 'برای نصب، دکمه اشتراک‌گذاری (Share) را بزنید و گزینه «Add to Home Screen» را انتخاب کنید.';
+        okBtn.textContent = 'متوجه شدم';
+        setTimeout(show, 1500);
+      }
+    })();
+  </script>
+
   <!--
     You can customize the "flutter_bootstrap.js" script.
     This is useful to provide a custom configuration to the Flutter loader

@@ -8,10 +8,12 @@ import '../../../../core/utils/date_format.dart';
 import '../../../../core/utils/text_normalizer.dart';
 import '../../../../core/widgets/common.dart';
 import '../../../../core/widgets/gradient_background.dart';
-import '../../../gsa212/presentation/pages/settings_pages.dart';
+import '../../../panel/domain/device_model.dart';
+import '../../../panel/presentation/pages/settings_pages.dart';
 import '../../domain/entities/device.dart';
 import '../../domain/entities/device_message.dart';
 import '../../domain/entities/device_status.dart';
+import '../../domain/usecases/incoming_sms_coordinator.dart';
 import '../cubit/device_cubit.dart';
 import '../widgets/cooldown_banner.dart';
 import '../widgets/rename_output_dialog.dart';
@@ -39,7 +41,11 @@ class DevicePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => DeviceCubit(device: device, repository: sl(), sendCommand: sl(), processReply: sl())..load(),
+      create: (_) {
+        // Pick up any reply that reached the inbox meanwhile; the cubit reloads on every change.
+        sl<IncomingSmsCoordinator>().refresh();
+        return DeviceCubit(device: device, repository: sl(), sendCommand: sl(), processReply: sl())..load();
+      },
       child: const _DeviceView(),
     );
   }
@@ -51,11 +57,14 @@ class _DeviceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final autoReceive = sl<SmsGateway>().receivesAutomatically;
+    final parts = context.select<DeviceCubit, bool>((c) => c.state.has(DeviceFeature.partControl));
     return BlocListener<DeviceCubit, DeviceState>(
       listenWhen: (prev, next) => !prev.deleted && next.deleted,
       listener: (context, _) => Navigator.of(context).popUntil((r) => r.isFirst),
       child: DefaultTabController(
-        length: 4,
+        // Rebuilt when the model changes so the controller matches the tab count.
+        key: ValueKey(parts),
+        length: parts ? 4 : 3,
         child: Scaffold(
           floatingActionButton: autoReceive
               ? null
@@ -67,11 +76,20 @@ class _DeviceView extends StatelessWidget {
                   label: const FabLabel(text: 'ثبت پاسخ دستگاه', icon: Icons.content_paste_go_rounded),
                 ),
           // Header and tabs stay fixed; scrolling them away pushed the tabs under the status bar.
-          body: const Column(
+          body: Column(
             children: [
-              _DeviceHeader(),
-              CooldownBanner(),
-              Expanded(child: TabBarView(children: [_ControlTab(), PartControlTab(), _SettingsTab(), _MessagesTab()])),
+              const _DeviceHeader(),
+              const CooldownBanner(),
+              Expanded(
+                child: TabBarView(
+                  children: [
+                    const _ControlTab(),
+                    if (parts) const PartControlTab(),
+                    const _SettingsTab(),
+                    const _MessagesTab(),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -168,13 +186,14 @@ class _DeviceHeader extends StatelessWidget {
                         },
                         alert: status.batteryOk == false,
                       ),
-                      _StatusTile(
-                        iconWidget: SignalBars(level: status.signal),
-                        label: 'آنتن',
-                        value: status.antenna == null
-                            ? '—'
-                            : '${status.signal!.label} (${TextNormalizer.toPersianDigits(status.antenna!)})',
-                      ),
+                      if (state.has(DeviceFeature.antenna))
+                        _StatusTile(
+                          iconWidget: SignalBars(level: status.signal),
+                          label: 'آنتن',
+                          value: status.antenna == null
+                              ? '—'
+                              : '${status.signal!.label} (${TextNormalizer.toPersianDigits(status.antenna!)})',
+                        ),
                     ],
                   ),
                 ),
@@ -187,12 +206,13 @@ class _DeviceHeader extends StatelessWidget {
                     style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 11.5),
                   ),
                 ),
-                const TabBar(
+                TabBar(
                   tabs: [
-                    Tab(text: 'کنترل', icon: Icon(Icons.gamepad_outlined, size: 20)),
-                    Tab(text: 'کنترل پارت', icon: Icon(Icons.account_tree_outlined, size: 20)),
-                    Tab(text: 'تنظیمات', icon: Icon(Icons.tune_rounded, size: 20)),
-                    Tab(text: 'پیام‌ها', icon: Icon(Icons.forum_outlined, size: 20)),
+                    const Tab(text: 'کنترل', icon: Icon(Icons.gamepad_outlined, size: 20)),
+                    if (state.has(DeviceFeature.partControl))
+                      const Tab(text: 'کنترل پارت', icon: Icon(Icons.account_tree_outlined, size: 20)),
+                    const Tab(text: 'تنظیمات', icon: Icon(Icons.tune_rounded, size: 20)),
+                    const Tab(text: 'پیام‌ها', icon: Icon(Icons.forum_outlined, size: 20)),
                   ],
                 ),
               ],
@@ -270,7 +290,7 @@ class _ControlTab extends StatelessWidget {
         return ListView(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
           children: [
-            if (state.usesDefaultPassword) ...[
+            if (state.usesDefaultPassword && state.has(DeviceFeature.changePassword)) ...[
               InkWell(
                 borderRadius: BorderRadius.circular(14),
                 onTap: () => pushWithDevice(context, const DevicePasswordPage()),
@@ -305,42 +325,46 @@ class _ControlTab extends StatelessWidget {
                     current: state.status.arm,
                     onTap: () => send(c.disarm()),
                   ),
-                  _ArmButton(
-                    state: ArmState.partset,
-                    title: 'نیمه فعال',
-                    current: state.status.arm,
-                    onTap: () => send(c.partSet()),
-                  ),
-                  _ArmButton(
-                    state: ArmState.silent,
-                    title: 'فعال بی‌صدا',
-                    current: state.status.arm,
-                    onTap: () => send(c.silentArm()),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 14),
-            SectionCard(
-              title: 'خروجی‌ها',
-              icon: Icons.electrical_services_rounded,
-              child: Column(
-                children: [
-                  for (var i = 1; i <= 4; i++) ...[
-                    _OutputTile(
-                      output: i,
-                      name: state.device.outputName(i),
-                      custom: state.device.hasCustomOutputName(i),
-                      on: state.status.outputs[i - 1],
-                      onRename: () => _renameOutput(context, state.device, i),
-                      onToggle: () => send(c.outputToggle(i)),
-                      onPulse: () => send(c.outputMomentary(i)),
+                  if (state.has(DeviceFeature.partSet))
+                    _ArmButton(
+                      state: ArmState.partset,
+                      title: 'نیمه فعال',
+                      current: state.status.arm,
+                      onTap: () => send(c.partSet()),
                     ),
-                    if (i < 4) const SizedBox(height: 10),
-                  ],
+                  if (state.has(DeviceFeature.silentArm))
+                    _ArmButton(
+                      state: ArmState.silent,
+                      title: 'فعال بی‌صدا',
+                      current: state.status.arm,
+                      onTap: () => send(c.silentArm()),
+                    ),
                 ],
               ),
             ),
+            if (state.model.outputs > 0) ...[
+              const SizedBox(height: 14),
+              SectionCard(
+                title: 'خروجی‌ها',
+                icon: Icons.electrical_services_rounded,
+                child: Column(
+                  children: [
+                    for (var i = 1; i <= 4; i++) ...[
+                      _OutputTile(
+                        output: i,
+                        name: state.device.outputName(i),
+                        custom: state.device.hasCustomOutputName(i),
+                        on: state.status.outputs[i - 1],
+                        onRename: () => _renameOutput(context, state.device, i),
+                        onToggle: () => send(c.outputToggle(i)),
+                        onPulse: () => send(c.outputMomentary(i)),
+                      ),
+                      if (i < 4) const SizedBox(height: 10),
+                    ],
+                  ],
+                ),
+              ),
+            ],
             const SizedBox(height: 14),
             SectionCard(
               title: 'دستورات سریع',
@@ -353,28 +377,37 @@ class _ControlTab extends StatelessWidget {
                 crossAxisSpacing: 10,
                 childAspectRatio: 1.05,
                 children: [
-                  _QuickAction(
-                    icon: Icons.door_front_door_outlined,
-                    label: 'درب‌بازکن',
-                    onTap: () => send(c.openDoor()),
-                  ),
+                  if (state.has(DeviceFeature.openDoor))
+                    _QuickAction(
+                      icon: Icons.door_front_door_outlined,
+                      label: 'درب‌بازکن',
+                      onTap: () => send(c.openDoor()),
+                    ),
                   _QuickAction(icon: Icons.fact_check_outlined, label: 'استعلام وضعیت', onTap: () => send(c.status())),
-                  _QuickAction(
-                    icon: Icons.signal_cellular_alt_rounded,
-                    label: 'قدرت آنتن',
-                    onTap: () => send(c.antenna()),
-                  ),
-                  _QuickAction(
-                    icon: Icons.account_balance_wallet_outlined,
-                    label: 'استعلام شارژ',
-                    onTap: () => send(c.simBalance()),
-                  ),
-                  _QuickAction(icon: Icons.contacts_outlined, label: 'استعلام حافظه', onTap: () => send(c.memories())),
-                  _QuickAction(
-                    icon: Icons.phone_disabled_outlined,
-                    label: 'توقف شماره‌گیری',
-                    onTap: () => send(c.stopDialing()),
-                  ),
+                  if (state.has(DeviceFeature.antenna))
+                    _QuickAction(
+                      icon: Icons.signal_cellular_alt_rounded,
+                      label: 'قدرت آنتن',
+                      onTap: () => send(c.antenna()),
+                    ),
+                  if (state.has(DeviceFeature.simBalance))
+                    _QuickAction(
+                      icon: Icons.account_balance_wallet_outlined,
+                      label: 'استعلام شارژ',
+                      onTap: () => send(c.simBalance()),
+                    ),
+                  if (state.has(DeviceFeature.memoryInquiry))
+                    _QuickAction(
+                      icon: Icons.contacts_outlined,
+                      label: 'استعلام حافظه',
+                      onTap: () => send(c.memories()),
+                    ),
+                  if (state.has(DeviceFeature.stopDialing))
+                    _QuickAction(
+                      icon: Icons.phone_disabled_outlined,
+                      label: 'توقف شماره‌گیری',
+                      onTap: () => send(c.stopDialing()),
+                    ),
                 ],
               ),
             ),
@@ -689,7 +722,9 @@ class _SettingsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final simSlot = context.select<DeviceCubit, int?>((c) => c.state.device.simSlot);
-    final groups = <(String, List<(IconData, String, String, Widget)>)>[
+    final model = context.select<DeviceCubit, DeviceModel>((c) => c.state.model);
+    bool has(DeviceFeature f) => model.has(f);
+    final allGroups = <(String, List<(IconData, String, String, Widget)>)>[
       (
         'تنظیمات پایه',
         [
@@ -700,37 +735,66 @@ class _SettingsTab extends StatelessWidget {
               simSlot == null ? 'سیم‌کارت پیش‌فرض گوشی' : 'ارسال از سیم ${TextNormalizer.toPersianDigits(simSlot + 1)}',
               const SimSelectionPage(),
             ),
-          (Icons.contacts_outlined, 'حافظه‌های تلفن', 'ثبت ۳۰ شماره پیامک و تماس', const PhoneMemoriesPage()),
-          (Icons.password_rounded, 'رمز دستگاه', 'تغییر رمز کنترلی ۴ رقمی', const DevicePasswordPage()),
-          (Icons.sim_card_outlined, 'سیم‌کارت و شارژ', 'شارژ، USSD و استعلام خودکار', const SimSettingsPage()),
-          (Icons.campaign_outlined, 'آژیر و صدا', 'زمان آژیر و حالت تک‌آژیر', const SirenSoundPage()),
+          (
+            Icons.contacts_outlined,
+            'حافظه‌های تلفن',
+            'ثبت ${TextNormalizer.toPersianDigits(model.memoryCount)} شماره پیامک و تماس',
+            const PhoneMemoriesPage(),
+          ),
+          if (has(DeviceFeature.changePassword))
+            (Icons.password_rounded, 'رمز دستگاه', 'تغییر رمز کنترلی ۴ رقمی', const DevicePasswordPage()),
+          if (SimSettingsPage.supports(model))
+            (
+              Icons.sim_card_outlined,
+              has(DeviceFeature.simCharge) ? 'سیم‌کارت و شارژ' : 'سیم‌کارت',
+              SimSettingsPage.subtitle(model),
+              const SimSettingsPage(),
+            ),
+          if (SirenSoundPage.supports(model))
+            (Icons.campaign_outlined, 'آژیر و صدا', SirenSoundPage.subtitle(model), const SirenSoundPage()),
+          if (has(DeviceFeature.customTexts))
+            (
+              Icons.edit_note_rounded,
+              'متن پیام‌های دستگاه',
+              'تغییر متن پیامک‌های ارسالی دستگاه',
+              const CustomTextsPage(),
+            ),
         ],
       ),
       (
         'امنیت و گزارش‌ها',
         [
-          (
-            Icons.verified_user_outlined,
-            'سطح امنیت و گزارش‌ها',
-            'امنیت، گزارش ریموت، برق و اخطارها',
-            const SecurityReportsPage(),
-          ),
-          (Icons.sensors_rounded, 'تنظیمات زون‌ها', 'NC/NO، دینگ‌دانگ، نوع و تاخیر زون', const ZonesPage()),
-          (Icons.settings_remote_outlined, 'ریموت‌ها', 'حذف ریموت از راه دور', const RemotesPage()),
-          (Icons.phone_in_talk_outlined, 'خط تلفن ثابت', 'تن/پالس، تعداد بوق، کنترل با تماس', const PhoneLinePage()),
+          if (SecurityReportsPage.supports(model))
+            (
+              Icons.verified_user_outlined,
+              has(DeviceFeature.securityLevel) ? 'سطح امنیت و گزارش‌ها' : 'گزارش‌ها و اخطارها',
+              SecurityReportsPage.subtitle(model),
+              const SecurityReportsPage(),
+            ),
+          if (has(DeviceFeature.zoneSettings))
+            (Icons.sensors_rounded, 'تنظیمات زون‌ها', 'NC/NO، دینگ‌دانگ، نوع و تاخیر زون', const ZonesPage()),
+          if (has(DeviceFeature.deleteRemote))
+            (Icons.settings_remote_outlined, 'ریموت‌ها', 'حذف ریموت از راه دور', const RemotesPage()),
+          if (PhoneLinePage.supports(model))
+            (Icons.phone_in_talk_outlined, 'خط تلفن ثابت', 'تن/پالس، تعداد بوق، کنترل با تماس', const PhoneLinePage()),
         ],
       ),
       (
         'قابلیت‌های ویژه',
         [
-          (
-            Icons.account_tree_outlined,
-            'پارتیشن‌بندی',
-            'پارت‌ها، ریموت‌ها، حافظه‌ها و خروجی‌ها',
-            const PartitionsPage(),
-          ),
+          if (PartitionsPage.supports(model))
+            (
+              Icons.account_tree_outlined,
+              'پارتیشن‌بندی',
+              'پارت‌ها، ریموت‌ها، حافظه‌ها و خروجی‌ها',
+              const PartitionsPage(),
+            ),
         ],
       ),
+    ];
+    final groups = [
+      for (final g in allGroups)
+        if (g.$2.isNotEmpty) g,
     ];
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),

@@ -3,9 +3,10 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../gsa212/domain/device_command.dart';
-import '../../../gsa212/domain/gsa212_commands.dart';
-import '../../../gsa212/domain/gsa212_response_parser.dart';
+import '../../../panel/domain/device_command.dart';
+import '../../../panel/domain/device_model.dart';
+import '../../../panel/domain/panel_commands.dart';
+import '../../../panel/domain/panel_response_parser.dart';
 import '../../domain/entities/device.dart';
 import '../../domain/entities/device_message.dart';
 import '../../domain/entities/device_status.dart';
@@ -44,7 +45,11 @@ class DeviceState extends Equatable {
 
   bool get usesDefaultPassword => password == '0000';
 
-  Gsa212Commands get commands => Gsa212Commands(password);
+  DeviceModel get model => device.type;
+
+  PanelCommands get commands => PanelCommands(model, password);
+
+  bool has(DeviceFeature feature) => model.has(feature);
 
   T? configValue<T>(String key) {
     final value = config[key];
@@ -145,12 +150,18 @@ class DeviceCubit extends Cubit<DeviceState> {
     return outcome;
   }
 
-  ParsedResponse preview(String text) => _processReply.preview(text);
+  ParsedResponse preview(String text) => _processReply.preview(text, model: state.model, config: state.config);
 
   Future<ParsedResponse> ingest(String text) => _processReply(state.device.id, text);
 
-  Future<void> updateDevice({required String name, required String simNumber, String? ownerPhone}) =>
-      _repository.saveDevice(state.device.copyWith(name: name, simNumber: simNumber, ownerPhone: ownerPhone));
+  Future<void> updateDevice({
+    required String name,
+    required String simNumber,
+    String? ownerPhone,
+    DeviceModel? model,
+  }) => _repository.saveDevice(
+    state.device.copyWith(name: name, simNumber: simNumber, ownerPhone: ownerPhone, model: model?.code),
+  );
 
   Future<void> updateSimSlot(int slot) => _repository.saveDevice(state.device.copyWith(simSlot: slot));
 

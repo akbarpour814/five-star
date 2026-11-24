@@ -12,7 +12,8 @@ import '../../../../core/widgets/common.dart';
 import '../../../../core/widgets/gradient_background.dart';
 import '../../../../core/widgets/pin_pad.dart';
 import '../../../auth/presentation/bloc/auth_bloc.dart';
-import '../../../gsa212/domain/gsa212_commands.dart';
+import '../../../panel/domain/device_model.dart';
+import '../../../panel/domain/panel_commands.dart';
 import '../../domain/usecases/send_device_command.dart';
 import '../cubit/register_device_cubit.dart';
 import '../widgets/send_feedback.dart';
@@ -192,6 +193,7 @@ class _DeviceForm extends StatefulWidget {
 
 class _DeviceFormState extends State<_DeviceForm> {
   final _formKey = GlobalKey<FormState>();
+  late DeviceModel? _model = widget.state.draft?.model;
   late final _name = TextEditingController(text: widget.state.draft?.name);
   late final _sim = TextEditingController(text: widget.state.draft?.simNumber);
   late final _password = TextEditingController(text: widget.state.draft?.password ?? '0000');
@@ -231,6 +233,7 @@ class _DeviceFormState extends State<_DeviceForm> {
     if (!mounted) return;
     cubit.submitDevice(
       DeviceDraft(
+        model: _model!,
         name: _name.text.trim(),
         simNumber: _sim.text,
         password: _password.text,
@@ -254,6 +257,8 @@ class _DeviceFormState extends State<_DeviceForm> {
             icon: Icons.router_outlined,
             child: Column(
               children: [
+                DeviceModelField(value: _model, onChanged: (v) => setState(() => _model = v)),
+                const SizedBox(height: 14),
                 TextFormField(
                   controller: _name,
                   textInputAction: TextInputAction.next,
@@ -299,7 +304,7 @@ class _DeviceFormState extends State<_DeviceForm> {
                       onPressed: () => setState(() => _showPassword = !_showPassword),
                     ),
                   ),
-                  validator: (v) => Gsa212Commands.isValidPassword(v ?? '') ? null : 'رمز دستگاه باید ۴ رقم باشد',
+                  validator: (v) => PanelCommands.isValidPassword(v ?? '') ? null : 'رمز دستگاه باید ۴ رقم باشد',
                 ),
               ],
             ),
@@ -494,7 +499,7 @@ class _SecurityStep extends StatelessWidget {
             children: [
               _SummaryRow(label: 'نام دستگاه', value: draft.name),
               _SummaryRow(label: 'شماره سیم‌کارت', value: PhoneUtils.normalize(draft.simNumber), ltr: true),
-              _SummaryRow(label: 'مدل', value: Gsa212Commands.model, ltr: true),
+              _SummaryRow(label: 'مدل', value: draft.model.code, ltr: true),
               if (draft.simSlot != null) _SummaryRow(label: 'سیم‌کارت ارسال', value: 'سیم ${draft.simSlot! + 1}'),
               if (draft.saveOwnerToMemory)
                 _SummaryRow(label: 'ثبت در حافظه ۱', value: PhoneUtils.normalize(draft.ownerPhone), ltr: true),
@@ -542,6 +547,65 @@ class _SummaryRow extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Required model picker; the chosen model decides which menus and commands the device gets.
+class DeviceModelField extends StatelessWidget {
+  const DeviceModelField({super.key, required this.value, required this.onChanged});
+
+  final DeviceModel? value;
+  final ValueChanged<DeviceModel?> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField<DeviceModel>(
+      initialValue: value,
+      isExpanded: true,
+      // Two-line items (code + summary) need more than the default 48px row.
+      itemHeight: null,
+      decoration: const InputDecoration(
+        labelText: 'نوع دستگاه',
+        hintText: 'مدل دستگاه را انتخاب کنید',
+        prefixIcon: Icon(Icons.developer_board_outlined),
+      ),
+      selectedItemBuilder: (_) => [
+        for (final m in DeviceModel.pickerOrder)
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: Text(
+              m.code,
+              textDirection: TextDirection.ltr,
+              style: const TextStyle(fontWeight: FontWeight.w700),
+            ),
+          ),
+      ],
+      items: [
+        for (final m in DeviceModel.pickerOrder)
+          DropdownMenuItem(
+            value: m,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  m.code,
+                  textDirection: TextDirection.ltr,
+                  style: const TextStyle(fontWeight: FontWeight.w800),
+                ),
+                Text(
+                  m.summary,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontSize: 11.5, color: AppColors.textSecondary),
+                ),
+              ],
+            ),
+          ),
+      ],
+      onChanged: onChanged,
+      validator: (v) => v == null ? 'نوع دستگاه را انتخاب کنید' : null,
     );
   }
 }

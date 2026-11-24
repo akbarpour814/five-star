@@ -8,7 +8,8 @@ import '../../../../core/widgets/common.dart';
 import '../../../devices/presentation/cubit/device_cubit.dart';
 import '../../../devices/presentation/widgets/send_feedback.dart';
 import '../../domain/device_command.dart';
-import '../../domain/gsa212_commands.dart';
+import '../../domain/device_model.dart';
+import '../../domain/panel_commands.dart';
 import '../widgets/settings_widgets.dart';
 
 String _fa(Object v) => TextNormalizer.toPersianDigits(v);
@@ -18,17 +19,24 @@ String _fa(Object v) => TextNormalizer.toPersianDigits(v);
 class PhoneMemoriesPage extends StatelessWidget {
   const PhoneMemoriesPage({super.key});
 
-  static const _groups = [
-    (1, 10, 'ارسال پیامک', Icons.sms_outlined),
-    (11, 20, 'تماس با خط تلفن', Icons.phone_outlined),
-    (21, 30, 'تماس با سیم‌کارت', Icons.phone_android_outlined),
-  ];
+  /// GSA-212 manual groups; other models document one list of [DeviceModel.memoryCount] memories.
+  static List<(int, int, String, IconData)> _groups(DeviceModel model) => model.hasMemoryGroups
+      ? const [
+          (1, 10, 'ارسال پیامک', Icons.sms_outlined),
+          (11, 20, 'تماس با خط تلفن', Icons.phone_outlined),
+          (21, 30, 'تماس با سیم‌کارت', Icons.phone_android_outlined),
+        ]
+      : [(1, model.memoryCount, 'پیامک و تماس', Icons.contacts_outlined)];
 
   Future<void> _edit(BuildContext context, int memory, String? current) async {
     final phone = await showModalBottomSheet<String>(
       context: context,
       isScrollControlled: true,
-      builder: (_) => _MemorySheet(memory: memory, current: current),
+      builder: (_) => _MemorySheet(
+        memory: memory,
+        current: current,
+        landline: context.read<DeviceCubit>().state.model.hasMemoryGroups && memory >= 11 && memory <= 20,
+      ),
     );
     if (phone == null || !context.mounted) return;
     final c = context.read<DeviceCubit>().state.commands;
@@ -41,10 +49,12 @@ class PhoneMemoriesPage extends StatelessWidget {
       builder: (context, state) => SettingsScaffold(
         title: 'حافظه‌های تلفن',
         children: [
-          const InfoBanner(
-            text:
-                'حافظه ۱ تا ۱۰ پیامک هشدار دریافت می‌کنند، ۱۱ تا ۲۰ با خط تلفن و ۲۱ تا ۳۰ با سیم‌کارت تماس گرفته می‌شوند. '
-                'حافظه ۱ مدیر دستگاه است. در سطح امنیت بالا فقط حافظه ۱ تا ۴ امکان کنترل دارند.',
+          InfoBanner(
+            text: state.model.hasMemoryGroups
+                ? 'حافظه ۱ تا ۱۰ پیامک هشدار دریافت می‌کنند، ۱۱ تا ۲۰ با خط تلفن و ۲۱ تا ۳۰ با سیم‌کارت تماس گرفته می‌شوند. '
+                      'حافظه ۱ مدیر دستگاه است. در سطح امنیت بالا فقط حافظه ۱ تا ۴ امکان کنترل دارند.'
+                : 'دستگاه ${state.model.code} دارای ${_fa(state.model.memoryCount)} حافظه شماره تلفن است و '
+                      'حافظه ۱ مدیر دستگاه است.${state.has(DeviceFeature.securityLevel) ? ' در سطح امنیت بالا فقط حافظه ۱ تا ۴ امکان کنترل دارند.' : ''}',
           ),
           SectionCard(
             title: 'استعلام حافظه‌ها',
@@ -64,7 +74,7 @@ class PhoneMemoriesPage extends StatelessWidget {
               ],
             ),
           ),
-          for (final g in _groups)
+          for (final g in _groups(state.model))
             SectionCard(
               title: 'حافظه ${_fa(g.$1)} تا ${_fa(g.$2)} • ${g.$3}',
               icon: g.$4,
@@ -128,9 +138,10 @@ class _MemoryTile extends StatelessWidget {
 }
 
 class _MemorySheet extends StatefulWidget {
-  const _MemorySheet({required this.memory, this.current});
+  const _MemorySheet({required this.memory, required this.landline, this.current});
 
   final int memory;
+  final bool landline;
   final String? current;
 
   @override
@@ -149,7 +160,7 @@ class _MemorySheetState extends State<_MemorySheet> {
 
   @override
   Widget build(BuildContext context) {
-    final landline = widget.memory >= 11 && widget.memory <= 20;
+    final landline = widget.landline;
     return Padding(
       padding: EdgeInsets.fromLTRB(20, 0, 20, 20 + MediaQuery.viewInsetsOf(context).bottom),
       child: Form(
@@ -277,6 +288,23 @@ class _DevicePasswordPageState extends State<DevicePasswordPage> {
 class SimSettingsPage extends StatefulWidget {
   const SimSettingsPage({super.key});
 
+  static const _features = [
+    DeviceFeature.simBalance,
+    DeviceFeature.antenna,
+    DeviceFeature.simCharge,
+    DeviceFeature.ussd,
+    DeviceFeature.autoBalance,
+  ];
+
+  static bool supports(DeviceModel model) => model.hasAny(_features);
+
+  static String subtitle(DeviceModel model) => [
+    if (model.has(DeviceFeature.simCharge)) 'شارژ',
+    if (model.has(DeviceFeature.ussd)) 'USSD',
+    if (model.has(DeviceFeature.antenna)) 'آنتن‌دهی',
+    if (model.has(DeviceFeature.autoBalance)) 'استعلام خودکار',
+  ].join('، ');
+
   @override
   State<SimSettingsPage> createState() => _SimSettingsPageState();
 }
@@ -298,7 +326,7 @@ class _SimSettingsPageState extends State<SimSettingsPage> {
     required TextEditingController controller,
     required String label,
     required String hint,
-    required DeviceCommand Function(Gsa212Commands c, String value) build,
+    required DeviceCommand Function(PanelCommands c, String value) build,
     String? description,
   }) {
     return SectionCard(
@@ -342,62 +370,70 @@ class _SimSettingsPageState extends State<SimSettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final c = context.read<DeviceCubit>().state.commands;
+    final state = context.read<DeviceCubit>().state;
+    final c = state.commands;
+    final balance = state.has(DeviceFeature.simBalance);
+    final antenna = state.has(DeviceFeature.antenna);
     return SettingsScaffold(
-      title: 'سیم‌کارت و شارژ',
+      title: state.has(DeviceFeature.simCharge) ? 'سیم‌کارت و شارژ' : 'سیم‌کارت',
       children: [
-        SectionCard(
-          title: 'استعلام‌ها',
-          icon: Icons.manage_search_rounded,
-          child: Row(
-            children: [
-              Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: () => sendFromSettings(context, c.simBalance()),
-                  icon: const Icon(Icons.account_balance_wallet_outlined),
-                  label: const Text('شارژ سیم‌کارت'),
-                ),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: OutlinedButton.icon(
-                  onPressed: () => sendFromSettings(context, c.antenna()),
-                  icon: const Icon(Icons.signal_cellular_alt_rounded),
-                  label: const Text('قدرت آنتن'),
-                ),
-              ),
-            ],
+        if (balance || antenna)
+          SectionCard(
+            title: 'استعلام‌ها',
+            icon: Icons.manage_search_rounded,
+            child: Row(
+              children: [
+                if (balance)
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: () => sendFromSettings(context, c.simBalance()),
+                      icon: const Icon(Icons.account_balance_wallet_outlined),
+                      label: const Text('شارژ سیم‌کارت'),
+                    ),
+                  ),
+                if (balance && antenna) const SizedBox(width: 10),
+                if (antenna)
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      onPressed: () => sendFromSettings(context, c.antenna()),
+                      icon: const Icon(Icons.signal_cellular_alt_rounded),
+                      label: const Text('قدرت آنتن'),
+                    ),
+                  ),
+              ],
+            ),
           ),
-        ),
-        _codeCard(
-          title: 'شارژ سیم‌کارت',
-          icon: Icons.add_card_outlined,
-          controller: _charge,
-          label: 'رمز شارژ',
-          hint: 'کد کارت شارژ',
-          description: 'رمز کارت شارژ را وارد کنید تا سیم‌کارت دستگاه شارژ شود.',
-          build: (c, v) => c.simCharge(v),
-        ),
-        _codeCard(
-          title: 'اجرای کد USSD',
-          icon: Icons.dialpad_rounded,
-          controller: _ussd,
-          label: 'کد USSD',
-          hint: '*141#',
-          description: 'دستگاه کد را اجرا کرده و نتیجه را پیامک می‌کند.',
-          build: (c, v) => c.ussd(v),
-        ),
-        NumberSettingCard(
-          title: 'استعلام شارژ خودکار',
-          icon: Icons.autorenew_rounded,
-          label: 'تعداد پیامک',
-          min: 1,
-          max: 255,
-          configKey: ConfigKeys.autoBalance,
-          description:
-              'پس از این تعداد پیامک (هر تماس یک پیامک حساب می‌شود)، دستگاه شارژ را استعلام و برای مدیر ارسال می‌کند.',
-          command: (s, v) => s.commands.autoBalance(v),
-        ),
+        if (state.has(DeviceFeature.simCharge))
+          _codeCard(
+            title: 'شارژ سیم‌کارت',
+            icon: Icons.add_card_outlined,
+            controller: _charge,
+            label: 'رمز شارژ',
+            hint: 'کد کارت شارژ',
+            description: 'رمز کارت شارژ را وارد کنید تا سیم‌کارت دستگاه شارژ شود.',
+            build: (c, v) => c.simCharge(v),
+          ),
+        if (state.has(DeviceFeature.ussd))
+          _codeCard(
+            title: 'اجرای کد USSD',
+            icon: Icons.dialpad_rounded,
+            controller: _ussd,
+            label: 'کد USSD',
+            hint: '*141#',
+            description: 'دستگاه کد را اجرا کرده و نتیجه را پیامک می‌کند.',
+            build: (c, v) => c.ussd(v),
+          ),
+        if (state.has(DeviceFeature.autoBalance))
+          NumberSettingCard(
+            title: 'استعلام شارژ خودکار',
+            icon: Icons.autorenew_rounded,
+            label: 'تعداد پیامک',
+            min: 1,
+            max: 255,
+            configKey: ConfigKeys.autoBalance,
+            description: 'پس از این تعداد پیامک (هر تماس یک پیامک حساب می‌شود)، دستگاه شارژ را استعلام و برای مدیر ارسال می‌کند.',
+            command: (s, v) => s.commands.autoBalance(v),
+          ),
       ],
     );
   }
@@ -408,44 +444,56 @@ class _SimSettingsPageState extends State<SimSettingsPage> {
 class SirenSoundPage extends StatelessWidget {
   const SirenSoundPage({super.key});
 
+  static bool supports(DeviceModel model) => model.hasAny(const [DeviceFeature.sirenTime, DeviceFeature.soundMode]);
+
+  static String subtitle(DeviceModel model) => [
+    if (model.has(DeviceFeature.sirenTime)) 'زمان آژیر',
+    if (model.has(DeviceFeature.soundMode)) 'صدای بلندگو و آژیر',
+  ].join(' و ');
+
   @override
   Widget build(BuildContext context) {
+    final state = context.read<DeviceCubit>().state;
     return SettingsScaffold(
       title: 'آژیر و صدا',
       children: [
-        NumberSettingCard(
-          title: 'زمان آژیر',
-          icon: Icons.timer_outlined,
-          label: 'مدت آژیر',
-          unit: 'ثانیه',
-          min: 0,
-          max: 255,
-          configKey: ConfigKeys.sirenTime,
-          description: 'مدت زمانی که پس از تحریک، آژیر به صدا درمی‌آید.',
-          command: (s, v) => s.commands.sirenTime(v),
-        ),
-        BlocBuilder<DeviceCubit, DeviceState>(
-          builder: (context, state) {
-            final current = state.configValue<int>(ConfigKeys.soundMode);
-            return SectionCard(
-              title: 'حالت تک‌آژیر (صدای فعال/غیرفعال شدن)',
-              icon: Icons.volume_up_outlined,
-              child: Column(
-                children: [
-                  for (final mode in SoundMode.values)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: _OptionTile(
-                        title: mode.label,
-                        selected: current == mode.code,
-                        onTap: () => sendFromSettings(context, state.commands.soundMode(mode)),
+        if (state.has(DeviceFeature.sirenTime))
+          NumberSettingCard(
+            title: 'زمان آژیر',
+            icon: Icons.timer_outlined,
+            label: 'مدت آژیر',
+            unit: 'ثانیه',
+            min: 0,
+            max: 255,
+            configKey: ConfigKeys.sirenTime,
+            description: 'مدت زمانی که پس از تحریک، آژیر به صدا درمی‌آید.',
+            command: (s, v) => s.commands.sirenTime(v),
+          ),
+        if (state.has(DeviceFeature.soundMode))
+          BlocBuilder<DeviceCubit, DeviceState>(
+            builder: (context, state) {
+              final current = state.configValue<int>(ConfigKeys.soundMode);
+              return SectionCard(
+                title: state.model == DeviceModel.gsa212
+                    ? 'حالت تک‌آژیر (صدای فعال/غیرفعال شدن)'
+                    : 'خروجی بلندگو و سیرن (SIR/SP)',
+                icon: Icons.volume_up_outlined,
+                child: Column(
+                  children: [
+                    for (final mode in SoundMode.values)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: _OptionTile(
+                          title: state.model.soundModeLabel(mode.code),
+                          selected: current == mode.code,
+                          onTap: () => sendFromSettings(context, state.commands.soundMode(mode)),
+                        ),
                       ),
-                    ),
-                ],
-              ),
-            );
-          },
-        ),
+                  ],
+                ),
+              );
+            },
+          ),
       ],
     );
   }
@@ -500,72 +548,101 @@ class _OptionTile extends StatelessWidget {
 class SecurityReportsPage extends StatelessWidget {
   const SecurityReportsPage({super.key});
 
+  static const _features = [
+    DeviceFeature.securityLevel,
+    DeviceFeature.remoteReport,
+    DeviceFeature.powerReport,
+    DeviceFeature.speakerReport,
+    DeviceFeature.fuseReport,
+    DeviceFeature.sensorBattery,
+    DeviceFeature.serviceReminder,
+  ];
+
+  static bool supports(DeviceModel model) => model.hasAny(_features);
+
+  static String subtitle(DeviceModel model) => [
+    if (model.has(DeviceFeature.securityLevel)) 'امنیت',
+    if (model.has(DeviceFeature.remoteReport)) 'گزارش ریموت',
+    if (model.has(DeviceFeature.powerReport)) 'گزارش برق',
+    if (model.hasAny(const [DeviceFeature.speakerReport, DeviceFeature.fuseReport, DeviceFeature.sensorBattery]))
+      'اخطارها',
+  ].join('، ');
+
   @override
   Widget build(BuildContext context) {
+    final state = context.read<DeviceCubit>().state;
+    bool has(DeviceFeature f) => state.has(f);
     return SettingsScaffold(
-      title: 'سطح امنیت و گزارش‌ها',
+      title: has(DeviceFeature.securityLevel) ? 'سطح امنیت و گزارش‌ها' : 'گزارش‌ها و اخطارها',
       children: [
-        ToggleSettingCard(
-          title: 'سطح امنیت',
-          icon: Icons.verified_user_outlined,
-          configKey: ConfigKeys.securityHigh,
-          onLabel: 'بالا',
-          offLabel: 'متوسط',
-          description:
-              'امنیت بالا: فقط شماره‌های حافظه ۱ تا ۴ دستگاه را کنترل می‌کنند. '
-              'امنیت متوسط: هر شخصی که شماره سیم‌کارت و رمز را دارد.',
-          command: (s, v) => s.commands.securityLevel(high: v),
-        ),
-        ToggleSettingCard(
-          title: 'گزارش ریموت',
-          icon: Icons.settings_remote_outlined,
-          configKey: ConfigKeys.remoteReport,
-          description: 'ارسال پیامک گزارش هنگام استفاده از ریموت‌ها، همراه با شماره ریموت.',
-          command: (s, v) => s.commands.remoteReport(v),
-        ),
-        ToggleSettingCard(
-          title: 'گزارش برق',
-          icon: Icons.power_outlined,
-          configKey: ConfigKeys.powerReport,
-          description: 'اطلاع‌رسانی قطع و وصل شدن برق شهر.',
-          command: (s, v) => s.commands.powerReport(v),
-        ),
-        ToggleSettingCard(
-          title: 'اخطار قطع اسپیکر',
-          icon: Icons.speaker_outlined,
-          configKey: ConfigKeys.speakerReport,
-          onLabel: 'روشن',
-          offLabel: 'خاموش',
-          command: (s, v) => s.commands.speakerCutReport(v),
-        ),
-        ToggleSettingCard(
-          title: 'اخطار قطع فیوز AUX',
-          icon: Icons.electric_bolt_outlined,
-          configKey: ConfigKeys.fuseReport,
-          onLabel: 'روشن',
-          offLabel: 'خاموش',
-          command: (s, v) => s.commands.fuseReport(v),
-        ),
-        ToggleSettingCard(
-          title: 'اخطار کم شدن باتری سنسور بی‌سیم',
-          icon: Icons.battery_alert_outlined,
-          configKey: ConfigKeys.sensorBattery,
-          onLabel: 'روشن',
-          offLabel: 'خاموش',
-          description: 'فقط برای سنسورهای فایواستار؛ جامپر FAULT داخل سنسور باید روی ON باشد.',
-          command: (s, v) => s.commands.sensorBatteryReport(v),
-        ),
-        NumberSettingCard(
-          title: 'یادآوری سرویس دوره‌ای',
-          icon: Icons.event_repeat_outlined,
-          label: 'فاصله یادآوری',
-          unit: 'روز',
-          min: 1,
-          max: 255,
-          configKey: ConfigKeys.serviceDays,
-          description: 'یادآوری پیامکی برای سرویس و تعویض باتری سنسورهای بی‌سیم.',
-          command: (s, v) => s.commands.serviceReminder(v),
-        ),
+        if (has(DeviceFeature.securityLevel))
+          ToggleSettingCard(
+            title: 'سطح امنیت',
+            icon: Icons.verified_user_outlined,
+            configKey: ConfigKeys.securityHigh,
+            onLabel: 'بالا',
+            offLabel: 'متوسط',
+            description:
+                'امنیت بالا: فقط شماره‌های حافظه ۱ تا ۴ دستگاه را کنترل می‌کنند. '
+                'امنیت متوسط: هر شخصی که شماره سیم‌کارت و رمز را دارد.',
+            command: (s, v) => s.commands.securityLevel(high: v),
+          ),
+        if (has(DeviceFeature.remoteReport))
+          ToggleSettingCard(
+            title: 'گزارش ریموت',
+            icon: Icons.settings_remote_outlined,
+            configKey: ConfigKeys.remoteReport,
+            description: 'ارسال پیامک گزارش هنگام استفاده از ریموت‌ها، همراه با شماره ریموت.',
+            command: (s, v) => s.commands.remoteReport(v),
+          ),
+        if (has(DeviceFeature.powerReport))
+          ToggleSettingCard(
+            title: 'گزارش برق',
+            icon: Icons.power_outlined,
+            configKey: ConfigKeys.powerReport,
+            description: 'اطلاع‌رسانی قطع و وصل شدن برق شهر.',
+            command: (s, v) => s.commands.powerReport(v),
+          ),
+        if (has(DeviceFeature.speakerReport))
+          ToggleSettingCard(
+            title: 'اخطار قطع اسپیکر',
+            icon: Icons.speaker_outlined,
+            configKey: ConfigKeys.speakerReport,
+            onLabel: 'روشن',
+            offLabel: 'خاموش',
+            command: (s, v) => s.commands.speakerCutReport(v),
+          ),
+        if (has(DeviceFeature.fuseReport))
+          ToggleSettingCard(
+            title: 'اخطار قطع فیوز AUX',
+            icon: Icons.electric_bolt_outlined,
+            configKey: ConfigKeys.fuseReport,
+            onLabel: 'روشن',
+            offLabel: 'خاموش',
+            command: (s, v) => s.commands.fuseReport(v),
+          ),
+        if (has(DeviceFeature.sensorBattery))
+          ToggleSettingCard(
+            title: 'اخطار کم شدن باتری سنسور بی‌سیم',
+            icon: Icons.battery_alert_outlined,
+            configKey: ConfigKeys.sensorBattery,
+            onLabel: 'روشن',
+            offLabel: 'خاموش',
+            description: 'فقط برای سنسورهای فایواستار؛ جامپر FAULT داخل سنسور باید روی ON باشد.',
+            command: (s, v) => s.commands.sensorBatteryReport(v),
+          ),
+        if (has(DeviceFeature.serviceReminder))
+          NumberSettingCard(
+            title: 'یادآوری سرویس دوره‌ای',
+            icon: Icons.event_repeat_outlined,
+            label: 'فاصله یادآوری',
+            unit: 'روز',
+            min: 1,
+            max: 255,
+            configKey: ConfigKeys.serviceDays,
+            description: 'یادآوری پیامکی برای سرویس و تعویض باتری سنسورهای بی‌سیم.',
+            command: (s, v) => s.commands.serviceReminder(v),
+          ),
       ],
     );
   }
@@ -738,24 +815,25 @@ class _RemotesPageState extends State<RemotesPage> {
           icon: Icons.delete_outline_rounded,
           label: 'شماره ریموت',
           min: 1,
-          max: Gsa212Commands.remoteCount,
+          max: PanelCommands.remoteCount,
           command: (s, v) => s.commands.deleteRemote(v),
         ),
-        const SectionCard(
-          title: 'راهنمای دکمه‌های ریموت',
-          icon: Icons.settings_remote_outlined,
-          child: Column(
-            children: [
-              _RemoteHint(icon: Icons.lock_rounded, text: 'فعال (ARM) – همه زون‌ها فعال'),
-              _RemoteHint(icon: Icons.lock_open_rounded, text: 'غیرفعال (DISARM) – همه زون‌ها غیرفعال'),
-              _RemoteHint(
-                icon: Icons.notifications_active_outlined,
-                text: 'درب‌بازکن در حالت غیرفعال، آژیر اضطراری در حالت فعال',
-              ),
-              _RemoteHint(icon: Icons.bolt_rounded, text: 'نیمه فعال (PARTSET) – زون ۲، ۳ و ۴ فعال'),
-            ],
+        if (context.read<DeviceCubit>().state.model == DeviceModel.gsa212)
+          const SectionCard(
+            title: 'راهنمای دکمه‌های ریموت',
+            icon: Icons.settings_remote_outlined,
+            child: Column(
+              children: [
+                _RemoteHint(icon: Icons.lock_rounded, text: 'فعال (ARM) – همه زون‌ها فعال'),
+                _RemoteHint(icon: Icons.lock_open_rounded, text: 'غیرفعال (DISARM) – همه زون‌ها غیرفعال'),
+                _RemoteHint(
+                  icon: Icons.notifications_active_outlined,
+                  text: 'درب‌بازکن در حالت غیرفعال، آژیر اضطراری در حالت فعال',
+                ),
+                _RemoteHint(icon: Icons.bolt_rounded, text: 'نیمه فعال (PARTSET) – زون ۲، ۳ و ۴ فعال'),
+              ],
+            ),
           ),
-        ),
       ],
     );
   }
@@ -786,6 +864,9 @@ class _RemoteHint extends StatelessWidget {
 
 class PhoneLinePage extends StatelessWidget {
   const PhoneLinePage({super.key});
+
+  static bool supports(DeviceModel model) =>
+      model.hasAny(const [DeviceFeature.dialMode, DeviceFeature.ringCount, DeviceFeature.landlineControl]);
 
   @override
   Widget build(BuildContext context) {
@@ -838,6 +919,16 @@ class PhoneLinePage extends StatelessWidget {
 class PartitionsPage extends StatelessWidget {
   const PartitionsPage({super.key});
 
+  static bool supports(DeviceModel model) => model.hasAny(const [
+    DeviceFeature.partitionMode,
+    DeviceFeature.passwordPartition,
+    DeviceFeature.partPassword,
+    DeviceFeature.remotePartition,
+    DeviceFeature.memoryPartition,
+    DeviceFeature.outputProgram,
+    DeviceFeature.notificationPartition,
+  ]);
+
   @override
   Widget build(BuildContext context) {
     return SettingsScaffold(
@@ -863,7 +954,7 @@ class PartitionsPage extends StatelessWidget {
           title: '۴. پارتیشن ریموت‌ها',
           icon: Icons.settings_remote_outlined,
           numberLabel: 'شماره ریموت',
-          numbers: [for (var i = 1; i <= Gsa212Commands.remoteCount; i++) i],
+          numbers: [for (var i = 1; i <= PanelCommands.remoteCount; i++) i],
           description: 'مشخص کنید هر ریموت کدام زون‌ها را کنترل کند.',
           build: (c, n, z) => c.remotePartition(remote: n, zones: z),
         ),
@@ -871,7 +962,7 @@ class PartitionsPage extends StatelessWidget {
           title: '۵. پارتیشن حافظه‌های تلفن',
           icon: Icons.contacts_outlined,
           numberLabel: 'شماره حافظه',
-          numbers: [for (var i = 1; i <= Gsa212Commands.memoryCount; i++) i],
+          numbers: [for (var i = 1; i <= context.read<DeviceCubit>().state.model.memoryCount; i++) i],
           description: 'با تحریک زون‌های انتخابی، فقط به این حافظه پیامک یا تماس انجام می‌شود.',
           build: (c, n, z) => c.memoryPartition(memory: n, zones: z),
         ),
@@ -897,7 +988,7 @@ class _ZoneAccessCard extends StatefulWidget {
   final String numberLabel;
   final List<int> numbers;
   final String? description;
-  final DeviceCommand Function(Gsa212Commands c, int number, ZoneMask zones) build;
+  final DeviceCommand Function(PanelCommands c, int number, ZoneMask zones) build;
 
   @override
   State<_ZoneAccessCard> createState() => _ZoneAccessCardState();
@@ -1184,6 +1275,151 @@ class _NotificationCardState extends State<_NotificationCard> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+// ============================================================ Message texts (A)
+
+/// Changes the SMS texts the panel sends for each event (GSA-206/207P/206+/208).
+class CustomTextsPage extends StatelessWidget {
+  const CustomTextsPage({super.key});
+
+  Future<void> _edit(BuildContext context, TextSlot slot, String? current) async {
+    final text = await showModalBottomSheet<String>(
+      context: context,
+      isScrollControlled: true,
+      builder: (_) => _TextSheet(slot: slot, current: current),
+    );
+    if (text == null || !context.mounted) return;
+    await sendFromSettings(context, context.read<DeviceCubit>().state.commands.customText(slot, text));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DeviceCubit, DeviceState>(
+      builder: (context, state) => SettingsScaffold(
+        title: 'متن پیام‌های دستگاه',
+        children: [
+          const InfoBanner(
+            text:
+                'متن پیامکی که دستگاه هنگام هر رویداد ارسال می‌کند را به دلخواه تغییر دهید. '
+                'دستگاه با «OK>>متن جدید» پاسخ می‌دهد. متن‌های ثبت‌شده در برنامه ذخیره می‌شوند تا پیامک‌های دستگاه شناسایی شوند.',
+          ),
+          SectionCard(
+            title: 'رویدادها',
+            icon: Icons.edit_note_rounded,
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+            child: Column(
+              children: [
+                for (final slot in state.model.texts)
+                  _TextTile(
+                    slot: slot,
+                    text: state.configValue<String>(ConfigKeys.text(slot.code)),
+                    onTap: () => _edit(context, slot, state.configValue<String>(ConfigKeys.text(slot.code))),
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _TextTile extends StatelessWidget {
+  const _TextTile({required this.slot, required this.text, required this.onTap});
+
+  final TextSlot slot;
+  final String? text;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final empty = text == null || text!.isEmpty;
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      dense: true,
+      leading: CircleAvatar(
+        radius: 16,
+        backgroundColor: AppColors.ice,
+        child: Text(
+          slot.code,
+          style: const TextStyle(color: AppColors.primary, fontWeight: FontWeight.w800, fontSize: 11),
+        ),
+      ),
+      title: Text(slot.label, style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13.5)),
+      subtitle: Text(
+        empty ? 'متن پیش‌فرض دستگاه' : text!,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(fontSize: 12, color: empty ? AppColors.textSecondary : AppColors.textPrimary),
+      ),
+      trailing: const Icon(Icons.edit_outlined, size: 20, color: AppColors.primary),
+      onTap: onTap,
+    );
+  }
+}
+
+class _TextSheet extends StatefulWidget {
+  const _TextSheet({required this.slot, this.current});
+
+  final TextSlot slot;
+  final String? current;
+
+  @override
+  State<_TextSheet> createState() => _TextSheetState();
+}
+
+class _TextSheetState extends State<_TextSheet> {
+  final _formKey = GlobalKey<FormState>();
+  late final _controller = TextEditingController(text: widget.current);
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(20, 0, 20, 20 + MediaQuery.viewInsetsOf(context).bottom),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(widget.slot.label, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800)),
+            const SizedBox(height: 16),
+            TextFormField(
+              controller: _controller,
+              autofocus: true,
+              maxLength: PanelCommands.maxTextLength,
+              decoration: InputDecoration(
+                labelText: 'متن جدید',
+                hintText: switch (widget.slot.event) {
+                  TextEvent.zoneAlarm => 'مثلا: ورودی پارکینگ',
+                  TextEvent.arm => 'مثلا: دزدگیر فعال شد',
+                  TextEvent.disarm => 'مثلا: دزدگیر غیرفعال شد',
+                  _ => null,
+                },
+                prefixIcon: const Icon(Icons.short_text_rounded),
+              ),
+              validator: (v) => (v ?? '').trim().isEmpty ? 'متن را وارد کنید' : null,
+            ),
+            const SizedBox(height: 12),
+            GradientButton(
+              label: 'ادامه',
+              icon: Icons.arrow_forward,
+              onPressed: () {
+                if (_formKey.currentState!.validate()) Navigator.pop(context, _controller.text.trim());
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

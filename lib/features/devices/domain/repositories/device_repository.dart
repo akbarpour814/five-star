@@ -31,7 +31,9 @@ abstract interface class DeviceRepository {
 
   Future<Map<String, Object?>> getConfig(String deviceId);
 
-  Future<void> mergeConfig(String deviceId, Map<String, Object?> patch);
+  /// With [at] (when the SMS or command behind [patch] happened), a key is only overwritten when no
+  /// newer value was stored for it, so late-processed replies never roll a setting back.
+  Future<void> mergeConfig(String deviceId, Map<String, Object?> patch, {DateTime? at});
 
   Future<List<DeviceMessage>> getMessages(String deviceId);
 
@@ -39,10 +41,11 @@ abstract interface class DeviceRepository {
 
   Future<void> clearMessages(String deviceId);
 
-  /// Receive time of the newest phone-inbox message already imported.
-  Future<DateTime?> getInboxSyncedAt();
+  /// Receive time of the newest phone-inbox message already imported for this device.
+  /// Reset when the device's SIM number changes.
+  Future<DateTime?> getInboxSyncedAt(String deviceId);
 
-  Future<void> setInboxSyncedAt(DateTime at);
+  Future<void> setInboxSyncedAt(String deviceId, DateTime at);
 
   Future<DateTime?> getLastSentAt(String deviceId);
 

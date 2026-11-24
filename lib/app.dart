@@ -126,22 +126,54 @@ class _FiveStarAppState extends State<FiveStarApp> with WidgetsBindingObserver {
           buildWhen: (prev, next) => prev.status != next.status,
           builder: (context, state) => AnnotatedRegion<SystemUiOverlayStyle>(
             value: _statusBarStyle,
-            child: Stack(
-              children: [
-                ?child,
-                Positioned.fill(child: CooldownBubble(enabled: state.status == AuthStatus.unlocked)),
-                if (state.status == AuthStatus.locked)
-                  // A second Navigator must not share the app's HeroController, or later root pushes break.
-                  Positioned.fill(
-                    child: HeroControllerScope.none(
-                      child: Navigator(onGenerateRoute: (_) => MaterialPageRoute(builder: (_) => const LockPage())),
+            child: _MaxWidthFrame(
+              child: Stack(
+                children: [
+                  ?child,
+                  Positioned.fill(child: CooldownBubble(enabled: state.status == AuthStatus.unlocked)),
+                  if (state.status == AuthStatus.locked)
+                    // A second Navigator must not share the app's HeroController, or later root pushes break.
+                    Positioned.fill(
+                      child: HeroControllerScope.none(
+                        child: Navigator(onGenerateRoute: (_) => MaterialPageRoute(builder: (_) => const LockPage())),
+                      ),
                     ),
-                  ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
         home: const _AuthGate(),
+      ),
+    );
+  }
+}
+
+/// Caps the app at large-tablet width; wider screens show the app centered
+/// between empty white side boxes.
+class _MaxWidthFrame extends StatelessWidget {
+  const _MaxWidthFrame({required this.child});
+
+  static const maxWidth = 1024.0;
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final media = MediaQuery.of(context);
+    if (media.size.width <= maxWidth) return child;
+    return ColoredBox(
+      color: Colors.white,
+      child: Center(
+        child: SizedBox(
+          width: maxWidth,
+          height: media.size.height,
+          // Pages that read MediaQuery size must see the framed width, not the window's.
+          child: MediaQuery(
+            data: media.copyWith(size: Size(maxWidth, media.size.height)),
+            child: ClipRect(child: child),
+          ),
+        ),
       ),
     );
   }

@@ -3,9 +3,8 @@ import 'package:equatable/equatable.dart';
 import '../../../core/utils/text_normalizer.dart';
 import '../../devices/domain/entities/device_message.dart';
 import '../../devices/domain/entities/device_status.dart';
-import 'gsa212_commands.dart';
-
-typedef StatusPatch = DeviceStatus Function(DeviceStatus status);
+import 'device_model.dart';
+import 'panel_commands.dart';
 
 class ParsedResponse extends Equatable {
   const ParsedResponse({
@@ -53,25 +52,104 @@ class ParsedResponse extends Equatable {
   List<Object?> get props => [title, detail, severity, config, recognized, output];
 }
 
-/// Interprets SMS replies of the GSA-212 following the code/answer table.
+/// Interprets SMS replies of every FiveStar panel following the code/answer table.
 /// Matching runs on a whitespace-free normalized copy so spacing/letter variants don't matter.
-class Gsa212ResponseParser {
-  const Gsa212ResponseParser();
+/// [config] carries the message texts programmed with the A command, so panels that send
+/// those custom texts (GSA-206/207P/206+/208) are still understood.
+class PanelResponseParser {
+  const PanelResponseParser();
 
   static const _onOff = '(غیرفعال|فعال)';
 
-  ParsedResponse parse(String raw) {
+  ParsedResponse parse(String raw, {DeviceModel model = DeviceModel.fallback, Map<String, Object?> config = const {}}) {
     final text = TextNormalizer.normalize(raw);
     final c = TextNormalizer.compact(raw);
     if (c.isEmpty) return const ParsedResponse.unknown();
 
     return _memories(text) ??
+        _textConfirmation(text, c, model, config) ??
+        _customText(c, model, config) ??
         _englishStatus(c.toUpperCase()) ??
         _status(text, c) ??
-        _rules(c) ??
+        _rules(c, model) ??
         _alerts(c) ??
         const ParsedResponse.unknown();
   }
+
+  /// Programmed texts of [model], longest first so a text never shadows a longer one containing it.
+  List<(TextSlot, String)> _programmedTexts(DeviceModel model, Map<String, Object?> config) {
+    final list = <(TextSlot, String)>[
+      for (final slot in model.texts)
+        if (config[ConfigKeys.text(slot.code)] case final String t when TextNormalizer.compact(t).isNotEmpty)
+          (slot, TextNormalizer.compact(t)),
+    ];
+    list.sort((a, b) => b.$2.length.compareTo(a.$2.length));
+    return list;
+  }
+
+  /// Reply to an A command: `OK>>` followed by the new text.
+  ParsedResponse? _textConfirmation(String text, String c, DeviceModel model, Map<String, Object?> config) {
+    final m = RegExp(r'^OK\s*>+\s*(.+)$', caseSensitive: false, dotAll: true).firstMatch(text);
+    if (m == null || c.toLowerCase().contains('newpassword')) return null;
+    final value = m[1]!.trim();
+    final compact = TextNormalizer.compact(value);
+    TextSlot? slot;
+    for (final (s, t) in _programmedTexts(model, config)) {
+      if (t == compact) {
+        slot = s;
+        break;
+      }
+    }
+    return ParsedResponse(title: slot == null ? 'متن پیام دستگاه ثبت شد' : '${slot.label} ثبت شد', detail: value);
+  }
+
+  /// A device event sent with a text the user programmed.
+  ParsedResponse? _customText(String c, DeviceModel model, Map<String, Object?> config) {
+    if (!model.has(DeviceFeature.customTexts)) return null;
+    for (final (slot, t) in _programmedTexts(model, config)) {
+      if (c == t || (t.length >= 3 && c.contains(t))) return _textEvent(slot);
+    }
+    return null;
+  }
+
+  ParsedResponse _textEvent(TextSlot slot) {
+    final n = slot.index == null ? '' : TextNormalizer.toPersianDigits(slot.index!);
+    return switch (slot.event) {
+      TextEvent.arm => _armReply(ArmState.armed),
+      TextEvent.disarm => _armReply(ArmState.disarmed),
+      TextEvent.partset => _armReply(ArmState.partset),
+      TextEvent.silentArm => _armReply(ArmState.silent),
+      TextEvent.outputOn => _outputReply(slot.index!, true),
+      TextEvent.outputOff => _outputReply(slot.index!, false),
+      TextEvent.powerCut => ParsedResponse(
+        title: 'هشدار قطع برق',
+        severity: MessageSeverity.alert,
+        patch: (s) => s.copyWith(powerConnected: false),
+      ),
+      TextEvent.powerRestored => ParsedResponse(
+        title: 'برق دستگاه وصل شد',
+        patch: (s) => s.copyWith(powerConnected: true),
+      ),
+      TextEvent.lowBattery => ParsedResponse(
+        title: 'هشدار کم بودن باتری پنل',
+        severity: MessageSeverity.alert,
+        patch: (s) => s.copyWith(batteryOk: false),
+      ),
+      TextEvent.alarm => const ParsedResponse(title: 'هشدار تحریک دزدگیر', severity: MessageSeverity.alert),
+      TextEvent.zoneAlarm => ParsedResponse(
+        title: 'هشدار تحریک دزدگیر',
+        detail: 'زون $n',
+        severity: MessageSeverity.alert,
+      ),
+      TextEvent.phoneLineCut => const ParsedResponse(title: 'هشدار قطع خط تلفن', severity: MessageSeverity.alert),
+      TextEvent.keypadAlarm => const ParsedResponse(title: 'هشدار زون امنیتی کیپد', severity: MessageSeverity.alert),
+    };
+  }
+
+  ParsedResponse _armReply(ArmState arm) => ParsedResponse(
+    title: 'دزدگیر ${arm.label} شد',
+    patch: (s) => s.copyWith(arm: arm, updatedAt: s.updatedAt),
+  );
 
   /// English status reply, e.g. `OUT 1: OFF , OUT 2: OFF , ... ,Device status:DISARM`.
   ParsedResponse? _englishStatus(String c) {
@@ -199,7 +277,7 @@ class Gsa212ResponseParser {
     );
   }
 
-  ParsedResponse? _rules(String c) {
+  ParsedResponse? _rules(String c, DeviceModel model) {
     RegExpMatch? m;
 
     if (c.toLowerCase().contains('newpassword')) {
@@ -231,7 +309,7 @@ class Gsa212ResponseParser {
           : 0;
       return ParsedResponse(
         title: 'حالت صدا تغییر کرد',
-        detail: SoundModeLabels.of(mode),
+        detail: model.soundModeLabel(mode),
         config: {ConfigKeys.soundMode: mode},
       );
     }
@@ -250,10 +328,7 @@ class Gsa212ResponseParser {
         'غیرفعال' => ArmState.disarmed,
         _ => ArmState.armed,
       };
-      return ParsedResponse(
-        title: 'دزدگیر ${arm.label} شد',
-        patch: (s) => s.copyWith(arm: arm, updatedAt: s.updatedAt),
-      );
+      return _armReply(arm);
     }
 
     if ((m = RegExp(
@@ -364,6 +439,12 @@ class Gsa212ResponseParser {
     if (c.contains('وصلبرق') || c.contains('وصلشدنبرق')) {
       return ParsedResponse(title: 'برق دستگاه وصل شد', patch: (s) => s.copyWith(powerConnected: true));
     }
+    if (c.contains('قطعتلفن') || c.contains('قطعخطتلفن')) {
+      return const ParsedResponse(title: 'هشدار قطع خط تلفن', severity: MessageSeverity.alert);
+    }
+    if (c.contains('کیپد')) {
+      return const ParsedResponse(title: 'هشدار زون امنیتی کیپد', severity: MessageSeverity.alert);
+    }
     if (c.contains('اسپیکر')) {
       return const ParsedResponse(title: 'هشدار قطع یا سوختن اسپیکر', severity: MessageSeverity.alert);
     }
@@ -394,12 +475,4 @@ class Gsa212ResponseParser {
     }
     return null;
   }
-}
-
-abstract final class SoundModeLabels {
-  static String of(int mode) => switch (mode) {
-    1 => 'بلندگو غیرفعال، پیزو فعال',
-    2 => 'بلندگو و پیزو غیرفعال',
-    _ => 'بلندگو و پیزو فعال',
-  };
 }

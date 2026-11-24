@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/common.dart';
 import '../../../../core/widgets/gradient_background.dart';
-import '../../../gsa212/domain/gsa212_response_parser.dart';
+import '../../../panel/domain/panel_response_parser.dart';
 import '../../domain/entities/device_message.dart';
 import '../cubit/device_cubit.dart';
 

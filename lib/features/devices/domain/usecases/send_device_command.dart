@@ -1,6 +1,6 @@
 import '../../../../core/platform/sms_gateway.dart';
 import '../../../../core/utils/id_generator.dart';
-import '../../../gsa212/domain/device_command.dart';
+import '../../../panel/domain/device_command.dart';
 import '../entities/device.dart';
 import '../entities/device_message.dart';
 import '../repositories/device_repository.dart';
@@ -55,7 +55,7 @@ class SendDeviceCommand {
 
     final now = _clock();
     await _repository.setLastSentAt(device.id, now);
-    await _repository.mergeConfig(device.id, command.configPatch);
+    await _repository.mergeConfig(device.id, command.configPatch, at: now);
     await _repository.addMessage(
       device.id,
       DeviceMessage(

@@ -1,36 +1,40 @@
 import '../../../../core/utils/id_generator.dart';
-import '../../../gsa212/domain/gsa212_commands.dart';
-import '../../../gsa212/domain/gsa212_response_parser.dart';
+import '../../../panel/domain/device_model.dart';
+import '../../../panel/domain/panel_commands.dart';
+import '../../../panel/domain/panel_response_parser.dart';
 import '../entities/device_message.dart';
 import '../repositories/device_repository.dart';
 
 /// Parses a device reply (received automatically or pasted) and folds it into local state.
 class ProcessDeviceReply {
-  ProcessDeviceReply({required this._repository, this._parser = const Gsa212ResponseParser()});
+  ProcessDeviceReply({required this._repository, this._parser = const PanelResponseParser()});
 
   final DeviceRepository _repository;
-  final Gsa212ResponseParser _parser;
+  final PanelResponseParser _parser;
 
-  ParsedResponse preview(String text) => _parser.parse(text);
+  /// [model] and [config] (programmed message texts) decide how the reply is read.
+  ParsedResponse preview(
+    String text, {
+    DeviceModel model = DeviceModel.fallback,
+    Map<String, Object?> config = const {},
+  }) => _parser.parse(text, model: model, config: config);
 
   Future<ParsedResponse> call(String deviceId, String text, {DateTime? at}) async {
-    var parsed = _parser.parse(text);
+    final device = await _repository.getDevice(deviceId);
+    final config = await _repository.getConfig(deviceId);
+    var parsed = _parser.parse(text, model: device?.type ?? DeviceModel.fallback, config: config);
     final time = at ?? DateTime.now();
     final output = parsed.output;
-    if (output != null) {
-      final config = await _repository.getConfig(deviceId);
-      if (config[ConfigKeys.outputMode(output)] == 'momentary') parsed = parsed.asMomentary();
-    }
+    if (output != null && config[ConfigKeys.outputMode(output)] == 'momentary') parsed = parsed.asMomentary();
 
-    // A reply older than the last applied one (e.g. found later in the inbox) is logged but must not roll state back.
-    final status = await _repository.getStatus(deviceId);
-    final stale = status.updatedAt != null && time.isBefore(status.updatedAt!);
-    if (!stale) {
-      if (parsed.patch != null) {
-        await _repository.saveStatus(deviceId, parsed.patch!(status).copyWith(updatedAt: time));
-      }
-      await _repository.mergeConfig(deviceId, parsed.config);
+    // Replies can be processed out of order (inbox sync, queued while closed, pasted): every field
+    // keeps the value of the newest SMS that reported it, so the latest SMS always defines the state.
+    if (parsed.patch != null) {
+      final status = await _repository.getStatus(deviceId);
+      final next = status.applyAt(parsed.patch!, time);
+      if (next != status) await _repository.saveStatus(deviceId, next);
     }
+    await _repository.mergeConfig(deviceId, parsed.config, at: time);
     await _repository.addMessage(
       deviceId,
       DeviceMessage(

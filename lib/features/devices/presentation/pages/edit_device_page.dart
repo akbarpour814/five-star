@@ -5,9 +5,11 @@ import '../../../../core/di/injection.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/phone_utils.dart';
 import '../../../../core/widgets/common.dart';
-import '../../../gsa212/presentation/widgets/settings_widgets.dart';
+import '../../../panel/domain/device_model.dart';
+import '../../../panel/presentation/widgets/settings_widgets.dart';
 import '../../domain/repositories/device_repository.dart';
 import '../cubit/device_cubit.dart';
+import 'register_device_page.dart' show DeviceModelField;
 
 class EditDevicePage extends StatefulWidget {
   const EditDevicePage({super.key});
@@ -23,6 +25,7 @@ class _EditDevicePageState extends State<EditDevicePage> {
   late final _sim = TextEditingController(text: _initial.device.simNumber);
   late final _owner = TextEditingController(text: _initial.device.ownerPhone);
   late final _password = TextEditingController(text: _initial.password);
+  late DeviceModel? _model = _initial.model;
   String? _simError;
 
   @override
@@ -47,6 +50,7 @@ class _EditDevicePageState extends State<EditDevicePage> {
       name: _name.text.trim(),
       simNumber: PhoneUtils.normalize(_sim.text),
       ownerPhone: _owner.text.trim().isEmpty ? null : PhoneUtils.normalize(_owner.text),
+      model: _model,
     );
     if (_password.text != _initial.password) await cubit.updatePassword(_password.text);
     if (!mounted) return;
@@ -77,6 +81,16 @@ class _EditDevicePageState extends State<EditDevicePage> {
             icon: Icons.edit_outlined,
             child: Column(
               children: [
+                DeviceModelField(value: _model, onChanged: (v) => setState(() => _model = v)),
+                if (_model != _initial.model)
+                  const Padding(
+                    padding: EdgeInsets.only(top: 8),
+                    child: Text(
+                      'با تغییر نوع دستگاه، منوها و دستورات مطابق مدل جدید نمایش داده می‌شوند.',
+                      style: TextStyle(fontSize: 12, color: Color(0xFFB7791F), height: 1.6),
+                    ),
+                  ),
+                const SizedBox(height: 14),
                 TextFormField(
                   controller: _name,
                   maxLength: 30,

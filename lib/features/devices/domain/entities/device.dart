@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 import '../../../../core/utils/text_normalizer.dart';
+import '../../../panel/domain/device_model.dart';
 
 class Device extends Equatable {
   const Device({
@@ -9,7 +10,7 @@ class Device extends Equatable {
     required this.simNumber,
     required this.createdAt,
     this.ownerPhone,
-    this.model = 'GSA-212',
+    this.model = DeviceModel.fallbackCode,
     this.simSlot,
     this.outputNames = const {},
   });
@@ -19,7 +20,7 @@ class Device extends Equatable {
     name: json['name'] as String,
     simNumber: json['simNumber'] as String,
     ownerPhone: json['ownerPhone'] as String?,
-    model: json['model'] as String? ?? 'GSA-212',
+    model: json['model'] as String? ?? DeviceModel.fallbackCode,
     simSlot: json['simSlot'] as int?,
     outputNames: {
       for (final e in (json['outputNames'] as Map? ?? const {}).entries) int.parse('${e.key}'): '${e.value}',
@@ -31,6 +32,8 @@ class Device extends Equatable {
   final String name;
   final String simNumber;
   final String? ownerPhone;
+
+  /// Model code (e.g. `GSA-212`); see [type].
   final String model;
   final DateTime createdAt;
 
@@ -40,22 +43,34 @@ class Device extends Equatable {
   /// User-given names for outputs 1–4; missing entries use the default name.
   final Map<int, String> outputNames;
 
+  DeviceModel get type => DeviceModel.fromCode(model);
+
+  /// Output 1 drives the door opener on models with the D command.
   String outputName(int output) =>
-      outputNames[output] ?? (output == 1 ? 'خروجی ۱ (درب‌بازکن)' : 'خروجی ${TextNormalizer.toPersianDigits(output)}');
+      outputNames[output] ??
+      (output == 1 && type.has(DeviceFeature.openDoor)
+          ? 'خروجی ۱ (درب‌بازکن)'
+          : 'خروجی ${TextNormalizer.toPersianDigits(output)}');
 
   bool hasCustomOutputName(int output) => outputNames.containsKey(output);
 
-  Device copyWith({String? name, String? simNumber, String? ownerPhone, int? simSlot, Map<int, String>? outputNames}) =>
-      Device(
-        id: id,
-        name: name ?? this.name,
-        simNumber: simNumber ?? this.simNumber,
-        ownerPhone: ownerPhone ?? this.ownerPhone,
-        model: model,
-        createdAt: createdAt,
-        simSlot: simSlot ?? this.simSlot,
-        outputNames: outputNames ?? this.outputNames,
-      );
+  Device copyWith({
+    String? name,
+    String? simNumber,
+    String? ownerPhone,
+    String? model,
+    int? simSlot,
+    Map<int, String>? outputNames,
+  }) => Device(
+    id: id,
+    name: name ?? this.name,
+    simNumber: simNumber ?? this.simNumber,
+    ownerPhone: ownerPhone ?? this.ownerPhone,
+    model: model ?? this.model,
+    createdAt: createdAt,
+    simSlot: simSlot ?? this.simSlot,
+    outputNames: outputNames ?? this.outputNames,
+  );
 
   Map<String, dynamic> toJson() => {
     'id': id,

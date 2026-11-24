@@ -2,7 +2,7 @@ import 'dart:async';
 
 import '../../../../core/platform/sms_gateway.dart';
 import '../../../../core/utils/text_normalizer.dart';
-import '../../../gsa212/domain/gsa212_response_parser.dart';
+import '../../../panel/domain/panel_response_parser.dart';
 import '../entities/device.dart';
 import '../repositories/device_repository.dart';
 import 'process_device_reply.dart';
@@ -14,7 +14,10 @@ class IncomingReply {
   final ParsedResponse response;
 }
 
-/// Routes automatically received SMS (Android) to the device that sent them.
+/// Routes automatically received SMS (Android) to the device that sent them, so the shown state
+/// always follows the newest SMS of each device:
+/// live while the app runs ([drain] on every receiver signal), and on start / resume / opening a
+/// device ([refresh]) by also importing everything from the device numbers in the phone inbox.
 class IncomingSmsCoordinator {
   IncomingSmsCoordinator({required this._gateway, required this._repository, required this._processReply});
 
@@ -23,8 +26,14 @@ class IncomingSmsCoordinator {
   final ProcessDeviceReply _processReply;
   final _replies = StreamController<IncomingReply>.broadcast();
   final List<StreamSubscription<Object?>> _subscriptions = [];
-  Future<void>? _draining;
   Future<void>? _refreshing;
+
+  /// Drain and inbox import run one after another so the same SMS is never processed twice concurrently.
+  Future<void> _queue = Future.value();
+
+  /// How far back a newly added device (or a changed SIM number) reads its inbox history, so the
+  /// device starts with the state of its latest SMS instead of an empty one.
+  static const initialLookback = Duration(days: 30);
 
   Stream<IncomingReply> get replies => _replies.stream;
 
@@ -43,27 +52,31 @@ class IncomingSmsCoordinator {
     if (!_gateway.receivesAutomatically) return Future.value();
     return _refreshing ??= () async {
       await drain();
-      await _syncInbox();
+      await _serial(_syncInbox);
     }().whenComplete(() => _refreshing = null);
   }
 
-  Future<void> _syncInbox() async {
-    final devices = await _repository.getDevices();
-    if (devices.isEmpty) return;
-    final earliest = devices.map((d) => d.createdAt).reduce((a, b) => a.isBefore(b) ? a : b);
-    final synced = await _repository.getInboxSyncedAt();
-    final since = synced == null || synced.isBefore(earliest) ? earliest : synced;
+  Future<void> _serial(Future<void> Function() task) {
+    final run = _queue.then((_) => task());
+    _queue = run.catchError((Object _) {});
+    return run;
+  }
 
-    final inbox = await _gateway.readInbox(numbers: [for (final d in devices) d.simNumber], since: since);
-    var newest = since;
-    for (final sms in inbox) {
-      if (sms.receivedAt.isAfter(newest)) newest = sms.receivedAt;
-      final device = await _repository.findBySender(sms.sender);
-      if (device == null || sms.receivedAt.isBefore(device.createdAt)) continue;
-      if (await _alreadyStored(device.id, sms)) continue;
-      await _processReply(device.id, sms.body, at: sms.receivedAt);
+  /// Each device keeps its own cursor, so a device added later (or whose SIM number changed)
+  /// still gets its inbox history instead of starting after other devices' last import.
+  Future<void> _syncInbox() async {
+    for (final device in await _repository.getDevices()) {
+      final synced = await _repository.getInboxSyncedAt(device.id);
+      final since = synced ?? device.createdAt.subtract(initialLookback);
+      final inbox = await _gateway.readInbox(numbers: [device.simNumber], since: since);
+      var newest = since;
+      for (final sms in inbox) {
+        if (sms.receivedAt.isAfter(newest)) newest = sms.receivedAt;
+        if (await _alreadyStored(device.id, sms)) continue;
+        await _processReply(device.id, sms.body, at: sms.receivedAt);
+      }
+      if (newest.isAfter(since)) await _repository.setInboxSyncedAt(device.id, newest);
     }
-    if (newest.isAfter(since)) await _repository.setInboxSyncedAt(newest);
   }
 
   /// The SMS receiver may already have logged this message; its timestamp can differ slightly from the inbox one.
@@ -79,18 +92,28 @@ class IncomingSmsCoordinator {
     return false;
   }
 
+  String? _watched;
+
+  /// Keeps the native receiver's sender filter current. A device added, or a SIM number changed,
+  /// imports its inbox history right away so its latest state shows without reopening the app.
   Future<void> syncWatchedNumbers() async {
     final devices = await _repository.getDevices();
+    final numbers = [for (final d in devices) '${d.id}:${d.simNumber}']..sort();
+    final key = numbers.join(',');
+    if (key == _watched) return;
+    final first = _watched == null;
+    _watched = key;
     await _gateway.watchNumbers([for (final d in devices) d.simNumber]);
+    if (!first) unawaited(refresh());
   }
 
-  Future<void> drain() => _draining ??= _drain().whenComplete(() => _draining = null);
+  Future<void> drain() => _serial(_drain);
 
   Future<void> _drain() async {
     final pending = await _gateway.drainPending();
     for (final sms in pending) {
       final device = await _repository.findBySender(sms.sender);
-      if (device == null) continue;
+      if (device == null || await _alreadyStored(device.id, sms)) continue;
       final parsed = await _processReply(device.id, sms.body, at: sms.receivedAt);
       _replies.add(IncomingReply(device, parsed));
     }

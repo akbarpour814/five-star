@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/text_normalizer.dart';
 import '../../../../core/widgets/common.dart';
-import '../../../gsa212/presentation/widgets/settings_widgets.dart';
+import '../../../panel/presentation/widgets/settings_widgets.dart';
 import '../cubit/device_cubit.dart';
 import '../widgets/sim_slot_selector.dart';
 

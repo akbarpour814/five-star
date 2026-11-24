@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/id_generator.dart';
 import '../../../../core/utils/phone_utils.dart';
 import '../../../auth/domain/auth_repository.dart';
-import '../../../gsa212/domain/gsa212_commands.dart';
+import '../../../panel/domain/device_model.dart';
+import '../../../panel/domain/panel_commands.dart';
 import '../../domain/entities/device.dart';
 import '../../domain/repositories/device_repository.dart';
 import '../../domain/usecases/send_device_command.dart';
@@ -13,6 +14,7 @@ enum RegisterStep { device, pin, confirmPin, security }
 
 class DeviceDraft extends Equatable {
   const DeviceDraft({
+    required this.model,
     required this.name,
     required this.simNumber,
     required this.password,
@@ -21,6 +23,7 @@ class DeviceDraft extends Equatable {
     this.simSlot,
   });
 
+  final DeviceModel model;
   final String name;
   final String simNumber;
   final String password;
@@ -29,7 +32,7 @@ class DeviceDraft extends Equatable {
   final int? simSlot;
 
   @override
-  List<Object?> get props => [name, simNumber, password, ownerPhone, saveOwnerToMemory, simSlot];
+  List<Object?> get props => [model, name, simNumber, password, ownerPhone, saveOwnerToMemory, simSlot];
 }
 
 class RegisterState extends Equatable {
@@ -164,6 +167,7 @@ class RegisterDeviceCubit extends Cubit<RegisterState> {
     final device = Device(
       id: IdGenerator.next(),
       name: draft.name.trim(),
+      model: draft.model.code,
       simNumber: PhoneUtils.normalize(draft.simNumber),
       ownerPhone: draft.ownerPhone.trim().isEmpty ? null : PhoneUtils.normalize(draft.ownerPhone),
       createdAt: DateTime.now(),
@@ -182,7 +186,7 @@ class RegisterDeviceCubit extends Cubit<RegisterState> {
 
     SendOutcome? outcome;
     if (draft.saveOwnerToMemory && device.ownerPhone != null) {
-      final command = Gsa212Commands(draft.password).saveNumber(memory: 1, phone: device.ownerPhone!);
+      final command = PanelCommands(draft.model, draft.password).saveNumber(memory: 1, phone: device.ownerPhone!);
       outcome = await _sendCommand(device, command);
     }
     if (!isClosed) {

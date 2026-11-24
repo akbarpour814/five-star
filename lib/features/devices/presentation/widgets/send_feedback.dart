@@ -9,7 +9,7 @@ import '../../../../core/storage/app_preferences.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/date_format.dart';
 import '../../../../core/widgets/common.dart';
-import '../../../gsa212/domain/device_command.dart';
+import '../../../panel/domain/device_command.dart';
 import '../../domain/usecases/send_device_command.dart';
 import '../cubit/device_cubit.dart';
 

@@ -13,7 +13,6 @@ class LocalDeviceRepository implements DeviceRepository {
 
   static const defaultPassword = '0000';
   static const _devicesKey = 'devices';
-  static const _inboxSyncedKey = 'inbox_synced_at';
   static const _maxMessages = 300;
 
   final KeyValueStore _store;
@@ -22,6 +21,8 @@ class LocalDeviceRepository implements DeviceRepository {
 
   static String _statusKey(String id) => 'status_$id';
   static String _configKey(String id) => 'config_$id';
+  static String _configStampsKey(String id) => 'config_at_$id';
+  static String _inboxSyncedKey(String id) => 'inbox_synced_at_$id';
   static String _messagesKey(String id) => 'messages_$id';
   static String _lastSentKey(String id) => 'last_sent_$id';
   static String _passwordKey(String id) => 'device_password_$id';
@@ -60,6 +61,8 @@ class LocalDeviceRepository implements DeviceRepository {
     final devices = await getDevices();
     final index = devices.indexWhere((d) => d.id == device.id);
     if (index >= 0) {
+      // A new SIM number has its own inbox history; import it from the start.
+      if (!PhoneUtils.same(devices[index].simNumber, device.simNumber)) await _store.remove(_inboxSyncedKey(device.id));
       devices[index] = device;
     } else {
       devices.add(device);
@@ -77,6 +80,8 @@ class LocalDeviceRepository implements DeviceRepository {
     await Future.wait([
       _store.remove(_statusKey(id)),
       _store.remove(_configKey(id)),
+      _store.remove(_configStampsKey(id)),
+      _store.remove(_inboxSyncedKey(id)),
       _store.remove(_messagesKey(id)),
       _store.remove(_lastSentKey(id)),
       _secure.delete(_passwordKey(id)),
@@ -136,10 +141,25 @@ class LocalDeviceRepository implements DeviceRepository {
   }
 
   @override
-  Future<void> mergeConfig(String deviceId, Map<String, Object?> patch) async {
+  Future<void> mergeConfig(String deviceId, Map<String, Object?> patch, {DateTime? at}) async {
     if (patch.isEmpty) return;
-    final config = await getConfig(deviceId)
-      ..addAll(patch);
+    final config = await getConfig(deviceId);
+    if (at == null) {
+      config.addAll(patch);
+    } else {
+      final raw = _store.getJson(_configStampsKey(deviceId));
+      final stamps = raw is Map ? Map<String, Object?>.from(raw) : <String, Object?>{};
+      var changed = false;
+      for (final e in patch.entries) {
+        final stamp = stamps[e.key];
+        if (stamp is num && at.millisecondsSinceEpoch < stamp) continue;
+        config[e.key] = e.value;
+        stamps[e.key] = at.millisecondsSinceEpoch;
+        changed = true;
+      }
+      if (!changed) return;
+      await _store.setJson(_configStampsKey(deviceId), stamps);
+    }
     await _store.setJson(_configKey(deviceId), config);
     _notify(deviceId);
   }
@@ -169,13 +189,14 @@ class LocalDeviceRepository implements DeviceRepository {
   }
 
   @override
-  Future<DateTime?> getInboxSyncedAt() async {
-    final ms = _store.getInt(_inboxSyncedKey);
+  Future<DateTime?> getInboxSyncedAt(String deviceId) async {
+    final ms = _store.getInt(_inboxSyncedKey(deviceId));
     return ms == null ? null : DateTime.fromMillisecondsSinceEpoch(ms);
   }
 
   @override
-  Future<void> setInboxSyncedAt(DateTime at) => _store.setInt(_inboxSyncedKey, at.millisecondsSinceEpoch);
+  Future<void> setInboxSyncedAt(String deviceId, DateTime at) =>
+      _store.setInt(_inboxSyncedKey(deviceId), at.millisecondsSinceEpoch);
 
   @override
   Future<DateTime?> getLastSentAt(String deviceId) async {
